@@ -1,56 +1,31 @@
 <template>
-  <v-app>
-    <v-app-bar app color="primary" dark>
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+  <v-app-bar color="#f7f7f7" app extented>
+    <v-img
+      class="mx-4"
+      src="https://media-exp1.licdn.com/dms/image/C560BAQGSI3DTJz8fWw/company-logo_200_200/0?e=1605139200&v=beta&t=v9oIUHAVGR0e36q5ZD4c7hgL9BfbbFmNyE9mBT9cv5s"
+      max-height="100"
+      max-width="100"
+      contain
+    ></v-img>
+    <v-toolbar-items>
+      <v-btn>Ana Sayfa</v-btn>
+      <v-btn>Hakkımızda</v-btn>
+      <v-btn>Atölyelerimiz</v-btn>
+      <v-btn>Blog</v-btn>
+      <v-btn>İletişim</v-btn>
+      <v-spacer/>
+      <v-btn rounded color="primary" dark>Gönüllü Ol !</v-btn>
+    </v-toolbar-items>
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-main>
-      <HelloWorld />
-    </v-main>
-  </v-app>
+  </v-app-bar>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
-
 export default {
   name: "App",
 
-  components: {
-    HelloWorld
-  },
-
   data: () => ({
     //
-  })
+  }),
 };
 </script>
