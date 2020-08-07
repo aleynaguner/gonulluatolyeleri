@@ -1,5 +1,5 @@
 # gonullu_atolyeleri
-Gönüllü Atölyeleri Resmi Web Sitesi
+Gönüllü Atölyeleri Resmi Web Sitesidir
 
 ## Project setup
 ```
