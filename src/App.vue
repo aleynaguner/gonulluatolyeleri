@@ -15,11 +15,12 @@
       <v-btn>İletişim</v-btn>
       <v-btn rounded color="primary" dark>Gönüllü Ol !</v-btn>
     </v-toolbar-items>
-
   </v-app-bar>
 </template>
 
 <script>
+import Header from '@/components/Header'
+
 export default {
   name: "App",
 
