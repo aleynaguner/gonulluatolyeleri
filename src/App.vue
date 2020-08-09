@@ -13,7 +13,6 @@
       <v-btn>Atölyelerimiz</v-btn>
       <v-btn>Blog</v-btn>
       <v-btn>İletişim</v-btn>
-      <v-spacer/>
       <v-btn rounded color="primary" dark>Gönüllü Ol !</v-btn>
     </v-toolbar-items>
 
