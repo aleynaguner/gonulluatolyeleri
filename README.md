@@ -1,2 +1,2 @@
 # gonullu_atolyeleri
-Gönüllü Atölyeleri Resmi Web Sitesidir
+Gönüllü Atölyeleri Resmi Web Sitesidir.
