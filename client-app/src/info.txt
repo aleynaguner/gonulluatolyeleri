@@ -1,0 +1,6 @@
+kullanılacak renkler
+
+#F7F7F7 gri background
+#397A9A mavi
+#80C08C yeşil
+
