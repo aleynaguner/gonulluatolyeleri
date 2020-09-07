@@ -1,0 +1,19 @@
+body, html{
+    background-color: #F7F7F7;
+}
+
+.ui.text.menu{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.ui.text.navbar.menu {
+    background-color: #F7F7F7;
+    border-bottom: 1px solid grey;
+}
+
+.ui.huge.image.logo {
+    content: url(./assets/gonulluatolyeleri.png);
+    height: 100px;
+    width: 100px;
+}
