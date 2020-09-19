@@ -1,19 +1,20 @@
 import React, { Component } from "react";
-import "../style/home/Header.css";
-import logo from "../assets/gonulluatolyeleri.png";
+import logo from "./assets/gonulluatolyeleri.png";
+import { HeaderLink } from "./HeaderLink";
 
 export default class Header extends Component {
   render() {
     return (
-      <div id="navbar" className="ui borderless main menu fixed">
+      <div className="ui borderless main menu">
         <div className="ui text container">
           <div className="header item">
             <img src={logo} />
           </div>
-          <a className="item">Ana Sayfa</a>
-          <a className="item">Hakkımızda</a>
-          <a className="item">Atölyelerimiz</a>
-          <a className="item">İletişim</a>
+          <HeaderLink to="/home">Ana Sayfa</HeaderLink>
+          <HeaderLink to="/ourworkshops">Atölyelerimiz</HeaderLink>
+          <HeaderLink to="/aboutus">Hakkımızda</HeaderLink>
+          <HeaderLink to="/contactus">İletişim</HeaderLink>
+          <a className="item"></a>
           <div className="ui right floated item">
             <i class="facebook icon"></i>
             <i class="instagram icon"></i>
