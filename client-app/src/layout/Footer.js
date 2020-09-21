@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import logo from "./assets/gonulluatolyeleri.png";
+import logo from "./image/gonulluatolyeleri.png";
 
 export default class Footer extends Component {
   render() {
@@ -10,9 +10,9 @@ export default class Footer extends Component {
         </div>
         <a className="item">@2020, Gönüllü Atölyeleri</a>
         <div className="ui right floated item" style={{ marginRight: "2em" }}>
-          <i class="facebook icon"></i>
-          <i class="instagram icon"></i>
-          <i class="twitter icon"></i>
+          <i className="facebook icon"></i>
+          <i className="instagram icon"></i>
+          <i className="twitter icon"></i>
         </div>
       </div>
     );

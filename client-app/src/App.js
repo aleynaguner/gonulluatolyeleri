@@ -1,6 +1,7 @@
+//#region imports
 import React from "react";
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "./layout/Header";
+import Footer from "./layout/Footer";
 import {
   BrowserRouter as Router,
   Route,
@@ -11,19 +12,22 @@ import { Home } from "./home/Home";
 import { AboutUs } from "./aboutus/AboutUs";
 import { OurWorkShops } from "./ourworkshops/OurWorkShops";
 import { ContactUs } from "./contactus/ContactUs";
+//#endregion
 
 function App() {
   return (
     <div>
       <Router>
         <Header />
-        <Switch>
-          <Route path="/home" component={Home} />
-          <Route path="/ourworkshops" component={OurWorkShops} />
-          <Route path="/aboutus" component={AboutUs} />
-          <Route path="/contactus" component={ContactUs} />
-          <Redirect to="/home" />
-        </Switch>
+        <div>
+          <Switch>
+            <Route path="/home" component={Home} />
+            <Route path="/ourworkshops" component={OurWorkShops} />
+            <Route path="/aboutus" component={AboutUs} />
+            <Route path="/contactus" component={ContactUs} />
+            <Redirect to="/home" />
+          </Switch>
+        </div>
       </Router>
       <Footer />
     </div>

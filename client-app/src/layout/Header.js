@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import logo from "./assets/gonulluatolyeleri.png";
+import logo from "./image/gonulluatolyeleri.png";
 import { HeaderLink } from "./HeaderLink";
 
 export default class Header extends Component {
@@ -16,9 +16,9 @@ export default class Header extends Component {
           <HeaderLink to="/contactus">İletişim</HeaderLink>
           <a className="item"></a>
           <div className="ui right floated item">
-            <i class="facebook icon"></i>
-            <i class="instagram icon"></i>
-            <i class="twitter icon"></i>
+            <i className="facebook icon"></i>
+            <i className="instagram icon"></i>
+            <i className="twitter icon"></i>
           </div>
         </div>
       </div>
