@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./style/section.css";
 
 const sizes = {
   1: "one",
@@ -20,18 +19,26 @@ const sizes = {
   16: "sixteen",
 };
 
+const sectionStyle = {
+  margin: "1%",
+};
+
 export class Section extends Component {
+  constructor(props) {
+    super(props);
+
+    sectionStyle["height"] = `${this.props.height}%`;
+  }
+
   render() {
     let isItRow = this.props.type === "row";
 
     let className = `${
       this.props.size !== undefined ? sizes[this.props.size] : "three"
-    } ${!isItRow ? "wide" : ""} ${isItRow ? "olive" : "black"} column centered${
-      isItRow ? " row" : ""
-    }`;
+    } ${!isItRow ? "wide" : ""}  column ${isItRow ? " row" : ""}`;
 
     return (
-      <div id="custRow" className={className}>
+      <div id="custRow" className={className} style={this.sectionStyle}>
         {this.props.children}
       </div>
     );

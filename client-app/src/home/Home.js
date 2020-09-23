@@ -1,19 +1,23 @@
 import React, { Component } from "react";
 import { Section } from "./Section.js";
 import "./style/home.css";
+import gonulluOlPhoto from "./image/testPhoto.jpg";
 
 export class Home extends Component {
   render() {
     return (
-      <div id="custUiGrid" className="ui grid">
-        <Section type="row">
-          <Section size="6">makamela</Section>
-          <Section size="1">makamela</Section>
+      <div id="custUiGrid">
+        <Section type="row" height="80">
+          <Section type="column" size="1">
+            <img
+              src={gonulluOlPhoto}
+              style={{ height: "auto", width: "80%" }}
+            />
+          </Section>
+          <Section type="column">
+            <p>Gönüllü Ol !</p>
+          </Section>
         </Section>
-        <Section size="6">Section 2</Section>
-        <Section>Section 2</Section>
-        <Section>Section 2</Section>
-        <Section>Section 2</Section>
       </div>
     );
   }

@@ -16,18 +16,16 @@ import { ContactUs } from "./contactus/ContactUs";
 
 function App() {
   return (
-    <div>
+    <div style={{height: "100%"}}>
       <Router>
         <Header />
-        <div>
-          <Switch>
-            <Route path="/home" component={Home} />
-            <Route path="/ourworkshops" component={OurWorkShops} />
-            <Route path="/aboutus" component={AboutUs} />
-            <Route path="/contactus" component={ContactUs} />
-            <Redirect to="/home" />
-          </Switch>
-        </div>
+        <Switch>
+          <Route path="/home" component={Home} />
+          <Route path="/ourworkshops" component={OurWorkShops} />
+          <Route path="/aboutus" component={AboutUs} />
+          <Route path="/contactus" component={ContactUs} />
+          <Redirect to="/home" />
+        </Switch>
       </Router>
       <Footer />
     </div>
