@@ -7,17 +7,17 @@ export class Home extends Component {
   render() {
     return (
       <div id="custUiGrid">
-        <Section type="row" height="80">
-          <Section type="column" size="1">
-            <img
-              src={gonulluOlPhoto}
-              style={{ height: "auto", width: "80%" }}
-            />
+          <Section type="row" size="5">
+            <Section type="column" size="5">
+              <img
+                src={gonulluOlPhoto}
+                style={{ height: "auto", width: "100%" }}
+              />
+            </Section>
+            <Section type="column" size="1">
+              <p>Gönüllü Ol !</p>
+            </Section>
           </Section>
-          <Section type="column">
-            <p>Gönüllü Ol !</p>
-          </Section>
-        </Section>
       </div>
     );
   }

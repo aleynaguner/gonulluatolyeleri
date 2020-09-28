@@ -1,46 +1,39 @@
 import React, { Component } from "react";
+import "./style/section.css";
 
-const sizes = {
-  1: "one",
-  2: "two",
-  3: "three",
-  4: "four",
-  5: "five",
-  6: "six",
-  7: "seven",
-  8: "eight",
-  9: "nine",
-  10: "ten",
-  11: "eleven",
-  12: "twelve",
-  13: "thirteen",
-  14: "fourteen",
-  15: "fiveteen",
-  16: "sixteen",
-};
+const buildSectionStyle = (type, size) => {
+  let sectionStyle = {};
 
-const sectionStyle = {
-  margin: "1%",
+  if (type === "row") {
+    sectionStyle["width"] = `100%`;
+    sectionStyle["height"] = `${size * 10}%`;
+  } else {
+    sectionStyle["height"] = `auto`;
+    sectionStyle["width"] = `${size * 10}%`;
+  }
+
+  return sectionStyle;
 };
 
 export class Section extends Component {
   constructor(props) {
     super(props);
 
-    sectionStyle["height"] = `${this.props.height}%`;
+    this.sectionStyle = buildSectionStyle(this.props.type, this.props.size);
   }
 
   render() {
-    let isItRow = this.props.type === "row";
-
-    let className = `${
-      this.props.size !== undefined ? sizes[this.props.size] : "three"
-    } ${!isItRow ? "wide" : ""}  column ${isItRow ? " row" : ""}`;
-
-    return (
-      <div id="custRow" className={className} style={this.sectionStyle}>
-        {this.props.children}
-      </div>
-    );
+    if (this.props.type === "row") {
+      console.log(this.props.children);
+      return (
+        <div style={this.sectionStyle}>
+          {React.Children.map(this.props.children, (child) => (
+            <div className="columnOfRow">{child}</div>
+          ))}
+        </div>
+      );
+    } else {
+      return <div style={this.sectionStyle}>{this.props.children}</div>;
+    }
   }
 }
