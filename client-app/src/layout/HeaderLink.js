@@ -24,7 +24,7 @@ export class HeaderLink extends Component {
           return (
             <React.Fragment>
               {this.state.doRedirect && <Redirect to={this.props.to} />}
-              <a className="item" onClick={this.handleClick}>
+              <a className="nav-item nav-link" onClick={this.handleClick}>
                 {this.props.children}
               </a>
             </React.Fragment>
