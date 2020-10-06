@@ -6,8 +6,8 @@ export default class Footer extends Component {
     return (
       <React.Fragment>
         <div id="footer">
-          <div class="container">
-            <p class="footer-block">@2020, Gönüllü Atölyeleri</p>
+          <div className="container">
+            <p className="footer-block">@2020, Gönüllü Atölyeleri</p>
           </div>
         </div>
       </React.Fragment>
