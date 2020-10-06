@@ -1,0 +1,43 @@
+a {
+  text-decoration: none !important;
+}
+
+.fa {
+  font-size: 30px;
+  margin-left: 8px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 50%;
+  color: #397a9a;
+  transition-delay: 0.05s;
+  padding: 0.4em 0.4em;
+}
+
+.fa:hover {
+  transition-delay: 0.05s;
+}
+
+.fa-facebook:hover {
+  background: #3b5998;
+  color: white;
+}
+
+.fa-twitter:hover {
+  background: #55acee;
+  color: white;
+}
+
+.fa-linkedin:hover {
+  background: #007bb5;
+  color: white;
+}
+
+.fa-youtube:hover {
+  background: #bb0000;
+  color: white;
+}
+
+.fa-instagram:hover {
+  background: #125688;
+  color: white;
+}

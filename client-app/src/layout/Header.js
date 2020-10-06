@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import logo from "./image/gonulluatolyeleri.png";
 import { HeaderLink } from "./HeaderLink";
+import VolunteerButton from "../volunteerButton/VolunteerButton";
+import "./style/header.css";
 
 export default class Header extends Component {
   render() {
     return (
-      <nav className="navbar navbar-expand-md navbar-light bg-light">
-        <div className="container">
+      <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+        <div className="container-fluid">
           <a className="navbar-brand">
             <img src={logo} width="50" height="50" />
           </a>
@@ -18,13 +20,22 @@ export default class Header extends Component {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <div className="navbar-nav">
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <div className="navbar-nav mr-auto">
               <HeaderLink to="/home">Ana Sayfa</HeaderLink>
               <HeaderLink to="/ourworkshops">Atölyelerimiz</HeaderLink>
               <HeaderLink to="/aboutus">Hakkımızda</HeaderLink>
               <HeaderLink to="/blog">Blog</HeaderLink>
               <HeaderLink to="/contactus">İletişim</HeaderLink>
+            </div>
+            <div className="navbar-nav navbar-right ml-auto d-none d-lg-block d-xl-block mr-3">
+              <a href="#" className="fa fa-lg fa-twitter"></a>
+              <a href="#" className="fa fa-lg fa-linkedin"></a>
+              <a href="#" className="fa fa-lg fa-youtube"></a>
+              <a href="#" className="fa fa-lg fa-instagram"></a>
+            </div>
+            <div className="navbar-nav d-none d-lg-block d-xl-block">
+              <VolunteerButton />
             </div>
           </div>
         </div>
