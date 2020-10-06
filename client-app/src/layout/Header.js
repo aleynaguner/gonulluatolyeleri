@@ -23,6 +23,7 @@ export default class Header extends Component {
               <HeaderLink to="/home">Ana Sayfa</HeaderLink>
               <HeaderLink to="/ourworkshops">Atölyelerimiz</HeaderLink>
               <HeaderLink to="/aboutus">Hakkımızda</HeaderLink>
+              <HeaderLink to="/blog">Blog</HeaderLink>
               <HeaderLink to="/contactus">İletişim</HeaderLink>
             </div>
           </div>

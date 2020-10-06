@@ -11,6 +11,7 @@ import {
 import { Home } from "./home/Home";
 import { AboutUs } from "./aboutus/AboutUs";
 import { OurWorkShops } from "./ourworkshops/OurWorkShops";
+import { Blog } from "./blog/Blog";
 import { ContactUs } from "./contactus/ContactUs";
 //#endregion
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/home" component={Home} />
           <Route path="/ourworkshops" component={OurWorkShops} />
           <Route path="/aboutus" component={AboutUs} />
+          <Route path="/blog" component={Blog} />
           <Route path="/contactus" component={ContactUs} />
           <Redirect to="/home" />
         </Switch>
