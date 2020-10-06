@@ -17,7 +17,7 @@ import { ContactUs } from "./contactus/ContactUs";
 
 function App() {
   return (
-    <div style={{height: "100%"}}>
+    <React.Fragment>
       <Router>
         <Header />
         <Switch>
@@ -30,7 +30,7 @@ function App() {
         </Switch>
       </Router>
       <Footer />
-    </div>
+    </React.Fragment>
   );
 }
 

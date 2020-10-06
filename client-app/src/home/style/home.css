@@ -1,4 +1,30 @@
-#custUiGrid {
-  margin: 1%;
-  height: 800px
+#volunteerLink {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 3vw;
+  display: inline;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+#volunteerLink::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  width: 0;
+  bottom: -5px;
+  background: #000;
+  height: 2px;
+  transition-property: width;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-out;
+}
+
+#volunteerLink:hover:after,
+#volunteerLink:focus:after,
+#volunteerLink:active:after {
+  left: 0;
+  right: auto;
+  width: 100%;
 }

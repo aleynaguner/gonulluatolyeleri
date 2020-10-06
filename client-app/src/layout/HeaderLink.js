@@ -24,7 +24,11 @@ export class HeaderLink extends Component {
           return (
             <React.Fragment>
               {this.state.doRedirect && <Redirect to={this.props.to} />}
-              <a className="nav-item nav-link" onClick={this.handleClick}>
+              <a
+                className="nav-item nav-link"
+                style={{ cursor: "pointer" }}
+                onClick={this.handleClick}
+              >
                 {this.props.children}
               </a>
             </React.Fragment>
