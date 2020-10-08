@@ -21,6 +21,18 @@ export class Home extends Component {
               </div>
             </div>
           </div>
+          <div className="row m-5">
+            <div className="mx-auto"><p className="h3 font-weight-normal">Neler Amaçlıyoruz?</p></div>
+          </div>
+          <div className="row m-5">
+            <div className="mx-auto"><p className="h3 font-weight-normal">Neler Yaptık?</p></div>
+          </div>
+          <div className="row m-5">
+            <div className="mx-auto"><p className="h3 font-weight-normal">Neredeyiz?</p></div>
+          </div>
+          <div className="row m-5">
+            <div className="mx-auto"><p className="h3 font-weight-normal">Bize istediğini sorabilirsin...</p></div>
+          </div>
         </div>
       </React.Fragment>
     );
