@@ -7,10 +7,10 @@ import "./style/header.css";
 export default class Header extends Component {
   render() {
     return (
-      <nav class="navbar navbar-expand-md navbar-light bg-light">
+      <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
         <div className="container-fluid">
           <a className="navbar-brand">
-            <img src={logo} width="50" height="50" />
+            <img src={logo} width="75" height="75" />
           </a>
           <button
             className="navbar-toggler"
