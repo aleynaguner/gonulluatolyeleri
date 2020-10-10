@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./style/contactForm.css";
 
 var formValidator = require("../utility-modules/formValidator");
 
@@ -57,12 +58,13 @@ export class ContactForm extends Component {
         />
         <label>Mesajınız</label>
         <textarea
+          id="messageTextArea"
           class="form-control"
           rows="5"
           name="message"
           value={this.state.message}
           onChange={this.updateFormValues}
-        ></textarea>
+        />
         <button
           type="submit"
           style={{ backgroundColor: "#397A9A" }}
