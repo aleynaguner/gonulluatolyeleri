@@ -29,7 +29,7 @@ function App() {
           <Redirect to="/home" />
         </Switch>
       </Router>
-      <Footer />
+      {/* <Footer /> */}
     </React.Fragment>
   );
 }
