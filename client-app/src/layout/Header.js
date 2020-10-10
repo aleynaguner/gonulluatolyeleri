@@ -35,7 +35,7 @@ export default class Header extends Component {
               <a href="#" className="fa fa-lg fa-instagram"></a>
             </div>
             <div className="navbar-nav d-none d-lg-block d-xl-block">
-              <VolunteerButton />
+              <VolunteerButton willBeBubbled={false} />
             </div>
           </div>
         </div>

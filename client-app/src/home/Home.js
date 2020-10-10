@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import VolunteerButton from "../layout/VolunteerButton";
 import "./style/home.css";
 
 export class Home extends Component {
@@ -82,7 +83,7 @@ export class Home extends Component {
               </div>
               <div className="row">
                 <div className="mx-auto">
-                  <a id="volunteerLink">GÖNÜLLÜ OL !</a>
+                  <VolunteerButton willBeBubbled={true} />
                 </div>
               </div>
             </div>
