@@ -8,10 +8,8 @@ export class ContactUs extends Component {
     return (
       <React.Fragment>
         <div id="body" className="container-fluid">
-          <Map />
-        </div>
-        <div className="container mt-3 ml-3">
           <ContactForm />
+          <Map />
         </div>
       </React.Fragment>
     );

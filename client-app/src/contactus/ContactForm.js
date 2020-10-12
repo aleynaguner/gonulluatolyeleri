@@ -32,47 +32,69 @@ export class ContactForm extends Component {
 
   render() {
     return (
-      <form>
-        <label>Adınız</label>
-        <input
-          className="form-control"
-          type="text"
-          name="name"
-          value={this.state.name}
-          onChange={this.updateFormValues}
-        />
-        <label>Mail adresiniz</label>
-        <input
-          className="form-control"
-          type="email"
-          name="email"
-          value={this.state.email}
-          onChange={this.updateFormValues}
-        />
-        <label>Konu</label>
-        <input
-          className="form-control"
-          type="text"
-          name="topic"
-          onChange={this.updateFormValues}
-        />
-        <label>Mesajınız</label>
-        <textarea
-          id="messageTextArea"
-          class="form-control"
-          rows="5"
-          name="message"
-          value={this.state.message}
-          onChange={this.updateFormValues}
-        />
-        <button
-          type="submit"
-          style={{ backgroundColor: "#397A9A" }}
-          class="btn float-right btn-primary mt-3"
-          onClick={this.handleSubmit}
-        >
-          Gönder
-        </button>
+      <form method="post" className="m-5 mx-auto">
+        <div class="row">
+          <div className="col-md-2"></div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label className="mb-0 small">Ad - Soyad</label>
+              <input
+                className="form-control"
+                type="text"
+                name="name"
+                value={this.state.name}
+                onChange={this.updateFormValues}
+                placeholder="Adınız"
+              />
+            </div>
+            <div class="form-group">
+              <label className="mb-0 small">E-mail</label>
+              <input
+                className="form-control"
+                type="email"
+                name="email"
+                value={this.state.email}
+                onChange={this.updateFormValues}
+                placeholder="E-mail adresiniz"
+              />
+            </div>
+            <div class="form-group">
+              <label className="mb-0 small">Konu</label>
+              <input
+                className="form-control"
+                type="text"
+                name="topic"
+                onChange={this.updateFormValues}
+                placeholder="Konu"
+              />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label className="mb-0 small">Mesaj</label>
+              <textarea
+                id="messageTextArea"
+                class="form-control"
+                rows="5"
+                name="message"
+                value={this.state.message}
+                onChange={this.updateFormValues}
+                placeholder="Mesajınız"
+              ></textarea>
+            </div>
+            <div className="mt-3">
+              <button
+                id="sendBtn"
+                class="btn text-white float-right"
+                type="submit"
+                onClick={this.handleSubmit}
+              >
+                Gönder
+              </button>
+            </div>
+          </div>
+          <div className="col-md-2"></div>
+        </div>
       </form>
     );
   }
