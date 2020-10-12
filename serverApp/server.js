@@ -16,7 +16,7 @@ router.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../client-app/build"));
 });
 
-router.post("/sendEmail", (req, res) => {
+router.post("/api/sendEmail", async (req, res) => {
   let validationResult = requestValidator.validateSendEmail(req.body);
 
   if (!validationResult)
@@ -25,7 +25,7 @@ router.post("/sendEmail", (req, res) => {
       message: "Send subject and message information correctly!",
     });
   else {
-    let emailServiceResponse = emailService.sendEmail(
+    let emailServiceResponse = await emailService.sendEmail(
       {
         user: config.senderUser,
         pass: config.senderPass,
@@ -36,7 +36,7 @@ router.post("/sendEmail", (req, res) => {
       req.body.message
     );
 
-    res.status(200).send({
+    res.status(emailServiceResponse.responseCode).send({
       isSuccess: emailServiceResponse.isSuccess,
       message: emailServiceResponse.message,
     });

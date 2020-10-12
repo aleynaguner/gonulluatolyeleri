@@ -3,13 +3,7 @@ const nodemailer = require("nodemailer");
 const OUTLOOK_SERVICE = "outlook";
 const GMAIL_SERVICE = "gmail";
 
-const sendEmail = (senderAuth, service, receiver, subject, message) => {
-  let result = {
-    isSuccess: false,
-    responseCode: 500,
-    message: "",
-  };
-
+async function sendEmail(senderAuth, service, receiver, subject, message) {
   var transporter = getTransporter(service, senderAuth);
 
   let mailOptions = {
@@ -19,22 +13,16 @@ const sendEmail = (senderAuth, service, receiver, subject, message) => {
     text: message,
   };
 
-  transporter.sendMail(mailOptions, function (err, info) {
-    if (err) {
-      result.isSuccess = false;
+  let emailerResponse = undefined;
 
-      console.log(err);
-    } else {
-      result.isSuccess = true;
+  try {
+    emailerResponse = await transporter.sendMail(mailOptions);
 
-      console.log("Email sent: " + info.response);
-    }
-
-    result.message = info.response;
-  });
-
-  return result;
-};
+    return prepareSendEmailResult(true, emailerResponse);
+  } catch (err) {
+    return prepareSendEmailResult(false, err);
+  }
+}
 
 const getTransporter = (service, senderAuth) => {
   if (service == OUTLOOK_SERVICE) {
@@ -60,6 +48,26 @@ const getTransporter = (service, senderAuth) => {
         pass: senderAuth.pass,
       },
     });
+  }
+};
+
+const prepareSendEmailResult = (isSuccess, response) => {
+  if (isSuccess) {
+    console.log("Mail sending is successful!");
+
+    return {
+      isSuccess: true,
+      responseCode: Number.parseInt(response.response.slice(0, 3)),
+      message: response.response,
+    };
+  } else {
+    console.log(`An error occurred while sending mail! : ${response}`);
+
+    return {
+      isSuccess: false,
+      responseCode: response.responseCode,
+      message: response.response,
+    };
   }
 };
 
