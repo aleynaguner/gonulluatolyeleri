@@ -6,6 +6,7 @@ import 'jquery/dist/jquery';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle';
 import 'font-awesome/css/font-awesome.min.css';
+import './index.css';
 
 
 ReactDOM.render(

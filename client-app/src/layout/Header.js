@@ -21,9 +21,10 @@ export default class Header extends Component {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
-            <div className="navbar-nav mr-auto">
+            <div className="navbar-nav mr-auto headerLink">
               <HeaderLink to="/home">Ana Sayfa</HeaderLink>
               <HeaderLink to="/ourworkshops">Atölyelerimiz</HeaderLink>
+              <HeaderLink to="/projects">Projelerimiz</HeaderLink>
               <HeaderLink to="/aboutus">Hakkımızda</HeaderLink>
               <HeaderLink to="/blog">Blog</HeaderLink>
               <HeaderLink to="/contactus">İletişim</HeaderLink>

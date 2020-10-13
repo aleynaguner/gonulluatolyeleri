@@ -9,7 +9,7 @@ a {
   text-decoration: none;
   border-radius: 50%;
   color: #397a9a;
-  transition-delay: 0.05s;
+  transition: all 0.3s ease !important;
   padding: 0.4em 0.4em;
 }
 
@@ -40,4 +40,22 @@ a {
 .fa-instagram:hover {
   background: #125688;
   color: white;
+}
+
+.nav-link {
+  font-weight: 600;
+}
+
+.nav-link:hover {
+  color: #80c08c !important;
+  transform: scale(1.1);
+  transition: all 0.3s ease !important;
+}
+
+.nav-link.a:active{
+  color: #ffffff !important;
+  background-color: #80c08c !important ;
+  box-shadow: 0 2px 25px rgba(128, 192, 140, 1);
+  border-radius: 4px;
+  transition: all 0.3s ease !important;
 }
