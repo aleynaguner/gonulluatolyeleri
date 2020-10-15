@@ -8,6 +8,12 @@ input[type="email"]:focus,
   outline: 0 none;
 }
 
-#sendBtn{
-  background-color: #397A9A;
+#sendBtn {
+  background-color: #397a9a;
+}
+
+@media screen and (min-width: 767px) {
+  #messageTextArea {
+    min-height: 194px;
+  }
 }
