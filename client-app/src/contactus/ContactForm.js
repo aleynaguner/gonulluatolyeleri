@@ -50,10 +50,10 @@ export class ContactForm extends Component {
   render() {
     return (
       <form method="post" className="m-5 mx-auto">
-        <div class="row">
+        <div className="row">
           <div className="col-md-2"></div>
-          <div class="col-md-4">
-            <div class="form-group">
+          <div className="col-md-4">
+            <div className="form-group">
               <label className="mb-0 small">Adınız</label>
               <input
                 className="form-control"
@@ -81,7 +81,7 @@ export class ContactForm extends Component {
 
               {/* Error message */}
             </div>
-            <div class="form-group">
+            <div className="form-group">
               <label className="mb-0 small">E-mail</label>
               <input
                 className="form-control"
@@ -92,7 +92,7 @@ export class ContactForm extends Component {
                 placeholder="E-mail adresiniz"
               />
             </div>
-            <div class="form-group">
+            <div className="form-group">
               <label className="mb-0 small">Konu</label>
               <input
                 className="form-control"
@@ -103,12 +103,12 @@ export class ContactForm extends Component {
               />
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="form-group">
+          <div className="col-md-4">
+            <div className="form-group">
               <label className="mb-0 small">Mesaj</label>
               <textarea
                 id="messageTextArea"
-                class="form-control"
+                className="form-control"
                 rows="5"
                 name="message"
                 value={this.state.message}
@@ -119,7 +119,7 @@ export class ContactForm extends Component {
             <div className="mt-3">
               <button
                 id="sendBtn"
-                class="btn text-white float-right"
+                className="btn text-white float-right"
                 type="submit"
                 onClick={this.handleSubmit}
               >

@@ -7,7 +7,7 @@ import "./style/header.css";
 export default class Header extends Component {
   render() {
     return (
-      <nav class="navbar navbar-expand-md navbar-light bg-light shadow fixed-top">
+      <nav className="navbar navbar-expand-md navbar-light bg-light shadow fixed-top">
         <div className="container-fluid">
           <a className="navbar-brand">
             <img src={logo} width="75" height="75" />
@@ -20,7 +20,7 @@ export default class Header extends Component {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
+          <div className="collapse navbar-collapse" id="navbarNav">
             <div className="navbar-nav mr-auto headerLink">
               <HeaderLink to="/home">Ana Sayfa</HeaderLink>
               <HeaderLink to="/ourworkshops">Atölyelerimiz</HeaderLink>
