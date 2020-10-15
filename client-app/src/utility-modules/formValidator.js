@@ -22,7 +22,6 @@ const validate = (values) => {
     }
   }
 
-  debugger;
   return validationResult;
 };
 

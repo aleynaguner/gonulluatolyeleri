@@ -5,6 +5,7 @@ var formValidator = require("../utility-modules/formValidator");
 
 const errorMessages = {
   REQUIRED_VALUE: "Bu alan gereklidir!",
+  CONTAINS_NUMERIC: "Bu alan numeric olamaz!",
 };
 
 export class ContactForm extends Component {
@@ -31,19 +32,18 @@ export class ContactForm extends Component {
     });
   };
 
-  handleSubmit = () => {
+  handleSubmit = (e) => {
+    e.preventDefault();
+
     let validationResult = formValidator.validate(this.state.formData);
 
     if (validationResult.isSuccess) {
       // /api/sendEmail request
     } else {
-      this.setState(
-        {
-          ...this.state,
-          inputsWithError: validationResult.errors,
-        },
-        () => console.log(this.state)
-      );
+      this.setState({
+        ...this.state,
+        inputsWithError: validationResult.errors,
+      });
     }
   };
 
@@ -68,13 +68,15 @@ export class ContactForm extends Component {
               <div
                 style={{
                   display: `${
-                    this.state.inputsWithError?.hasOwnProperty("name")
+                    this.state.inputsWithError.hasOwnProperty("name")
                       ? "block"
                       : "none"
                   }`,
                 }}
               >
-                HATAA
+                {this.state.inputsWithError.hasOwnProperty("name")
+                  ? errorMessages[this.state.inputsWithError.name[0]]
+                  : ""}
               </div>
 
               {/* Error message */}
