@@ -3,6 +3,10 @@ import "./style/contactForm.css";
 
 var formValidator = require("../utility-modules/formValidator");
 
+const errorMessages = {
+  REQUIRED_VALUE: "Bu alan gereklidir!",
+};
+
 export class ContactForm extends Component {
   constructor(props) {
     super(props);
@@ -14,6 +18,7 @@ export class ContactForm extends Component {
         topic: "",
         message: "",
       },
+      inputsWithError: {},
     };
   }
 
@@ -21,13 +26,25 @@ export class ContactForm extends Component {
     event.persist();
     this.setState((state) => {
       state.formData[event.target?.name] = event.target?.value;
+
       return state;
     });
   };
 
   handleSubmit = () => {
-    debugger;
-    let validationResult = formValidator.formValidator(this.state.formData);
+    let validationResult = formValidator.validate(this.state.formData);
+
+    if (validationResult.isSuccess) {
+      // /api/sendEmail request
+    } else {
+      this.setState(
+        {
+          ...this.state,
+          inputsWithError: validationResult.errors,
+        },
+        () => console.log(this.state)
+      );
+    }
   };
 
   render() {
@@ -37,7 +54,7 @@ export class ContactForm extends Component {
           <div className="col-md-2"></div>
           <div class="col-md-4">
             <div class="form-group">
-              <label className="mb-0 small">Ad - Soyad</label>
+              <label className="mb-0 small">Adınız</label>
               <input
                 className="form-control"
                 type="text"
@@ -46,6 +63,21 @@ export class ContactForm extends Component {
                 onChange={this.updateFormValues}
                 placeholder="Adınız"
               />
+              {/* Error message */}
+
+              <div
+                style={{
+                  display: `${
+                    this.state.inputsWithError?.hasOwnProperty("name")
+                      ? "block"
+                      : "none"
+                  }`,
+                }}
+              >
+                HATAA
+              </div>
+
+              {/* Error message */}
             </div>
             <div class="form-group">
               <label className="mb-0 small">E-mail</label>
