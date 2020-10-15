@@ -6,7 +6,7 @@ export class Home extends Component {
   render() {
     return (
       <React.Fragment>
-        <div id="homeBody" className="container-fluid">
+        <div className="container-fluid">
           <div className="row m-5">
             <div className="mx-auto">
               <div className="row mb-5">
