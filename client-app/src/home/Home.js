@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import VolunteerButton from "../layout/VolunteerButton";
 import { HomeSection } from "./HomeSection";
-import { ContactUs } from "../contactus/ContactUs";
+import { ContactUsContent } from "../contactus/ContactUsContent";
 import "./style/home.css";
 
 export class Home extends Component {
@@ -108,7 +108,7 @@ export class Home extends Component {
             <div>İçerik</div>
           </HomeSection>
           <HomeSection header="Bize istediğini sor...">
-            <ContactUs />
+            <ContactUsContent />
           </HomeSection>
         </div>
       </React.Fragment>
