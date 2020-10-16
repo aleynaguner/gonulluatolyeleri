@@ -4,8 +4,11 @@ import "./style/contactForm.css";
 var formValidator = require("../utility-modules/formValidator");
 
 const errorMessages = {
-  REQUIRED_VALUE: "Bu alan gereklidir!",
-  CONTAINS_NUMERIC: "Bu alan numeric olamaz!",
+  REQUIRED_VALUE_FOR_NAME: "Ad alanı boş bırakılamaz !",
+  REQUIRED_VALUE_FOR_EMAIL: "Email alanı boş bırakılamaz !",
+  REQUIRED_VALUE_FOR_TOPIC: "Konu alanı boş bırakılamaz !",
+  REQUIRED_VALUE_FOR_MESSAGE: "Mesaj alanı boş bırakılamaz !",
+  REQUIRED_FORMAT_FOR_EMAIL: "Email formatında yazınız. 'example@example.com'",
 };
 
 export class ContactForm extends Component {
@@ -54,7 +57,25 @@ export class ContactForm extends Component {
           <div className="col-md-2"></div>
           <div className="col-md-4">
             <div className="form-group">
-              <label className="mb-0 small">Adınız</label>
+              <label className="mb-0 small">
+                Adınız
+                {/* Error Message */}
+                <span
+                  className="badge badge-danger"
+                  style={{
+                    display: `${
+                      this.state.inputsWithError.hasOwnProperty("name")
+                        ? "block"
+                        : "none"
+                    }`,
+                  }}
+                >
+                  {this.state.inputsWithError.hasOwnProperty("name")
+                    ? errorMessages[this.state.inputsWithError.name[0]]
+                    : ""}
+                </span>
+                {/* Error Message */}
+              </label>
               <input
                 className="form-control"
                 type="text"
@@ -63,26 +84,27 @@ export class ContactForm extends Component {
                 onChange={this.updateFormValues}
                 placeholder="Adınız"
               />
-              {/* Error message */}
-
-              <div
-                style={{
-                  display: `${
-                    this.state.inputsWithError.hasOwnProperty("name")
-                      ? "block"
-                      : "none"
-                  }`,
-                }}
-              >
-                {this.state.inputsWithError.hasOwnProperty("name")
-                  ? errorMessages[this.state.inputsWithError.name[0]]
-                  : ""}
-              </div>
-
-              {/* Error message */}
             </div>
             <div className="form-group">
-              <label className="mb-0 small">E-mail</label>
+              <label className="mb-0 small">
+                E-mail
+                {/* Error Message */}
+                <span
+                  className="badge badge-danger"
+                  style={{
+                    display: `${
+                      this.state.inputsWithError.hasOwnProperty("email")
+                        ? "block"
+                        : "none"
+                    }`,
+                  }}
+                >
+                  {this.state.inputsWithError.hasOwnProperty("email")
+                    ? errorMessages[this.state.inputsWithError.email[0]]
+                    : ""}
+                </span>
+                {/* Error Message */}
+              </label>
               <input
                 className="form-control"
                 type="email"
@@ -93,7 +115,25 @@ export class ContactForm extends Component {
               />
             </div>
             <div className="form-group">
-              <label className="mb-0 small">Konu</label>
+              <label className="mb-0 small">
+                Konu
+                {/* Error Message */}
+                <span
+                  className="badge badge-danger"
+                  style={{
+                    display: `${
+                      this.state.inputsWithError.hasOwnProperty("topic")
+                        ? "block"
+                        : "none"
+                    }`,
+                  }}
+                >
+                  {this.state.inputsWithError.hasOwnProperty("topic")
+                    ? errorMessages[this.state.inputsWithError.topic[0]]
+                    : ""}
+                </span>
+                {/* Error Message */}
+              </label>
               <input
                 className="form-control"
                 type="text"
@@ -105,7 +145,25 @@ export class ContactForm extends Component {
           </div>
           <div className="col-md-4">
             <div className="form-group">
-              <label className="mb-0 small">Mesaj</label>
+              <label className="mb-0 small">
+                Mesaj
+                {/* Error Message */}
+                <span
+                  className="badge badge-danger"
+                  style={{
+                    display: `${
+                      this.state.inputsWithError.hasOwnProperty("message")
+                        ? "block"
+                        : "none"
+                    }`,
+                  }}
+                >
+                  {this.state.inputsWithError.hasOwnProperty("message")
+                    ? errorMessages[this.state.inputsWithError.message[0]]
+                    : ""}
+                </span>
+                {/* Error Message */}
+              </label>
               <textarea
                 id="messageTextArea"
                 className="form-control"
