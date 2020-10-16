@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import logo from "./image/gonulluatolyeleri.png";
-import { HeaderLink } from "./HeaderLink";
-import VolunteerButton from "./VolunteerButton";
+import { HeaderLink } from "./components/HeaderLink";
+import VolunteerButton from "./components/VolunteerButton";
 import "./style/header.css";
 
 export default class Header extends Component {

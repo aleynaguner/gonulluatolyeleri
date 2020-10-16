@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ContactUsContent } from "./ContactUsContent";
+import { ContactUsContent } from "./components/ContactUsContent";
 
 export class ContactUs extends Component {
   render() {

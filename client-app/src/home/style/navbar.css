@@ -1,0 +1,7 @@
+#img2 {
+  filter: grayscale(100);
+}
+
+#img3 {
+  filter: blur(5px);
+}

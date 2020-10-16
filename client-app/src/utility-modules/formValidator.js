@@ -1,10 +1,7 @@
 const validator = require("validator");
 
 const errorCodes = {
-  REQUIRED_VALUE_FOR_NAME: "REQUIRED_VALUE_FOR_NAME",
-  REQUIRED_VALUE_FOR_EMAIL: "REQUIRED_VALUE_FOR_EMAIL",
-  REQUIRED_VALUE_FOR_TOPIC: "REQUIRED_VALUE_FOR_TOPIC",
-  REQUIRED_VALUE_FOR_MESSAGE: "REQUIRED_VALUE_FOR_MESSAGE",
+  REQUIRED_VALUE: "REQUIRED_VALUE",
   REQUIRED_FORMAT_FOR_EMAIL: "REQUIRED_FORMAT_FOR_EMAIL",
   REQUIRED_NONNUMERIC_FORMAT: "REQUIRED_NONNUMERIC_FORMAT",
 };
@@ -57,7 +54,7 @@ const validateName = (val) => {
   let errors = [];
 
   if (validator.isEmpty(val)) {
-    errors.push(errorCodes.REQUIRED_VALUE_FOR_NAME);
+    errors.push(errorCodes.REQUIRED_VALUE);
   }
 
   return errors;
@@ -67,31 +64,31 @@ const validateEmail = (val) => {
   let errors = [];
 
   if (validator.isEmpty(val)) {
-    errors.push(errorCodes.REQUIRED_VALUE_FOR_EMAIL);
+    errors.push(errorCodes.REQUIRED_VALUE);
   }
 
-  if(validator.isEmail(val)){
+  if (validator.isEmail(val)) {
     errors.push(errorCodes.REQUIRED_FORMAT_FOR_EMAIL);
   }
 
   return errors;
 };
 
-const validateTopic = (val) =>  {
+const validateTopic = (val) => {
   let errors = [];
 
   if (validator.isEmpty(val)) {
-    errors.push(errorCodes.REQUIRED_VALUE_FOR_TOPIC);
+    errors.push(errorCodes.REQUIRED_VALUE);
   }
 
   return errors;
 };
 
-const validateMessage = (val) =>  {
+const validateMessage = (val) => {
   let errors = [];
 
   if (validator.isEmpty(val)) {
-    errors.push(errorCodes.REQUIRED_VALUE_FOR_MESSAGE);
+    errors.push(errorCodes.REQUIRED_VALUE);
   }
 
   return errors;
