@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import "../style/contactForm.css";
 import { FormItem } from "./FormItem";
+import "../style/contactForm.css";
 
-var formValidator = require("../../utility-modules/formValidator");
+const formValidator = require("../../utility-modules/formValidator");
 
 export class ContactForm extends Component {
   constructor(props) {
@@ -18,6 +18,24 @@ export class ContactForm extends Component {
       inputsWithError: {},
     };
   }
+
+  formInputs = [
+    {
+      name: "name",
+      tag: "Adınız",
+      itemType: "input",
+    },
+    {
+      name: "email",
+      tag: "E-mail",
+      itemType: "input",
+    },
+    {
+      name: "topic",
+      tag: "Konu",
+      itemType: "input",
+    },
+  ];
 
   updateFormValues = (event) => {
     event.persist();
@@ -45,23 +63,8 @@ export class ContactForm extends Component {
 
   valHasError = (val) => this.state.inputsWithError.hasOwnProperty(val);
 
-  formInputs = [
-    {
-      tag: "Adınız",
-      valName: "name",
-      itemType: "input",
-    },
-    {
-      tag: "E-mail",
-      valName: "email",
-      itemType: "input",
-    },
-    {
-      tag: "Konu",
-      valName: "topic",
-      itemType: "input",
-    },
-  ];
+  getErrorCode = (val) =>
+    this.valHasError(val) ? this.state.inputsWithError[val][0] : null;
 
   render() {
     return (
@@ -72,33 +75,26 @@ export class ContactForm extends Component {
             {this.formInputs.map((item, i) => (
               <FormItem
                 key={i}
-                tag={item.tag}
+                name={item.name}
                 itemType={item.itemType}
-                valName={item.valName}
-                erroneous={this.valHasError(item.valName)}
-                errorCode={
-                  this.valHasError(item.valName)
-                    ? this.state.inputsWithError[item.valName][0]
-                    : null
-                }
-                value={this.state.formData[item.valName]}
+                tag={item.tag}
+                erroneous={this.valHasError(item.name)}
+                errorCode={this.getErrorCode(item.name)}
+                value={this.state.formData[item.name]}
                 onChange={this.updateFormValues}
               />
             ))}
           </div>
           <div className="col-md-4">
             <FormItem
-              tag={"Mesajınız"}
+              name="message"
               itemType="textarea"
-              valName="message"
+              tag={"Mesajınız"}
               erroneous={this.valHasError("message")}
-              errorCode={
-                this.valHasError("message")
-                  ? this.state.inputsWithError["message"][0]
-                  : null
-              }
+              errorCode={this.getErrorCode("message")}
               value={this.state.formData["message"]}
               onChange={this.updateFormValues}
+              customAttributes={{ id: "messageTextArea", rows: "5" }}
             />
             <div className="mt-3">
               <button
