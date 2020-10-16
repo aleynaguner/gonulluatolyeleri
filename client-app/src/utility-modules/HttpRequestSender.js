@@ -24,7 +24,7 @@ export class HttpRequestSender {
       response.responseData = responseFromWebService.data;
     } catch (err) {
       response.isSuccess = false;
-      response.responseData = null;
+      response.responseData = err;
     }
 
     return response;
