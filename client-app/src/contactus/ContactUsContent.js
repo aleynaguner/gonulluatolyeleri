@@ -6,11 +6,6 @@ export class ContactUsContent extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className="row">
-          <div className="mx-auto">
-            <p className="h3 font-weight-normal">Bize istediğini sor</p>
-          </div>
-        </div>
         <div className="container-fluid">
           <ContactForm />
           <Map />
