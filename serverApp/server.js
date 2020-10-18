@@ -43,4 +43,9 @@ router.post("/api/sendEmail", async (req, res) => {
   }
 });
 
+// Yukarıda belirtilen pointler hariç tüm GET requestleri "/" ya yani React app yönlendirir.
+router.get("*", function (req, res) {
+  res.redirect("/");
+});
+
 const app = express().use(router).listen(3000);
