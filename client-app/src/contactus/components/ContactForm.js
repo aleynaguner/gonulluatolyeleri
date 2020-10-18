@@ -51,13 +51,15 @@ export class ContactForm extends Component {
 
     let validationResult = formValidator.validate(this.state.formData);
 
+    this.setState({
+      ...this.state,
+      inputsWithError: validationResult.errors,
+    });
+
     if (validationResult.isSuccess) {
       // /api/sendEmail request
     } else {
-      this.setState({
-        ...this.state,
-        inputsWithError: validationResult.errors,
-      });
+      // Ekrandaki bir message box'a hata oluştu gönderilemedi felan yazalım.
     }
   };
 
