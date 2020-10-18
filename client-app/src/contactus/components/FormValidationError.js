@@ -5,7 +5,7 @@ const errorMessages = {
   REQUIRED_FORMAT_FOR_EMAIL: () =>
     "Email formatında yazınız. 'example@example.com'",
   REQUIRED_NONNUMERIC_FORMAT: () => "Sayısal olmayan değer girin !",
-  MAX_LENGTH: () => "MAX_LENGTH"
+  MAX_LENGTH: () => "Maksimum uzunluk sınırını geçtiniz !"
 };
 
 export class FormValidationError extends Component {
