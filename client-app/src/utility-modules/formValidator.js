@@ -4,6 +4,7 @@ const errorCodes = {
   REQUIRED_VALUE: "REQUIRED_VALUE",
   REQUIRED_FORMAT_FOR_EMAIL: "REQUIRED_FORMAT_FOR_EMAIL",
   REQUIRED_NONNUMERIC_FORMAT: "REQUIRED_NONNUMERIC_FORMAT",
+  MAX_LENGTH: "MAX_LENGTH",
 };
 
 const validate = (values) => {
@@ -57,6 +58,14 @@ const validateName = (val) => {
     errors.push(errorCodes.REQUIRED_VALUE);
   }
 
+  if (!validator.isAlpha(val)) {
+    errors.push(errorCodes.REQUIRED_NONNUMERIC_FORMAT);
+  }
+
+  if (!validator.isLength(val, {max:25})) {
+    errors.push(errorCodes.MAX_LENGTH);
+  }
+
   return errors;
 };
 
@@ -67,7 +76,7 @@ const validateEmail = (val) => {
     errors.push(errorCodes.REQUIRED_VALUE);
   }
 
-  if (validator.isEmail(val)) {
+  if (!validator.isEmail(val)) {
     errors.push(errorCodes.REQUIRED_FORMAT_FOR_EMAIL);
   }
 
@@ -81,6 +90,18 @@ const validateTopic = (val) => {
     errors.push(errorCodes.REQUIRED_VALUE);
   }
 
+  if (!validator.isAlphanumeric(val)) {
+    errors.push(errorCodes.REQUIRED_NONNUMERIC_FORMAT);
+  }
+
+  if (validator.isNumeric(val)) {
+    errors.push(errorCodes.REQUIRED_NONNUMERIC_FORMAT);
+  }
+
+  if (!validator.isLength(val, {max:25})) {
+    errors.push(errorCodes.MAX_LENGTH);
+  }
+
   return errors;
 };
 
@@ -89,6 +110,14 @@ const validateMessage = (val) => {
 
   if (validator.isEmpty(val)) {
     errors.push(errorCodes.REQUIRED_VALUE);
+  }
+
+  if (validator.isNumeric(val)) {
+    errors.push(errorCodes.REQUIRED_NONNUMERIC_FORMAT);
+  }
+
+  if (!validator.isLength(val, {max:350})) {
+    errors.push(errorCodes.MAX_LENGTH);
   }
 
   return errors;
