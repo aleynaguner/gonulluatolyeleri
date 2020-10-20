@@ -40,7 +40,9 @@ export default class VolunteerButton extends Component {
       <button
         className={this.state.buttonClassName}
         onClick={(e) => this.handleClick(e, this.props.willBeBubbled)}
-        style={{ width: this.props.width ?? "200px" }}
+        style={
+          this.props.customStyle !== undefined ? this.props.customStyle : {}
+        }
       >
         GÖNÜLLÜ OL !
       </button>
