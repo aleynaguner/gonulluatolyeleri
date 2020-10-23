@@ -23,9 +23,9 @@ export class Box extends Component {
 
   render() {
     if (this.props.type == BoxTypes.Row) {
-      return <div class="row m-2">{this.createBox()}</div>;
+      return <div className="row">{this.createBox()}</div>;
     } else if (this.props.type == BoxTypes.Wrapper) {
-      return <div class="container-fluid">{this.props.children}</div>;
+      return <div className="container-fluid">{this.props.children}</div>;
     } else {
       return this.createBox();
     }

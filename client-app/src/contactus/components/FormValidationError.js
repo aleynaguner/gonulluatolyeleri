@@ -12,7 +12,7 @@ export class FormValidationError extends Component {
   render() {
     return (
       <span
-        className="badge badge-danger"
+        className="badge badge-danger mt-1"
         style={{
           display: `${this.props.display ? "block" : "none"}`,
         }}
