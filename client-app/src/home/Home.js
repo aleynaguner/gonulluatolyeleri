@@ -26,7 +26,7 @@ export class Home extends Component {
           </Box>
           <Box type={BoxTypes.Wrapper}>
             <Box type={BoxTypes.Row}>
-              <p className="h3 font-weight-normal">Neler Yaptık ? </p>
+              <p className="h3 font-weight-normal">Neleri Amaçlıyoruz ? </p>
             </Box>
             <Box type={BoxTypes.Row}>
               <blockquote className="blockquote text-center">
@@ -39,6 +39,49 @@ export class Home extends Component {
                   <cite title="Source Title">Source Title</cite>
                 </footer>
               </blockquote>
+            </Box>
+          </Box>
+          <Box type={BoxTypes.Wrapper.Manuel}>
+            <Box type={BoxTypes.Row}>
+              <p className="h3 font-weight-normal">Neler Yaptık ? </p>
+            </Box>
+            <Box type={BoxTypes.Row}>
+              <Box type={BoxTypes.Column}>
+                <img
+                  src="https://www.w3schools.com/bootstrap4/newyork.jpg"
+                  style={{
+                    width: "150px",
+                    height: "150px",
+                    position: "relative",
+                    overflow: "hidden",
+                    borderRadius: "50%",
+                  }}
+                />
+              </Box>
+              <Box type={BoxTypes.Column}>
+                <img
+                  src="https://www.w3schools.com/bootstrap4/newyork.jpg"
+                  style={{
+                    width: "150px",
+                    height: "150px",
+                    position: "relative",
+                    overflow: "hidden",
+                    borderRadius: "50%",
+                  }}
+                />
+              </Box>
+              <Box type={BoxTypes.Column}>
+                <img
+                  src="https://www.w3schools.com/bootstrap4/newyork.jpg"
+                  style={{
+                    width: "150px",
+                    height: "150px",
+                    position: "relative",
+                    overflow: "hidden",
+                    borderRadius: "50%",
+                  }}
+                />
+              </Box>
             </Box>
           </Box>
           <Box type={BoxTypes.Row}>

@@ -32,7 +32,7 @@ router.post("/api/sendEmail", async (req, res) => {
       },
       config.emailService,
       config.receiverUser,
-      req.body.subjet,
+      req.body.topic,
       req.body.message
     );
 

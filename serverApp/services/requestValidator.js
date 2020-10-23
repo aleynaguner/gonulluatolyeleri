@@ -1,6 +1,6 @@
 const validateSendEmail = (reqBody) => {
   if (
-    !reqBody.hasOwnProperty("subject") ||
+    !reqBody.hasOwnProperty("topic") ||
     !reqBody.hasOwnProperty("message")
   ) {
     return false;

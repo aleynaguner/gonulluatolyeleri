@@ -51,7 +51,7 @@ export class ContactForm extends Component {
   executeAfterSuccessfulSendEmail = () => {
     alert("is-success");
     this.setState({
-      formData: { name: " ", email: " ", topic: " ", message: " " },
+      formData: { name: "", email: "", topic: "", message: "" },
     });
   };
 
@@ -73,7 +73,7 @@ export class ContactForm extends Component {
       const requestSender = new HttpRequestSender(config.BASE_URL);
       let response = await requestSender.SendRequest(
         "post",
-        "sendEmail",
+        "api/sendEmail",
         this.state.formData
       );
       console.log(response);
