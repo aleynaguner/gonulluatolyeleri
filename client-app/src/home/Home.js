@@ -49,6 +49,7 @@ export class Home extends Component {
               <Box type={BoxTypes.Column}>
                 <img
                   src="https://www.w3schools.com/bootstrap4/newyork.jpg"
+                  alt="randomImg"
                   style={{
                     width: "150px",
                     height: "150px",
@@ -61,6 +62,7 @@ export class Home extends Component {
               <Box type={BoxTypes.Column}>
                 <img
                   src="https://www.w3schools.com/bootstrap4/newyork.jpg"
+                  alt="randomImg"
                   style={{
                     width: "150px",
                     height: "150px",
@@ -73,6 +75,7 @@ export class Home extends Component {
               <Box type={BoxTypes.Column}>
                 <img
                   src="https://www.w3schools.com/bootstrap4/newyork.jpg"
+                  alt="randomImg"
                   style={{
                     width: "150px",
                     height: "150px",

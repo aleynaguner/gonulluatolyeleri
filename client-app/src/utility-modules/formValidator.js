@@ -14,7 +14,7 @@ const validate = (values) => {
   };
 
   for (let prop in values) {
-    if (prop == "name") {
+    if (prop === "name") {
       let nameValidationResult = validateName(values[prop]);
 
       if (nameValidationResult.length > 0) {
@@ -22,7 +22,7 @@ const validate = (values) => {
         validationResult.errors.name = nameValidationResult;
       }
     }
-    if (prop == "email") {
+    if (prop === "email") {
       let emailValidationResult = validateEmail(values[prop]);
 
       if (emailValidationResult.length > 0) {
@@ -30,7 +30,7 @@ const validate = (values) => {
         validationResult.errors.email = emailValidationResult;
       }
     }
-    if (prop == "topic") {
+    if (prop === "topic") {
       let topicValidationResult = validateTopic(values[prop]);
 
       if (topicValidationResult.length > 0) {
@@ -38,7 +38,7 @@ const validate = (values) => {
         validationResult.errors.topic = topicValidationResult;
       }
     }
-    if (prop == "message") {
+    if (prop === "message") {
       let messageValidationResult = validateMessage(values[prop]);
 
       if (messageValidationResult.length > 0) {
