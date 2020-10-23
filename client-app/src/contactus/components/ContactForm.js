@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { FormItem } from "./FormItem";
 import "../style/contactForm.css";
+import { HttpRequestSender } from "../../utility-modules/HttpRequestSender";
+import config from "../../config.json";
 
 const formValidator = require("../../utility-modules/formValidator");
 
@@ -46,7 +48,18 @@ export class ContactForm extends Component {
     });
   };
 
-  handleSubmit = (e) => {
+  executeAfterSuccessfulSendEmail = () => {
+    alert("is-success");
+    this.setState({
+      formData: { name: " ", email: " ", topic: " ", message: " " },
+    });
+  };
+
+  executeAfterUnsuccessfulSendEmail = () => {
+    alert("is-failed");
+  };
+
+  handleSubmit = async (e) => {
     e.preventDefault();
 
     let validationResult = formValidator.validate(this.state.formData);
@@ -57,9 +70,18 @@ export class ContactForm extends Component {
     });
 
     if (validationResult.isSuccess) {
-      // /api/sendEmail request
-    } else {
-      // Ekrandaki bir message box'a hata oluştu gönderilemedi felan yazalım.
+      const requestSender = new HttpRequestSender(config.BASE_URL);
+      let response = await requestSender.SendRequest(
+        "post",
+        "sendEmail",
+        this.state.formData
+      );
+      console.log(response);
+      if (response.isSuccess) {
+        this.executeAfterSuccessfulSendEmail();
+      } else {
+        this.executeAfterUnsuccessfulSendEmail();
+      }
     }
   };
 
