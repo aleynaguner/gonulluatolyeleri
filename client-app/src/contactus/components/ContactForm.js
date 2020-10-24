@@ -3,6 +3,8 @@ import { FormItem } from "./FormItem";
 import "../style/contactForm.css";
 import { HttpRequestSender } from "../../utility-modules/HttpRequestSender";
 import config from "../../config.json";
+import { Loading } from "../../layout/components/Loading";
+import { Box, BoxTypes } from "../../home/components/Box";
 
 const formValidator = require("../../utility-modules/formValidator");
 
@@ -18,6 +20,9 @@ export class ContactForm extends Component {
         message: "",
       },
       inputsWithError: {},
+      loading: false,
+      sendEmailSuccessful: false,
+      showSendEmailMessage: false,
     };
   }
 
@@ -48,17 +53,6 @@ export class ContactForm extends Component {
     });
   };
 
-  executeAfterSuccessfulSendEmail = () => {
-    alert("is-success");
-    this.setState({
-      formData: { name: "", email: "", topic: "", message: "" },
-    });
-  };
-
-  executeAfterUnsuccessfulSendEmail = () => {
-    alert("is-failed");
-  };
-
   handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -71,17 +65,22 @@ export class ContactForm extends Component {
 
     if (validationResult.isSuccess) {
       const requestSender = new HttpRequestSender(config.BASE_URL);
+
+      this.setState({ loading: true });
+
       let response = await requestSender.SendRequest(
         "post",
         "api/sendEmail",
         this.state.formData
       );
-      console.log(response);
+
       if (response.isSuccess) {
         this.executeAfterSuccessfulSendEmail();
       } else {
         this.executeAfterUnsuccessfulSendEmail();
       }
+
+      this.setState({ loading: false });
     }
   };
 
@@ -90,50 +89,110 @@ export class ContactForm extends Component {
   getErrorCode = (val) =>
     this.valHasError(val) ? this.state.inputsWithError[val][0] : null;
 
+  executeAfterSuccessfulSendEmail = () => {
+    this.setState({
+      formData: { name: "", email: "", topic: "", message: "" },
+      sendEmailSuccessful: true,
+      showSendEmailMessage: true,
+    });
+
+    setTimeout(
+      () =>
+        this.setState({
+          showSendEmailMessage: false,
+        }),
+      1500
+    );
+  };
+
+  executeAfterUnsuccessfulSendEmail = () => {
+    this.setState({
+      sendEmailSuccessful: false,
+      showSendEmailMessage: true,
+    });
+
+    setTimeout(
+      () =>
+        this.setState({
+          showSendEmailMessage: false,
+        }),
+      1500
+    );
+  };
+
+  createSendEmailResponseMessage = (isSuccess) => {
+    let message = isSuccess
+      ? "Mesajınız gönderildi !"
+      : "Bir hata oluştu... Daha sonra deneyin !";
+    let className = `alert alert-${isSuccess ? "success" : "alert"}`;
+
+    return (
+      <Box type={BoxTypes.Column}>
+        <div className={className} role="alert">
+          {message}
+        </div>
+      </Box>
+    );
+  };
+
   render() {
     return (
-      <form method="post" className="m-5 mx-auto">
-        <div className="row">
-          <div className="col-md-2"></div>
-          <div className="col-md-4">
-            {this.formInputs.map((item, i) => (
-              <FormItem
-                key={i}
-                name={item.name}
-                itemType={item.itemType}
-                tag={item.tag}
-                erroneous={this.valHasError(item.name)}
-                errorCode={this.getErrorCode(item.name)}
-                value={this.state.formData[item.name]}
-                onChange={this.updateFormValues}
-              />
-            ))}
-          </div>
-          <div className="col-md-4">
-            <FormItem
-              name="message"
-              itemType="textarea"
-              tag={"Mesajınız"}
-              erroneous={this.valHasError("message")}
-              errorCode={this.getErrorCode("message")}
-              value={this.state.formData["message"]}
-              onChange={this.updateFormValues}
-              customAttributes={{ id: "messageTextArea", rows: "5" }}
-            />
-            <div className="mt-3">
-              <button
-                id="sendBtn"
-                className="btn text-white float-right"
-                type="submit"
-                onClick={this.handleSubmit}
-              >
-                Gönder
-              </button>
-            </div>
-          </div>
-          <div className="col-md-2"></div>
-        </div>
-      </form>
+      <React.Fragment>
+        <Box type={BoxTypes.Wrapper}>
+          {this.state.loading && (
+            <Box type={BoxTypes.Column}>
+              <Loading />
+            </Box>
+          )}
+          {!this.state.loading &&
+            this.state.showSendEmailMessage &&
+            this.createSendEmailResponseMessage(this.state.sendEmailSuccessful)}
+          <fieldset disabled={this.state.loading}>
+            <form>
+              <div className="row m-4">
+                <div className="col-md-2"></div>
+                <div className="col-md-4">
+                  {this.formInputs.map((item, i) => (
+                    <FormItem
+                      key={i}
+                      name={item.name}
+                      itemType={item.itemType}
+                      tag={item.tag}
+                      erroneous={this.valHasError(item.name)}
+                      errorCode={this.getErrorCode(item.name)}
+                      value={this.state.formData[item.name]}
+                      onChange={this.updateFormValues}
+                    />
+                  ))}
+                </div>
+                <div className="col-md-4">
+                  <FormItem
+                    name="message"
+                    itemType="textarea"
+                    tag={"Mesajınız"}
+                    erroneous={this.valHasError("message")}
+                    errorCode={this.getErrorCode("message")}
+                    value={this.state.formData["message"]}
+                    onChange={this.updateFormValues}
+                    customAttributes={{ id: "messageTextArea", rows: "5" }}
+                  />
+                  <div className="mt-3">
+                    <button
+                      id="sendBtn"
+                      className="btn text-white float-right"
+                      type="submit"
+                      onClick={this.handleSubmit}
+                    >
+                      Gönder
+                    </button>
+                  </div>
+                </div>
+                <div className="col-md-2"></div>
+              </div>
+            </form>
+          </fieldset>
+        </Box>
+      </React.Fragment>
     );
   }
 }
