@@ -54,15 +54,17 @@ const validate = (values) => {
 const validateName = (val) => {
   let errors = [];
 
+  let spaceControl = val.replace(/ /g, "");
+
   if (validator.isEmpty(val)) {
     errors.push(errorCodes.REQUIRED_VALUE);
   }
 
-  if (!validator.isAlpha(val)) {
+  if (!validator.isAlpha(spaceControl, "tr-TR")) {
     errors.push(errorCodes.REQUIRED_NONNUMERIC_FORMAT);
   }
 
-  if (!validator.isLength(val, {max:25})) {
+  if (!validator.isLength(val, { max: 25 })) {
     errors.push(errorCodes.MAX_LENGTH);
   }
 
@@ -86,11 +88,13 @@ const validateEmail = (val) => {
 const validateTopic = (val) => {
   let errors = [];
 
+  let spaceControl = val.replace(/ /g, "");
+
   if (validator.isEmpty(val)) {
     errors.push(errorCodes.REQUIRED_VALUE);
   }
 
-  if (!validator.isAlphanumeric(val)) {
+  if (!validator.isAlphanumeric(spaceControl, "tr-TR")) {
     errors.push(errorCodes.REQUIRED_NONNUMERIC_FORMAT);
   }
 
@@ -98,7 +102,7 @@ const validateTopic = (val) => {
     errors.push(errorCodes.REQUIRED_NONNUMERIC_FORMAT);
   }
 
-  if (!validator.isLength(val, {max:25})) {
+  if (!validator.isLength(val, { max: 25 })) {
     errors.push(errorCodes.MAX_LENGTH);
   }
 
@@ -116,7 +120,7 @@ const validateMessage = (val) => {
     errors.push(errorCodes.REQUIRED_NONNUMERIC_FORMAT);
   }
 
-  if (!validator.isLength(val, {max:350})) {
+  if (!validator.isLength(val, { max: 350 })) {
     errors.push(errorCodes.MAX_LENGTH);
   }
 
