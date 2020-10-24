@@ -5,7 +5,7 @@ export class Done extends Component {
   render() {
     return (
       <Box type={BoxTypes.Row}>
-        <div class="col-md-4">
+        <div class="col-md-5">
           <Box type={BoxTypes.Wrapper}>
             <Box type={BoxTypes.Row}>
               <div
@@ -38,7 +38,7 @@ export class Done extends Component {
           </Box>
         </div>
 
-        <div class="col-md-4 clearfix d-none d-md-block">
+        <div class="col-md-5 clearfix d-none d-md-block">
           <Box type={BoxTypes.Wrapper}>
             <Box type={BoxTypes.Row}>
               <div
@@ -71,7 +71,7 @@ export class Done extends Component {
           </Box>
         </div>
 
-        <div class="col-md-4 clearfix d-none d-md-block">
+        <div class="col-md-5 clearfix d-none d-md-block">
           <Box type={BoxTypes.Wrapper}>
             <Box type={BoxTypes.Row}>
               <div
