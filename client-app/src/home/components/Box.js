@@ -1,13 +1,9 @@
 import React, { Component } from "react";
 
 export class Box extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
-
   createBox = () => {
     return (
-      <div className="col m-3">
+      <div className="col m-3" style={this.props.customStyle}>
         <div
           style={{
             display: "flex",
@@ -26,7 +22,7 @@ export class Box extends Component {
       return <div className="row">{this.createBox()}</div>;
     } else if (this.props.type === BoxTypes.Wrapper) {
       return <div className="container-fluid">{this.props.children}</div>;
-    } else if (this.props.type === BoxTypes.Wrapper.Manuel) {
+    } else if (this.props.type === BoxTypes.Wrapper.NotFluid) {
       return <div className="container">{this.props.children}</div>;
     } else {
       return this.createBox();
@@ -35,18 +31,8 @@ export class Box extends Component {
 }
 
 const Wrapper = {
-  Manuel: {
-    Small: "1",
-    Medium: "2",
-    Large: "3",
-  },
+  NotFluid: "notfluid",
 };
-
-// const setManuelWrapper = (size) => {
-//   if(size === Wrapper.Manuel.Small) {
-
-//   }
-// }
 
 export const BoxTypes = {
   Wrapper: Wrapper,
