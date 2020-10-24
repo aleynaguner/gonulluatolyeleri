@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import VolunteerButton from "../layout/components/VolunteerButton";
 import { Navbar } from "./components/Navbar";
 import { Box, BoxTypes } from "./components/Box";
+import { WhatWeDone } from "./components/WhatWeDone";
 import { ContactUsContent } from "../contactus/components/ContactUsContent";
 
 export class Home extends Component {
@@ -11,17 +12,13 @@ export class Home extends Component {
         <Box type={BoxTypes.Wrapper}>
           <Box type={BoxTypes.Wrapper}>
             <Box type={BoxTypes.Row}>
-              <Box type={BoxTypes.Column}>
-                <Navbar />
-              </Box>
+              <Navbar />
             </Box>
             <Box type={BoxTypes.Row}>
-              <Box type={BoxTypes.Column}>
-                <VolunteerButton
-                  willBeBubbled={true}
-                  customStyle={{ width: "25%" }}
-                />
-              </Box>
+              <VolunteerButton
+                willBeBubbled={true}
+                customStyle={{ width: "25%" }}
+              />
             </Box>
           </Box>
           <Box type={BoxTypes.Wrapper}>
@@ -41,56 +38,16 @@ export class Home extends Component {
               </blockquote>
             </Box>
           </Box>
-          <Box type={BoxTypes.Wrapper.Manuel}>
+          <Box type={BoxTypes.Wrapper.NotFluid}>
             <Box type={BoxTypes.Row}>
               <p className="h3 font-weight-normal">Neler Yaptık ? </p>
             </Box>
             <Box type={BoxTypes.Row}>
-              <Box type={BoxTypes.Column}>
-                <img
-                  src="https://www.w3schools.com/bootstrap4/newyork.jpg"
-                  alt="randomImg"
-                  style={{
-                    width: "150px",
-                    height: "150px",
-                    position: "relative",
-                    overflow: "hidden",
-                    borderRadius: "50%",
-                  }}
-                />
-              </Box>
-              <Box type={BoxTypes.Column}>
-                <img
-                  src="https://www.w3schools.com/bootstrap4/newyork.jpg"
-                  alt="randomImg"
-                  style={{
-                    width: "150px",
-                    height: "150px",
-                    position: "relative",
-                    overflow: "hidden",
-                    borderRadius: "50%",
-                  }}
-                />
-              </Box>
-              <Box type={BoxTypes.Column}>
-                <img
-                  src="https://www.w3schools.com/bootstrap4/newyork.jpg"
-                  alt="randomImg"
-                  style={{
-                    width: "150px",
-                    height: "150px",
-                    position: "relative",
-                    overflow: "hidden",
-                    borderRadius: "50%",
-                  }}
-                />
-              </Box>
+              <WhatWeDone />
             </Box>
           </Box>
           <Box type={BoxTypes.Row}>
-            <Box type={BoxTypes.Column}>
-              <ContactUsContent />
-            </Box>
+            <ContactUsContent />
           </Box>
         </Box>
       </React.Fragment>
