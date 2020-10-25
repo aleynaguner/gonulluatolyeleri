@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../style/volunteerButton.css";
+import "./style/volunteerButton.css";
 
 export default class VolunteerButton extends Component {
   constructor(props) {

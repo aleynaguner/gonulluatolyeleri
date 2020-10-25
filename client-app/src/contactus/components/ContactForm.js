@@ -3,8 +3,8 @@ import { FormItem } from "./FormItem";
 import "../style/contactForm.css";
 import { HttpRequestSender } from "../../utility-modules/HttpRequestSender";
 import config from "../../config.json";
-import { Loading } from "../../layout/components/Loading";
-import { Box, BoxTypes } from "../../home/components/Box";
+import { Loading } from "../../components/Loading";
+import { Box, BoxTypes } from "../../components/Box";
 
 const formValidator = require("../../utility-modules/formValidator");
 

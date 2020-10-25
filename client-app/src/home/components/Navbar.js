@@ -18,6 +18,8 @@ export class Navbar extends Component {
           <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
         </ol>
+
+        
         <div className="carousel-inner">
           <div className="carousel-item active">
             <img

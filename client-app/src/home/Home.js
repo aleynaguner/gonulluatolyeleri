@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import VolunteerButton from "../layout/components/VolunteerButton";
+import VolunteerButton from "../components/VolunteerButton";
 import { Navbar } from "./components/Navbar";
-import { Box, BoxTypes } from "./components/Box";
+import { Box, BoxTypes } from "../components/Box";
 import { WhatWeDone } from "./components/WhatWeDone";
 import { ContactUsContent } from "../contactus/components/ContactUsContent";
 

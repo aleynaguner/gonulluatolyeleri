@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { ContactUsContent } from "./components/ContactUsContent";
-import { Loading } from "../layout/components/Loading";
 
 export class ContactUs extends Component {
   render() {
