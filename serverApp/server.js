@@ -6,7 +6,6 @@ const modelsValidator = require("models-validator");
 const config = require("./config");
 
 const emailService = require("./services/emailService");
-const requestValidator = require("./services/requestValidator");
 
 const router = express.Router();
 
