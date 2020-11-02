@@ -2,11 +2,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
 const modelsValidator = require("models-validator");
+const models = require("./models/models");
 
 const config = require("./config");
 
 const emailService = require("./services/emailService");
-const requestValidator = require("./services/requestValidator");
 
 const router = express.Router();
 
@@ -14,10 +14,7 @@ router.use(bodyParser());
 router.use(express.static(path.join(__dirname, "../client-app/build")));
 router.use(
   modelsValidator.modelValidatorMiddleware({
-    "/api/sendEmail": modelsValidator.createModel("sendEmailModel", {
-      topic: "string",
-      message: "string",
-    }),
+    [models.emailSendModel.modelName]: models.emailSendModel.model,
   })
 );
 
