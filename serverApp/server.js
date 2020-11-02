@@ -14,7 +14,10 @@ router.use(bodyParser());
 router.use(express.static(path.join(__dirname, "../client-app/build")));
 router.use(
   modelsValidator.modelValidatorMiddleware({
-    [models.emailSendModel.modelName]: models.emailSendModel.model,
+    "/api/sendEmail": modelsValidator.createModel(
+      models.emailSendModel.modelName,
+      models.emailSendModel.model
+    ),
   })
 );
 
