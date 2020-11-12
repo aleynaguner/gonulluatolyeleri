@@ -12,7 +12,7 @@ export class AboutUs extends Component {
         <Box type={BoxTypes.Wrapper}>
           <ImgHeader imgSrc={imgSrc} headerText="About Us" />
           <div className="row mt-5">
-            <div className="col-8">
+            <div className="col-lg-8 col-md-8 col-sm-8 col-xs-12">
               <p style={{ fontSize: "20px" }}>
                 Dolore consequat commodo sint cillum. Veniam aliqua est et
                 adipisicing magna adipisicing esse ad elit est incididunt nisi.
@@ -32,21 +32,25 @@ export class AboutUs extends Component {
                 proident reprehenderit ad dolor eiusmod deserunt officia enim.
               </p>
             </div>
-            <div className="col-4">
-              <img
-                src="https://lh3.googleusercontent.com/proxy/5gwmqQCct71Aw0LGZRP57GFleGeVctyXwbiLYd_Y01Y-hBx4FZbwyMNVOfhmX7oIIKEXJwxG_uFuV-yJvjEVTJlZU0v8Vvvi7HMbsliX0yZYXxKkwH3POjMqXWdj_CZla-H7KnjJRtSsld8FOvwR1KyTyGNL"
-                class="rounded float-right"
-                alt="..."
-              ></img>
+            <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+              <div className="d-flex justify-content-center">
+                <img
+                  src="https://www.hermesiletisim.net/uploads/2013/11/pazarlama-teknikleri-g%C3%B6nderim-testleri.jpg"
+                  class="img-fluid"
+                  alt="..."
+                ></img>
+              </div>
             </div>
           </div>
           <div className="row mt-5">
-            <div className="col-4">
-              <img
-                src="https://lh3.googleusercontent.com/proxy/5gwmqQCct71Aw0LGZRP57GFleGeVctyXwbiLYd_Y01Y-hBx4FZbwyMNVOfhmX7oIIKEXJwxG_uFuV-yJvjEVTJlZU0v8Vvvi7HMbsliX0yZYXxKkwH3POjMqXWdj_CZla-H7KnjJRtSsld8FOvwR1KyTyGNL"
-                class="rounded float-right"
-                alt="..."
-              ></img>
+            <div className="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+              <div className="d-flex justify-content-center">
+                <img
+                  src="https://www.hermesiletisim.net/uploads/2013/11/pazarlama-teknikleri-g%C3%B6nderim-testleri.jpg"
+                  class="img-fluid"
+                  alt="..."
+                ></img>
+              </div>
             </div>
             <div className="col-8">
               <p style={{ fontSize: "20px" }}>
