@@ -17,3 +17,19 @@ input[type="email"]:focus,
     min-height: 194px;
   }
 }
+
+.has-error {
+  border-color: rgb(219, 67, 69) !important;
+  box-shadow: 0 0.5px 0.5px rgb(219, 67, 69) inset, 0 0 4px rgb(219, 67, 69) !important;
+}
+
+.defaultBadge {
+  color: #F7F7F7;
+  margin-top: 2px;
+  background-color: #F7F7F7;
+}
+
+.errorClass {
+  color:  gray;
+  margin-top: 2px;
+}

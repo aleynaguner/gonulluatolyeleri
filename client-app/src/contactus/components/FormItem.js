@@ -5,11 +5,11 @@ export class FormItem extends Component {
   render() {
     return (
       <div className="form-group">
-        <label className="mb-0 small">
-          {this.props.tag}
-        </label>
+        <label className="mb-0 small">{this.props.tag}</label>
         {React.createElement(this.props.itemType, {
-          className: "form-control",
+          className: this.props.erroneous
+            ? "form-control has-error"
+            : "form-control ",
           type: "text",
           name: this.props.name,
           value: this.props.value,
@@ -19,10 +19,10 @@ export class FormItem extends Component {
           ...this.props.customAttributes,
         })}
         <FormValidationError
-            valName={this.props.tag}
-            display={this.props.erroneous}
-            errorCode={this.props.errorCode}
-          />
+          valName={this.props.tag}
+          display={this.props.erroneous}
+          errorCode={this.props.errorCode}
+        />
       </div>
     );
   }

@@ -5,22 +5,19 @@ const errorMessages = {
   REQUIRED_FORMAT_FOR_EMAIL: () =>
     "Email formatında yazınız. 'example@example.com'",
   REQUIRED_NONNUMERIC_FORMAT: () => "Sayısal olmayan değer girin !",
-  MAX_LENGTH: () => "Maksimum uzunluk sınırını geçtiniz !"
+  MAX_LENGTH: () => "Maksimum uzunluk sınırını geçtiniz !",
 };
 
 export class FormValidationError extends Component {
   render() {
-    return (
-      <span
-        className="badge badge-danger mt-1"
-        style={{
-          display: `${this.props.display ? "block" : "none"}`,
-        }}
-      >
-        {this.props.display
-          ? errorMessages[this.props.errorCode](this.props.valName)
-          : ""}
-      </span>
-    );
+    if (this.props.display) {
+      return (
+        <span className="errorClass">
+          {errorMessages[this.props.errorCode](this.props.valName)}
+        </span>
+      );
+    } else {
+      return <span className="defaultBadge">A</span>;
+    }
   }
 }
