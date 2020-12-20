@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { FormItem } from "./FormItem";
 import "../style/contactForm.css";
-import { HttpRequestSender } from "../../utility-modules/HttpRequestSender";
+import { HttpRequestSender } from "../../utility/HttpRequestSender";
 import config from "../../config.json";
 import { Loading } from "../../components/Loading";
 import { Box, BoxTypes } from "../../components/Box";
-
-const formValidator = require("../../utility-modules/formValidator");
+import { FormValidator } from "../../utility/FormValidator";
 
 export class ContactForm extends Component {
   constructor(props) {
@@ -56,7 +55,7 @@ export class ContactForm extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
 
-    let validationResult = formValidator.validate(this.state.formData);
+    let validationResult = FormValidator.Validate(this.state.formData);
 
     this.setState({
       ...this.state,
