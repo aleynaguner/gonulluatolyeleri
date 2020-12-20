@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 
 export const Constant = {
-  ContentType: {
-    TEXT_CONTENT: "TEXT_CONTENT",
-    IMG_CONTENT: "IMG_CONTENT",
-  },
   Alignment: {
     L: "Left",
     R: "Right",
