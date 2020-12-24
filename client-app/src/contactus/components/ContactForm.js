@@ -5,7 +5,7 @@ import { HttpRequestSender } from "../../utility/HttpRequestSender";
 import config from "../../config.json";
 import { Loading } from "../../components/Loading";
 import { Box, BoxTypes } from "../../components/Box";
-import { FormValidator } from "../../utility/FormValidator";
+const FormValidator = require("../../utility/FormValidator");
 
 export class ContactForm extends Component {
   constructor(props) {
@@ -57,10 +57,7 @@ export class ContactForm extends Component {
 
     let validationResult = FormValidator.Validate(this.state.formData);
 
-    this.setState({
-      ...this.state,
-      inputsWithError: validationResult.errors,
-    });
+    this.setState({ inputsWithError: validationResult.errors });
 
     if (validationResult.isSuccess) {
       const requestSender = new HttpRequestSender(config.BASE_URL);
