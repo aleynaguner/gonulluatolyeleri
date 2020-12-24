@@ -13,15 +13,15 @@ const validateName = (val) => {
   let spaceControl = val.replace(/ /g, "");
 
   if (validator.isEmpty(val)) {
-    errors.push(errorCodes.REQUIRED_VALUE);
+    errors.push(ErrorCodes.REQUIRED_VALUE);
   }
 
   if (!validator.isAlpha(spaceControl, "tr-TR")) {
-    errors.push(errorCodes.REQUIRED_NONNUMERIC_FORMAT);
+    errors.push(ErrorCodes.REQUIRED_NONNUMERIC_FORMAT);
   }
 
   if (!validator.isLength(val, { max: 25 })) {
-    errors.push(errorCodes.MAX_LENGTH);
+    errors.push(ErrorCodes.MAX_LENGTH);
   }
 
   return errors;
@@ -31,11 +31,11 @@ const validateEmail = (val) => {
   let errors = [];
 
   if (validator.isEmpty(val)) {
-    errors.push(errorCodes.REQUIRED_VALUE);
+    errors.push(ErrorCodes.REQUIRED_VALUE);
   }
 
   if (!validator.isEmail(val)) {
-    errors.push(errorCodes.REQUIRED_FORMAT_FOR_EMAIL);
+    errors.push(ErrorCodes.REQUIRED_FORMAT_FOR_EMAIL);
   }
 
   return errors;
@@ -47,19 +47,19 @@ const validateTopic = (val) => {
   let spaceControl = val.replace(/ /g, "");
 
   if (validator.isEmpty(val)) {
-    errors.push(errorCodes.REQUIRED_VALUE);
+    errors.push(ErrorCodes.REQUIRED_VALUE);
   }
 
   if (!validator.isAlphanumeric(spaceControl, "tr-TR")) {
-    errors.push(errorCodes.REQUIRED_NONNUMERIC_FORMAT);
+    errors.push(ErrorCodes.REQUIRED_NONNUMERIC_FORMAT);
   }
 
   if (validator.isNumeric(val)) {
-    errors.push(errorCodes.REQUIRED_NONNUMERIC_FORMAT);
+    errors.push(ErrorCodes.REQUIRED_NONNUMERIC_FORMAT);
   }
 
   if (!validator.isLength(val, { max: 25 })) {
-    errors.push(errorCodes.MAX_LENGTH);
+    errors.push(ErrorCodes.MAX_LENGTH);
   }
 
   return errors;
@@ -69,15 +69,15 @@ const validateMessage = (val) => {
   let errors = [];
 
   if (validator.isEmpty(val)) {
-    errors.push(errorCodes.REQUIRED_VALUE);
+    errors.push(ErrorCodes.REQUIRED_VALUE);
   }
 
   if (validator.isNumeric(val)) {
-    errors.push(errorCodes.REQUIRED_NONNUMERIC_FORMAT);
+    errors.push(ErrorCodes.REQUIRED_NONNUMERIC_FORMAT);
   }
 
   if (!validator.isLength(val, { max: 350 })) {
-    errors.push(errorCodes.MAX_LENGTH);
+    errors.push(ErrorCodes.MAX_LENGTH);
   }
 
   return errors;
