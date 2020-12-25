@@ -2,8 +2,28 @@ import React from "react";
 import config from "../config.json";
 import { HttpRequestSender, SendRequest } from "./HttpRequestSender";
 
+//#region Global instances
 const RequestSender = new HttpRequestSender(config["BASE_URL"]);
+//#endregion
 
+//#region Private methods
+let clientInfo = undefined;
+const getClientInfo = async () => {
+  if (clientInfo === undefined) {
+    clientInfo = {};
+
+    let clientLocationInfo = await SendRequest("GET", "https://ipapi.co/json/");
+
+    clientInfo = clientLocationInfo.responseData;
+
+    return clientInfo;
+  } else {
+    return clientInfo;
+  }
+};
+//#endregion
+
+//#region Public methods
 export const ConfigureApp = async function () {
   let configuration = {
     Config: config,
@@ -13,7 +33,7 @@ export const ConfigureApp = async function () {
     SendRequest: SendRequest,
   };
 
-  let clientInformation = await getClintInfo();
+  let clientInformation = await getClientInfo();
 
   configuration.ClientInfo = clientInformation;
 
@@ -27,19 +47,5 @@ export const ConfigureApp = async function () {
   return configuration;
 };
 
-let clientInfo = undefined;
-const getClintInfo = async () => {
-  if (clientInfo === undefined) {
-    clientInfo = {};
-
-    let clientLocationInfo = await SendRequest("GET", "https://ipapi.co/json/");
-
-    clientInfo = clientLocationInfo.responseData;
-
-    return clientInfo;
-  } else {
-    return clientInfo;
-  }
-};
-
 export const AppConfig = React.createContext(undefined);
+//#endregion
