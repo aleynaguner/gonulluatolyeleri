@@ -14,26 +14,45 @@ import { OurWorkShops } from "./ourworkshops/OurWorkShops";
 import { Projects } from "./projects/Projects";
 import { Blog } from "./blog/Blog";
 import { ContactUs } from "./contactus/ContactUs";
+import { AppConfig } from "./utility/AppConfig";
 //#endregion
 
-function App() {
-  return (
-    <React.Fragment>
-      <Router>
-        <Header />
-        <Switch>
-          <Route path="/home" component={Home} />
-          <Route path="/ourworkshops" component={OurWorkShops} />
-          <Route path="/projects" component={Projects} />
-          <Route path="/aboutus" component={AboutUs} />
-          <Route path="/blog" component={Blog} />
-          <Route path="/contactus" component={ContactUs} />
-          <Redirect to="/home" />
-        </Switch>
-      </Router>
-      <Footer />
-    </React.Fragment>
-  );
-}
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
 
-export default App;
+    this.state = {
+      Config: {},
+    };
+  }
+
+  async componentDidMount() {
+    let appConfig = new AppConfig();
+
+    await appConfig.ConfigureApp();
+
+    this.setState({ Config: appConfig });
+  }
+
+  render() {
+    console.log("Context: ", this.state.Config);
+
+    return (
+      <React.Fragment>
+        <Router>
+          <Header />
+          <Switch>
+            <Route path="/home" component={Home} />
+            <Route path="/ourworkshops" component={OurWorkShops} />
+            <Route path="/projects" component={Projects} />
+            <Route path="/aboutus" component={AboutUs} />
+            <Route path="/blog" component={Blog} />
+            <Route path="/contactus" component={ContactUs} />
+            <Redirect to="/home" />
+          </Switch>
+        </Router>
+        <Footer />
+      </React.Fragment>
+    );
+  }
+}
