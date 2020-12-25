@@ -1,10 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import "./style/volunteerButton.css";
-import { AppConfig } from "../utility/AppConfig";
+import BaseComponent from "../utility/BaseComponent";
 
-export default class VolunteerButton extends Component {
-  static contextType = AppConfig;
-
+export default class VolunteerButton extends BaseComponent {
   constructor(props) {
     super(props);
 

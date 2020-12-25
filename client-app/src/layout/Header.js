@@ -1,13 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import logo from "./image/gonulluatolyeleri.png";
 import { HeaderLink } from "./components/HeaderLink";
 import VolunteerButton from "../components/VolunteerButton";
 import "./style/header.css";
-import { AppConfig } from "../utility/AppConfig";
+import BaseComponent from "../utility/BaseComponent";
 
-export default class Header extends Component {
-  static contextType = AppConfig;
-
+export default class Header extends BaseComponent {
   render() {
     return (
       <nav className="navbar navbar-expand-md navbar-light bg-light shadow fixed-top">
