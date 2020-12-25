@@ -3,8 +3,11 @@ import logo from "./image/gonulluatolyeleri.png";
 import { HeaderLink } from "./components/HeaderLink";
 import VolunteerButton from "../components/VolunteerButton";
 import "./style/header.css";
+import { AppConfig } from "../utility/AppConfig";
 
 export default class Header extends Component {
+  static contextType = AppConfig;
+
   render() {
     return (
       <nav className="navbar navbar-expand-md navbar-light bg-light shadow fixed-top">
@@ -22,12 +25,24 @@ export default class Header extends Component {
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <div className="navbar-nav mr-auto headerLink">
-              <HeaderLink to="/home">Ana Sayfa</HeaderLink>
-              <HeaderLink to="/ourworkshops">Atölyelerimiz</HeaderLink>
-              <HeaderLink to="/projects">Projelerimiz</HeaderLink>
-              <HeaderLink to="/aboutus">Hakkımızda</HeaderLink>
-              <HeaderLink to="/blog">Blog</HeaderLink>
-              <HeaderLink to="/contactus">İletişim</HeaderLink>
+              <HeaderLink to="/home">
+                {this.context.Dictionary?.HomePage_Name}
+              </HeaderLink>
+              <HeaderLink to="/ourworkshops">
+                {this.context.Dictionary?.OurworkshopsPage_Name}
+              </HeaderLink>
+              <HeaderLink to="/projects">
+                {this.context.Dictionary?.ProjectsPage_Name}
+              </HeaderLink>
+              <HeaderLink to="/aboutus">
+                {this.context.Dictionary?.AboutusPage_Name}
+              </HeaderLink>
+              <HeaderLink to="/blog">
+                {this.context.Dictionary?.BlogPage_Name}
+              </HeaderLink>
+              <HeaderLink to="/contactus">
+                {this.context.Dictionary?.ContactUsPage_Name}
+              </HeaderLink>
             </div>
             <div className="navbar-nav navbar-right ml-auto d-none d-lg-block d-xl-block mr-3">
               <a href="#" className="fa fa-lg fa-twitter"></a>

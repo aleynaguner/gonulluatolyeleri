@@ -14,7 +14,7 @@ import { OurWorkShops } from "./ourworkshops/OurWorkShops";
 import { Projects } from "./projects/Projects";
 import { Blog } from "./blog/Blog";
 import { ContactUs } from "./contactus/ContactUs";
-import { AppConfig } from "./utility/AppConfig";
+import { AppConfig, ConfigureApp } from "./utility/AppConfig";
 //#endregion
 
 export default class App extends React.Component {
@@ -27,18 +27,14 @@ export default class App extends React.Component {
   }
 
   async componentDidMount() {
-    let appConfig = new AppConfig();
+    let configuration = await ConfigureApp();
 
-    await appConfig.ConfigureApp();
-
-    this.setState({ Config: appConfig });
+    this.setState({ Config: configuration });
   }
 
   render() {
-    console.log("Context: ", this.state.Config);
-
     return (
-      <React.Fragment>
+      <AppConfig.Provider value={this.state.Config}>
         <Router>
           <Header />
           <Switch>
@@ -52,7 +48,7 @@ export default class App extends React.Component {
           </Switch>
         </Router>
         <Footer />
-      </React.Fragment>
+      </AppConfig.Provider>
     );
   }
 }

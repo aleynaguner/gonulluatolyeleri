@@ -4,6 +4,30 @@
     "VolunteerButton_Text": {
       "TR": "GÖNÜLLÜ OL !",
       "ENG": "BE A VOLUNTEER !"
+    },
+    "HomePage_Name": {
+      "TR": "Ana Sayfa",
+      "ENG": "Home"
+    },
+    "OurworkshopsPage_Name": {
+      "TR": "Atölyelerimiz",
+      "ENG": "Workshops"
+    },
+    "ProjectsPage_Name": {
+      "TR": "Projelerimiz",
+      "ENG": "Projects"
+    },
+    "AboutusPage_Name": {
+      "TR": "Hakkımızda",
+      "ENG": "About Us"
+    },
+    "BlogPage_Name": {
+      "TR": "Blog",
+      "ENG": "Blog"
+    },
+    "ContactUsPage_Name": {
+      "TR": "İletişim",
+      "ENG": "Contact Us"
     }
   }
 }

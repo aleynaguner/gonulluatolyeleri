@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import "./style/volunteerButton.css";
+import { AppConfig } from "../utility/AppConfig";
 
 export default class VolunteerButton extends Component {
+  static contextType = AppConfig;
+
   constructor(props) {
     super(props);
 
@@ -44,7 +47,7 @@ export default class VolunteerButton extends Component {
           this.props.customStyle !== undefined ? this.props.customStyle : {}
         }
       >
-        GÖNÜLLÜ OL !
+        {this.context.Dictionary?.VolunteerButton_Text}
       </button>
     );
   }

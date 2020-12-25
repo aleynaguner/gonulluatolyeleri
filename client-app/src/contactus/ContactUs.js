@@ -3,6 +3,7 @@ import { ContactUsContent } from "./components/ContactUsContent";
 
 export class ContactUs extends Component {
   render() {
+    console.log(this.context);
     return (
       <React.Fragment>
         <div className="row">
