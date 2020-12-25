@@ -36,7 +36,7 @@ export class Carousel extends Component {
 
             <div className="carousel-inner" role="listbox">
               {childrenAsArray.map((c, i) => (
-                <div className={`carousel-item${i === 0 ? " active" : ""}`}>
+                <div key={i} className={`carousel-item${i === 0 ? " active" : ""}`}>
                   {c}
                 </div>
               ))}

@@ -53,7 +53,7 @@ export class InfoCard extends Component {
   getImgContent = () => (
     <div className="col-sm-12 col-md-12 col-lg-4">
       <div className="d-flex justify-content-center">
-        <img src={this.props.imgsrc} class="img-fluid" alt="..."></img>
+        <img src={this.props.imgsrc} className="img-fluid" alt="..."></img>
       </div>
     </div>
   );

@@ -13,7 +13,7 @@ export class CarouselSlide extends Component {
     return (
       <Box type={BoxTypes.Row}>
         {childrenAsArray.map((c, i) => (
-          <div class={`col-md-5${i > 0 ? " clearfix d-none d-md-block" : ""}`}>
+          <div key={i} className={`col-md-5${i > 0 ? " clearfix d-none d-md-block" : ""}`}>
             {c}
           </div>
         ))}

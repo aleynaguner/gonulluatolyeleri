@@ -27,6 +27,7 @@ export default class App extends React.Component {
   }
 
   async componentDidMount() {
+    console.log("App mounted!");
     let configuration = await ConfigureApp();
 
     this.setState({ Config: configuration });
