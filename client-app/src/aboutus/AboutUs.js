@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Box, BoxTypes } from "../components/Box";
+import { Container, Row } from "../components/Grid";
 import { ImgHeader } from "../components/ImgHeader";
 import { InfoCard, Constant as InfoCardConstant } from "./components/InfoCard";
 
@@ -10,49 +10,55 @@ export class AboutUs extends Component {
   render() {
     return (
       <React.Fragment>
-        <Box type={BoxTypes.Wrapper}>
+        <Container>
           <ImgHeader imgSrc={imgSrc} headerText="About Us" />
-          <InfoCard
-            textAlign={InfoCardConstant.Alignment.L}
-            imgsrc="https://www.hermesiletisim.net/uploads/2013/11/pazarlama-teknikleri-g%C3%B6nderim-testleri.jpg"
-          >
-            Dolore consequat commodo sint cillum. Veniam aliqua est et
-            adipisicing magna adipisicing esse ad elit est incididunt nisi. Elit
-            eu irure labore minim aliquip reprehenderit qui aliqua.Do ad do
-            cillum in adipisicing culpa dolor mollit dolor sit esse irure
-            aliqua. Laborum excepteur dolor irure cupidatat mollit pariatur
-            commodo laboris irure. Cillum dolor non officia fugiat commodo
-            nostrud aute. Consequat proident anim nisi nostrud sunt exercitation
-            sunt culpa do aliquip aliqua. Exercitation fugiat proident veniam
-            nisi.Veniam mollit dolor dolor sunt eiusmod amet consectetur.
-            Exercitation incididunt labore irure sit ea. Excepteur elit nostrud
-            quis quis sit deserunt cillum adipisicing. Nisi reprehenderit
-            cupidatat non ullamco consectetur deserunt Lorem sunt ea est ea
-            culpa elit. Laboris pariatur amet aliqua velit Lorem sint non.
-            Cupidatat culpa exercitation officia do est do. Dolore do cupidatat
-            esse proident reprehenderit ad dolor eiusmod deserunt officia enim.
-          </InfoCard>
-          <InfoCard
-            textAlign={InfoCardConstant.Alignment.R}
-            imgsrc="https://www.hermesiletisim.net/uploads/2013/11/pazarlama-teknikleri-g%C3%B6nderim-testleri.jpg"
-          >
-            Dolore consequat commodo sint cillum. Veniam aliqua est et
-            adipisicing magna adipisicing esse ad elit est incididunt nisi. Elit
-            eu irure labore minim aliquip reprehenderit qui aliqua.Do ad do
-            cillum in adipisicing culpa dolor mollit dolor sit esse irure
-            aliqua. Laborum excepteur dolor irure cupidatat mollit pariatur
-            commodo laboris irure. Cillum dolor non officia fugiat commodo
-            nostrud aute. Consequat proident anim nisi nostrud sunt exercitation
-            sunt culpa do aliquip aliqua. Exercitation fugiat proident veniam
-            nisi.Veniam mollit dolor dolor sunt eiusmod amet consectetur.
-            Exercitation incididunt labore irure sit ea. Excepteur elit nostrud
-            quis quis sit deserunt cillum adipisicing. Nisi reprehenderit
-            cupidatat non ullamco consectetur deserunt Lorem sunt ea est ea
-            culpa elit. Laboris pariatur amet aliqua velit Lorem sint non.
-            Cupidatat culpa exercitation officia do est do. Dolore do cupidatat
-            esse proident reprehenderit ad dolor eiusmod deserunt officia enim.
-          </InfoCard>
-        </Box>
+          <Row margins={{ l: 2, t: 3 }}>
+            <InfoCard
+              textAlign={InfoCardConstant.Alignment.L}
+              imgsrc="https://www.hermesiletisim.net/uploads/2013/11/pazarlama-teknikleri-g%C3%B6nderim-testleri.jpg"
+            >
+              Dolore consequat commodo sint cillum. Veniam aliqua est et
+              adipisicing magna adipisicing esse ad elit est incididunt nisi.
+              Elit eu irure labore minim aliquip reprehenderit qui aliqua.Do ad
+              do cillum in adipisicing culpa dolor mollit dolor sit esse irure
+              aliqua. Laborum excepteur dolor irure cupidatat mollit pariatur
+              commodo laboris irure. Cillum dolor non officia fugiat commodo
+              nostrud aute. Consequat proident anim nisi nostrud sunt
+              exercitation sunt culpa do aliquip aliqua. Exercitation fugiat
+              proident veniam nisi.Veniam mollit dolor dolor sunt eiusmod amet
+              consectetur. Exercitation incididunt labore irure sit ea.
+              Excepteur elit nostrud quis quis sit deserunt cillum adipisicing.
+              Nisi reprehenderit cupidatat non ullamco consectetur deserunt
+              Lorem sunt ea est ea culpa elit. Laboris pariatur amet aliqua
+              velit Lorem sint non. Cupidatat culpa exercitation officia do est
+              do. Dolore do cupidatat esse proident reprehenderit ad dolor
+              eiusmod deserunt officia enim.
+            </InfoCard>
+          </Row>
+          <Row margins={{ l: 2, t: 4 }}>
+            <InfoCard
+              textAlign={InfoCardConstant.Alignment.R}
+              imgsrc="https://www.hermesiletisim.net/uploads/2013/11/pazarlama-teknikleri-g%C3%B6nderim-testleri.jpg"
+            >
+              Dolore consequat commodo sint cillum. Veniam aliqua est et
+              adipisicing magna adipisicing esse ad elit est incididunt nisi.
+              Elit eu irure labore minim aliquip reprehenderit qui aliqua.Do ad
+              do cillum in adipisicing culpa dolor mollit dolor sit esse irure
+              aliqua. Laborum excepteur dolor irure cupidatat mollit pariatur
+              commodo laboris irure. Cillum dolor non officia fugiat commodo
+              nostrud aute. Consequat proident anim nisi nostrud sunt
+              exercitation sunt culpa do aliquip aliqua. Exercitation fugiat
+              proident veniam nisi.Veniam mollit dolor dolor sunt eiusmod amet
+              consectetur. Exercitation incididunt labore irure sit ea.
+              Excepteur elit nostrud quis quis sit deserunt cillum adipisicing.
+              Nisi reprehenderit cupidatat non ullamco consectetur deserunt
+              Lorem sunt ea est ea culpa elit. Laboris pariatur amet aliqua
+              velit Lorem sint non. Cupidatat culpa exercitation officia do est
+              do. Dolore do cupidatat esse proident reprehenderit ad dolor
+              eiusmod deserunt officia enim.
+            </InfoCard>
+          </Row>
+        </Container>
       </React.Fragment>
     );
   }

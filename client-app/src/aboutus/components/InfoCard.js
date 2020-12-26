@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Container, Row, Col } from "../../components/Grid";
 
 export const Constant = {
   Alignment: {
@@ -32,7 +33,7 @@ export class InfoCard extends Component {
     if (this.state.windowWidth <= 990) {
       result = [
         this.getImgContent(),
-        <div className="col mt-4"></div>,
+        <Col id="empty-div" margins={{ t: 4 }} />,
         this.getTextContent(),
       ];
     } else if (textAlign === Constant.Alignment.L) {
@@ -45,22 +46,22 @@ export class InfoCard extends Component {
   };
 
   getTextContent = () => (
-    <div className="col-sm-12 col-md-12 col-lg-8">
+    <Col id="text" responsiveSystem={{ sm: 12, md: 12, lg: 8 }}>
       <p style={{ fontSize: "1.3em" }}>{this.props.children}</p>
-    </div>
+    </Col>
   );
 
   getImgContent = () => (
-    <div className="col-sm-12 col-md-12 col-lg-4">
+    <Col id="img" responsiveSystem={{ sm: 12, md: 12, lg: 4 }}>
       <div className="d-flex justify-content-center">
         <img src={this.props.imgsrc} className="img-fluid" alt="..."></img>
       </div>
-    </div>
+    </Col>
   );
 
   render() {
     return (
-      <div className="row mt-5">{this.getContent(this.props.textAlign)}</div>
+      <React.Fragment>{this.getContent(this.props.textAlign)}</React.Fragment>
     );
   }
 }
