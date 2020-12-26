@@ -42,18 +42,16 @@ export class HttpRequestSender {
       data: data,
     })
       .then(function (response) {
-        res.isSuccess =
-          responseFromWebService.status >= 200 &&
-          responseFromWebService.status < 300;
-        response.responseData = responseFromWebService.data;
+        res.isSuccess = response.status >= 200 && response.status < 300;
+        res.responseData = response.data;
 
         callback(res);
       })
       .catch(function (error) {
         console.log(error);
 
-        response.isSuccess = false;
-        response.responseData = err;
+        res.isSuccess = false;
+        res.responseData = error;
       })
       .then(function () {
         // always executed
