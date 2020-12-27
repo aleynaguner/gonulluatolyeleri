@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Box, BoxTypes } from "./Box";
+import { Container } from "./Grid";
 
 export class Carousel extends Component {
   constructor(props) {
@@ -13,10 +13,10 @@ export class Carousel extends Component {
 
   render() {
     let childrenAsArray = this.getChildrenAsArray();
-    
+
     return (
       <React.Fragment>
-        <Box type={BoxTypes.Wrapper}>
+        <Container>
           <div
             id="carouselComponent"
             className={`carousel slide${
@@ -36,13 +36,16 @@ export class Carousel extends Component {
 
             <div className="carousel-inner" role="listbox">
               {childrenAsArray.map((c, i) => (
-                <div key={i} className={`carousel-item${i === 0 ? " active" : ""}`}>
+                <div
+                  key={i}
+                  className={`carousel-item${i === 0 ? " active" : ""}`}
+                >
                   {c}
                 </div>
               ))}
             </div>
           </div>
-        </Box>
+        </Container>
       </React.Fragment>
     );
   }

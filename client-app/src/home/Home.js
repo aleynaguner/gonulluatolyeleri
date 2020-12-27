@@ -4,6 +4,7 @@ import { Navbar } from "./components/Navbar";
 import { Box, BoxTypes } from "../components/Box";
 import { WhatWeDone } from "./components/WhatWeDone";
 import { ContactUsContent } from "../contactus/components/ContactUsContent";
+import { Row } from "../components/Grid";
 
 export class Home extends Component {
   render() {
@@ -11,21 +12,21 @@ export class Home extends Component {
       <React.Fragment>
         <Box type={BoxTypes.Wrapper}>
           <Box type={BoxTypes.Wrapper}>
-            <Box type={BoxTypes.Row}>
+            <Row isCentered={true} margins={{ t: 5 }}>
               <Navbar />
-            </Box>
-            <Box type={BoxTypes.Row}>
+            </Row>
+            <Row isCentered={true} margins={{ t: 5 }}>
               <VolunteerButton
                 willBeBubbled={true}
                 customStyle={{ width: "25%" }}
               />
-            </Box>
+            </Row>
           </Box>
           <Box type={BoxTypes.Wrapper}>
-            <Box type={BoxTypes.Row}>
+            <Row isCentered={true} margins={{ t: 5 }}>
               <p className="h3 font-weight-normal">Neleri Amaçlıyoruz ? </p>
-            </Box>
-            <Box type={BoxTypes.Row}>
+            </Row>
+            <Row isCentered={true} margins={{ t: 5 }}>
               <blockquote className="blockquote text-center">
                 <p className="mb-0">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -36,19 +37,19 @@ export class Home extends Component {
                   <cite title="Source Title">Source Title</cite>
                 </footer>
               </blockquote>
-            </Box>
+            </Row>
           </Box>
           <Box type={BoxTypes.Wrapper.NotFluid}>
-            <Box type={BoxTypes.Row}>
+            <Row isCentered={true} margins={{ t: 5 }}>
               <p className="h3 font-weight-normal">Neler Yaptık ? </p>
-            </Box>
-            <Box type={BoxTypes.Row}>
+            </Row>
+            <Row>
               <WhatWeDone />
-            </Box>
+            </Row>
           </Box>
-          <Box type={BoxTypes.Row}>
+          <Row>
             <ContactUsContent />
-          </Box>
+          </Row>
         </Box>
       </React.Fragment>
     );

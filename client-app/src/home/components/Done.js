@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import { Box, BoxTypes } from "../../components/Box";
 import { CarouselSlide } from "../../components/CarouselSlide";
+import { Container, Row } from "../../components/Grid";
 
 export class Done extends Component {
   render() {
     return (
       <CarouselSlide>
-        <Box type={BoxTypes.Wrapper}>
-          <Box type={BoxTypes.Row}>
+        <Container>
+          <Row isCentered={true}>
             <div
               style={{
                 borderRadius: "50%",
@@ -22,8 +22,8 @@ export class Done extends Component {
             >
               {this.props.sayi}
             </div>
-          </Box>
-          <Box type={BoxTypes.Row}>
+          </Row>
+          <Row isCentered={true}>
             <blockquote className="blockquote text-center">
               <p className="mb-0">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
@@ -33,10 +33,10 @@ export class Done extends Component {
                 Someone famous in <cite title="Source Title">Source Title</cite>
               </footer>
             </blockquote>
-          </Box>
-        </Box>
-        <Box type={BoxTypes.Wrapper}>
-          <Box type={BoxTypes.Row}>
+          </Row>
+        </Container>
+        <Container>
+          <Row isCentered={true}>
             <div
               style={{
                 borderRadius: "50%",
@@ -51,8 +51,8 @@ export class Done extends Component {
             >
               {this.props.sayi}
             </div>
-          </Box>
-          <Box type={BoxTypes.Row}>
+          </Row>
+          <Row isCentered={true}>
             <blockquote className="blockquote text-center">
               <p className="mb-0">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
@@ -62,10 +62,10 @@ export class Done extends Component {
                 Someone famous in <cite title="Source Title">Source Title</cite>
               </footer>
             </blockquote>
-          </Box>
-        </Box>
-        <Box type={BoxTypes.Wrapper}>
-          <Box type={BoxTypes.Row}>
+          </Row>
+        </Container>
+        <Container>
+          <Row isCentered={true}>
             <div
               style={{
                 borderRadius: "50%",
@@ -80,8 +80,8 @@ export class Done extends Component {
             >
               {this.props.sayi}
             </div>
-          </Box>
-          <Box type={BoxTypes.Row}>
+          </Row>
+          <Row isCentered={true}>
             <blockquote className="blockquote text-center">
               <p className="mb-0">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
@@ -91,8 +91,8 @@ export class Done extends Component {
                 Someone famous in <cite title="Source Title">Source Title</cite>
               </footer>
             </blockquote>
-          </Box>
-        </Box>
+          </Row>
+        </Container>
       </CarouselSlide>
     );
   }

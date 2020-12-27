@@ -1,22 +1,23 @@
 import React, { Component } from "react";
 
 const addMarginSettings = (className, margins) => {
-  if (margins.l !== undefined && !isNaN(Number(margins.l))) {
-    className += ` ml-${margins.l}`;
-  }
+  if (margins !== undefined) {
+    if (margins.l !== undefined && !isNaN(Number(margins.l))) {
+      className += ` ml-${margins.l}`;
+    }
 
-  if (margins.r !== undefined || !isNaN(Number(margins.r))) {
-    className += ` mr-${margins.r}`;
-  }
+    if (margins.r !== undefined || !isNaN(Number(margins.r))) {
+      className += ` mr-${margins.r}`;
+    }
 
-  if (margins.t !== undefined || !isNaN(Number(margins.t))) {
-    className += ` mt-${margins.t}`;
-  }
+    if (margins.t !== undefined || !isNaN(Number(margins.t))) {
+      className += ` mt-${margins.t}`;
+    }
 
-  if (margins.b !== undefined || !isNaN(Number(margins.b))) {
-    className += ` mb-${margins.b}`;
+    if (margins.b !== undefined || !isNaN(Number(margins.b))) {
+      className += ` mb-${margins.b}`;
+    }
   }
-
   return className;
 };
 
@@ -40,7 +41,12 @@ export class Row extends Component {
     this.className = this.createClassName();
   }
 
-  createClassName = () => addMarginSettings("row", this.props.margins);
+  createClassName = () => {
+    return addMarginSettings(
+      this.props.isCentered ? "row justify-content-md-center" : "row",
+      this.props.margins
+    );
+  };
 
   render() {
     return (
