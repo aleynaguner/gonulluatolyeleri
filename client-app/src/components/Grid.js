@@ -66,11 +66,12 @@ export class Col extends Component {
 
     this.className = this.createClassName(
       this.props.responsiveSystem,
-      this.props.margins
+      this.props.margins,
+      this.props.isCentered
     );
   }
 
-  createClassName = (responsiveSystem, margins) => {
+  createClassName = (responsiveSystem, margins, isCentered) => {
     let className = "col";
 
     if (responsiveSystem !== undefined && responsiveSystem !== null) {
@@ -103,9 +104,12 @@ export class Col extends Component {
       }
     }
 
-    return margins !== undefined
-      ? addMarginSettings(className, margins)
-      : className;
+    className =
+      margins !== undefined ? addMarginSettings(className, margins) : className;
+
+    className = isCentered ? `${className} align-self-center` : className;
+
+    return className;
   };
 
   render() {

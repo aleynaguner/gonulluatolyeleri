@@ -1,17 +1,16 @@
 import React, { Component } from "react";
 import VolunteerButton from "../components/VolunteerButton";
 import { Navbar } from "./components/Navbar";
-import { Box, BoxTypes } from "../components/Box";
 import { WhatWeDone } from "./components/WhatWeDone";
 import { ContactUsContent } from "../contactus/components/ContactUsContent";
-import { Row } from "../components/Grid";
+import { Row, Container } from "../components/Grid";
 
 export class Home extends Component {
   render() {
     return (
       <React.Fragment>
-        <Box type={BoxTypes.Wrapper}>
-          <Box type={BoxTypes.Wrapper}>
+        <Container>
+          <Container>
             <Row isCentered={true} margins={{ t: 5 }}>
               <Navbar />
             </Row>
@@ -21,8 +20,8 @@ export class Home extends Component {
                 customStyle={{ width: "25%" }}
               />
             </Row>
-          </Box>
-          <Box type={BoxTypes.Wrapper}>
+          </Container>
+          <Container>
             <Row isCentered={true} margins={{ t: 5 }}>
               <p className="h3 font-weight-normal">Neleri Amaçlıyoruz ? </p>
             </Row>
@@ -38,19 +37,19 @@ export class Home extends Component {
                 </footer>
               </blockquote>
             </Row>
-          </Box>
-          <Box type={BoxTypes.Wrapper.NotFluid}>
-            <Row isCentered={true} margins={{ t: 5 }}>
+          </Container>
+          <Container>
+            <Row isCentered={true} margins={{ t: 5, b: 5 }}>
               <p className="h3 font-weight-normal">Neler Yaptık ? </p>
             </Row>
-            <Row>
+            <Row margins={{ l: 3, r: 3 }}>
               <WhatWeDone />
             </Row>
-          </Box>
+          </Container>
           <Row>
             <ContactUsContent />
           </Row>
-        </Box>
+        </Container>
       </React.Fragment>
     );
   }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container } from "./Grid";
+import { Container, Row } from "./Grid";
 
 export class Carousel extends Component {
   constructor(props) {
@@ -24,16 +24,6 @@ export class Carousel extends Component {
             }`}
             data-ride="carousel"
           >
-            <ol className="carousel-indicators">
-              <li
-                data-target="#carouselComponent"
-                data-slide-to="0"
-                className="active"
-              ></li>
-              <li data-target="#carouselComponent" data-slide-to="1"></li>
-              <li data-target="#carouselComponent" data-slide-to="2"></li>
-            </ol>
-
             <div className="carousel-inner" role="listbox">
               {childrenAsArray.map((c, i) => (
                 <div
@@ -44,9 +34,27 @@ export class Carousel extends Component {
                 </div>
               ))}
             </div>
+
+            <Row margins={{ t: 5 }}>
+              <ol className="carousel-indicators">
+                <li
+                  data-target="#carouselComponent"
+                  data-slide-to="0"
+                  className="active"
+                ></li>
+                <li data-target="#carouselComponent" data-slide-to="1"></li>
+                <li data-target="#carouselComponent" data-slide-to="2"></li>
+              </ol>
+            </Row>
           </div>
         </Container>
       </React.Fragment>
     );
+  }
+}
+
+export class CarouselSlide extends Component {
+  render() {
+    return <Row isCentered={true}>{this.props.children}</Row>;
   }
 }
