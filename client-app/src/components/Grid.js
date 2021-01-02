@@ -26,7 +26,7 @@ export class Container extends Component {
     return (
       <div
         className={`container${this.props.notFluid ? "" : "-fluid"}`}
-        customStyle={this.props.style !== undefined ? this.props.style : {}}
+        style={this.props.customStyle !== undefined ? this.props.customStyle : {}}
       >
         {this.props.children}
       </div>
@@ -52,7 +52,7 @@ export class Row extends Component {
     return (
       <div
         className={this.className}
-        customStyle={this.props.style !== undefined ? this.props.style : {}}
+        style={this.props.customStyle !== undefined ? this.props.customStyle : {}}
       >
         {this.props.children}
       </div>
@@ -117,7 +117,7 @@ export class Col extends Component {
       <div
         id={this.props?.id}
         className={this.className}
-        customStyle={this.props.style !== undefined ? this.props.style : {}}
+        style={this.props.customStyle !== undefined ? this.props.customStyle : {}}
       >
         {this.props.children}
       </div>
