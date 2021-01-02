@@ -26,7 +26,7 @@ export class Container extends Component {
     return (
       <div
         className={`container${this.props.notFluid ? "" : "-fluid"}`}
-        style={this.props.style !== undefined ? this.props.style : {}}
+        customStyle={this.props.style !== undefined ? this.props.style : {}}
       >
         {this.props.children}
       </div>
@@ -43,7 +43,7 @@ export class Row extends Component {
 
   createClassName = () => {
     return addMarginSettings(
-      this.props.isCentered ? "row justify-content-md-center" : "row",
+      this.props.isCentered ? "row justify-content-center" : "row",
       this.props.margins
     );
   };
@@ -52,7 +52,7 @@ export class Row extends Component {
     return (
       <div
         className={this.className}
-        style={this.props.style !== undefined ? this.props.style : {}}
+        customStyle={this.props.style !== undefined ? this.props.style : {}}
       >
         {this.props.children}
       </div>
@@ -117,7 +117,7 @@ export class Col extends Component {
       <div
         id={this.props?.id}
         className={this.className}
-        style={this.props.style !== undefined ? this.props.style : {}}
+        customStyle={this.props.style !== undefined ? this.props.style : {}}
       >
         {this.props.children}
       </div>

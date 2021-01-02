@@ -42,7 +42,9 @@ export default class VolunteerButton extends BaseComponent {
         className={this.state.buttonClassName}
         onClick={(e) => this.handleClick(e, this.props.willBeBubbled)}
         style={
-          this.props.customStyle !== undefined ? this.props.customStyle : {}
+          this.props.customStyle !== undefined
+            ? { ...this.props.customStyle, minWidth: "196px" }
+            : { minWidth: "196px" }
         }
       >
         {this.context.Dictionary?.VolunteerButton_Text}

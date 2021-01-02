@@ -7,7 +7,7 @@ export class WhatWeDone extends Component {
     return (
       <React.Fragment>
         <Carousel isMultiItem={true}>
-          <CarouselSlide isCentered={true}>
+          <CarouselSlide>
             <Done sayi="30" />
             <Done sayi="30" />
             <Done sayi="30" />

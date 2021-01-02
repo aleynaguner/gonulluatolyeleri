@@ -8,10 +8,10 @@ import { Row, Container } from "../components/Grid";
 export class Home extends Component {
   render() {
     return (
-      <React.Fragment>
-        <Container>
+      <Container>
+        <Row>
           <Container>
-            <Row isCentered={true} margins={{ t: 5 }}>
+            <Row isCentered={true}>
               <Navbar />
             </Row>
             <Row isCentered={true} margins={{ t: 5 }}>
@@ -21,6 +21,8 @@ export class Home extends Component {
               />
             </Row>
           </Container>
+        </Row>
+        <Row>
           <Container>
             <Row isCentered={true} margins={{ t: 5 }}>
               <p className="h3 font-weight-normal">Neleri Amaçlıyoruz ? </p>
@@ -38,6 +40,8 @@ export class Home extends Component {
               </blockquote>
             </Row>
           </Container>
+        </Row>
+        <Row>
           <Container>
             <Row isCentered={true} margins={{ t: 5, b: 5 }}>
               <p className="h3 font-weight-normal">Neler Yaptık ? </p>
@@ -46,11 +50,15 @@ export class Home extends Component {
               <WhatWeDone />
             </Row>
           </Container>
-          <Row>
-            <ContactUsContent />
-          </Row>
-        </Container>
-      </React.Fragment>
+        </Row>
+        <Row>
+          <Container>
+            <Row>
+              <ContactUsContent />
+            </Row>
+          </Container>
+        </Row>
+      </Container>
     );
   }
 }
