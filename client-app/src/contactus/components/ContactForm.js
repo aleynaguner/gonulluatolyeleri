@@ -5,9 +5,10 @@ import { HttpRequestSender } from "../../utility/HttpRequestSender";
 import config from "../../config.json";
 import { Loading } from "../../components/Loading";
 import { Box, BoxTypes } from "../../components/Box";
+import BaseComponent from "../../utility/BaseComponent";
 const FormValidator = require("../../utility/FormValidator");
 
-export class ContactForm extends Component {
+export class ContactForm extends BaseComponent {
   constructor(props) {
     super(props);
 
@@ -60,23 +61,15 @@ export class ContactForm extends Component {
     this.setState({ inputsWithError: validationResult.errors });
 
     if (validationResult.isSuccess) {
-      const requestSender = new HttpRequestSender(config.BASE_URL);
-
       this.setState({ loading: true });
 
-      let response = await requestSender.SendRequest(
+      let response = await this.context.RequestSender.SendRequest(
         "post",
         "api/sendEmail",
         this.state.formData
       );
 
-      if (response.isSuccess) {
-        this.executeAfterSuccessfulSendEmail();
-      } else {
-        this.executeAfterUnsuccessfulSendEmail();
-      }
-
-      this.setState({ loading: false });
+      this.executeAfterSendEmail(response.isSuccess);
     }
   };
 
@@ -84,6 +77,16 @@ export class ContactForm extends Component {
 
   getErrorCode = (val) =>
     this.valHasError(val) ? this.state.inputsWithError[val][0] : null;
+
+  executeAfterSendEmail = (isSuccess) => {
+    if (isSuccess) {
+      this.executeAfterSuccessfulSendEmail();
+    } else {
+      this.executeAfterUnsuccessfulSendEmail();
+    }
+
+    this.setState({ loading: false });
+  };
 
   executeAfterSuccessfulSendEmail = () => {
     this.setState({
