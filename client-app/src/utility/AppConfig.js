@@ -1,6 +1,7 @@
 import React from "react";
 import config from "../config.json";
 import { HttpRequestSender, SendRequest } from "./HttpRequestSender";
+const FormValidator = require("./FormValidator");
 
 //#region Global instances
 const RequestSender = new HttpRequestSender(config["BASE_URL"]);
@@ -29,8 +30,11 @@ export const ConfigureApp = async function () {
     Config: config,
     ClientInfo: undefined,
     Dictionary: {},
-    RequestSender: RequestSender,
-    SendRequest: SendRequest,
+    Services: {
+      RequestSender: RequestSender,
+      FormValidator: FormValidator,
+      SendRequest: SendRequest,
+    },
   };
 
   let clientInformation = await getClientInfo();

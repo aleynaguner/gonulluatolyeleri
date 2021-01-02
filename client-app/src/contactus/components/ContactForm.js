@@ -1,12 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import { FormItem } from "./FormItem";
 import "../style/contactForm.css";
-import { HttpRequestSender } from "../../utility/HttpRequestSender";
-import config from "../../config.json";
 import { Loading } from "../../components/Loading";
 import { Box, BoxTypes } from "../../components/Box";
 import BaseComponent from "../../utility/BaseComponent";
-const FormValidator = require("../../utility/FormValidator");
 
 export class ContactForm extends BaseComponent {
   constructor(props) {
@@ -56,14 +53,14 @@ export class ContactForm extends BaseComponent {
   handleSubmit = async (e) => {
     e.preventDefault();
 
-    let validationResult = FormValidator.Validate(this.state.formData);
+    let validationResult = this.context.Services.FormValidator.Validate(this.state.formData);
 
     this.setState({ inputsWithError: validationResult.errors });
 
     if (validationResult.isSuccess) {
       this.setState({ loading: true });
 
-      let response = await this.context.RequestSender.SendRequest(
+      let response = await this.context.Services.RequestSender.SendRequest(
         "post",
         "api/sendEmail",
         this.state.formData
