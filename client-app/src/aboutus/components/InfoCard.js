@@ -1,5 +1,6 @@
-import React, { Component } from "react";
-import { Container, Row, Col } from "../../components/Grid";
+import React from "react";
+import { Col } from "../../components/Grid";
+import ResponsiveBaseComponent from "../../utility/ResponsiveBaseComponent";
 
 export const Constant = {
   Alignment: {
@@ -8,23 +9,9 @@ export const Constant = {
   },
 };
 
-export class InfoCard extends Component {
+export class InfoCard extends ResponsiveBaseComponent {
   constructor(props) {
     super(props);
-
-    this.state = { windowWidth: window.innerWidth };
-  }
-
-  handleResize = (e) => {
-    this.setState({ windowWidth: window.innerWidth });
-  };
-
-  componentDidMount() {
-    window.addEventListener("resize", this.handleResize);
-  }
-
-  componentWillUnmount() {
-    window.addEventListener("resize", this.handleResize);
   }
 
   getContent = (textAlign) => {
