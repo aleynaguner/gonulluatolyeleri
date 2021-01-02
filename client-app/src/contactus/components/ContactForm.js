@@ -2,7 +2,7 @@ import React from "react";
 import { FormItem } from "./FormItem";
 import "../style/contactForm.css";
 import { Loading } from "../../components/Loading";
-import { Box, BoxTypes } from "../../components/Box";
+import { Container, Row, Col } from "../../components/Grid";
 import BaseComponent from "../../utility/BaseComponent";
 
 export class ContactForm extends BaseComponent {
@@ -21,25 +21,25 @@ export class ContactForm extends BaseComponent {
       sendEmailSuccessful: false,
       showSendEmailMessage: false,
     };
-  }
 
-  formInputs = [
-    {
-      name: "name",
-      tag: "Adınız",
-      itemType: "input",
-    },
-    {
-      name: "email",
-      tag: "E-mail",
-      itemType: "input",
-    },
-    {
-      name: "topic",
-      tag: "Konu",
-      itemType: "input",
-    },
-  ];
+    this.formInputs = [
+      {
+        name: "name",
+        tag: "Adınız",
+        itemType: "input",
+      },
+      {
+        name: "email",
+        tag: "E-mail",
+        itemType: "input",
+      },
+      {
+        name: "topic",
+        tag: "Konu",
+        itemType: "input",
+      },
+    ];
+  }
 
   updateFormValues = (event) => {
     event.persist();
@@ -58,22 +58,21 @@ export class ContactForm extends BaseComponent {
     this.setState({ inputsWithError: validationResult.errors });
 
     if (validationResult.isSuccess) {
-      this.setState({ loading: true });
-
-      let response = await this.context.Services.RequestSender.SendRequest(
-        "post",
-        "api/sendEmail",
-        this.state.formData
-      );
+      let response = await this.sendEmail();
 
       this.executeAfterSendEmail(response.isSuccess);
     }
   };
 
-  valHasError = (val) => this.state.inputsWithError.hasOwnProperty(val);
+  sendEmail = async () => {
+    this.setState({ loading: true });
 
-  getErrorCode = (val) =>
-    this.valHasError(val) ? this.state.inputsWithError[val][0] : null;
+    let response = await this.context.Services.RequestSender.SendRequest("post", "api/sendEmail", this.state.formData);
+
+    this.setState({ loading: false });
+
+    return response;
+  }
 
   executeAfterSendEmail = (isSuccess) => {
     if (isSuccess) {
@@ -81,8 +80,6 @@ export class ContactForm extends BaseComponent {
     } else {
       this.executeAfterUnsuccessfulSendEmail();
     }
-
-    this.setState({ loading: false });
   };
 
   executeAfterSuccessfulSendEmail = () => {
@@ -123,22 +120,27 @@ export class ContactForm extends BaseComponent {
     let className = `alert alert-${isSuccess ? "success" : "alert"}`;
 
     return (
-      <Box type={BoxTypes.Column}>
+      <Row isCentered={true}>
         <div className={className} role="alert">
           {message}
         </div>
-      </Box>
+      </Row>
     );
   };
+
+  valHasError = (val) => this.state.inputsWithError.hasOwnProperty(val);
+
+  getErrorCode = (val) =>
+    this.valHasError(val) ? this.state.inputsWithError[val][0] : null;
 
   render() {
     return (
       <React.Fragment>
-        <Box type={BoxTypes.Wrapper}>
+        <Container>
           {this.state.loading && (
-            <Box type={BoxTypes.Column}>
+            <Col>
               <Loading />
-            </Box>
+            </Col>
           )}
           {!this.state.loading &&
             this.state.showSendEmailMessage &&
@@ -187,7 +189,7 @@ export class ContactForm extends BaseComponent {
               </div>
             </form>
           </fieldset>
-        </Box>
+        </Container>
       </React.Fragment>
     );
   }
