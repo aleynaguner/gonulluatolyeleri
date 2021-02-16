@@ -1,1 +1,0 @@
-export { emailSendModel } from "./emailSendModel";
