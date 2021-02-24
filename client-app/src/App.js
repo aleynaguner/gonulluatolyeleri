@@ -15,6 +15,7 @@ import { Projects } from "./projects/Projects";
 import { Blog } from "./blog/Blog";
 import { ContactUs } from "./contactus/ContactUs";
 import { AppConfig, ConfigureApp } from "./utility/AppConfig";
+import AdminDashboard from "./admindashboard/AdminDashboard";
 //#endregion
 
 export default class App extends React.Component {
@@ -45,6 +46,7 @@ export default class App extends React.Component {
             <Route path="/aboutus" component={AboutUs} />
             <Route path="/blog" component={Blog} />
             <Route path="/contactus" component={ContactUs} />
+            <Route path="/admindashboard" component={AdminDashboard} />
             <Redirect to="/home" />
           </Switch>
         </Router>
