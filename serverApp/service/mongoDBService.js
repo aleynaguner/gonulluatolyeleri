@@ -1,10 +1,11 @@
+const mongoose = require("mongoose");
 class MongoDBService {
-  constructor(mongoDBSetting) {
-    this.mongoDBSetting = mongoDBSetting;
+  constructor(mongoDBSettings) {
+    this.mongoDBSettings = mongoDBSettings;
   }
 
   ConnectToMongo = async () => {
-    await mongoose.connect(mongoDBSetting.url, {
+    await mongoose.connect(this.mongoDBSettings.url, {
       useCreateIndex: true,
       useNewUrlParser: true,
       useUnifiedTopology: true,

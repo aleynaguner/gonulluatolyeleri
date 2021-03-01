@@ -8,15 +8,14 @@ const createUserService = () => {
 };
 
 const createMongoDBService = () => {
-  const MongoDBSetting = require("../model/model").mongoDBSetting;
   const MongoDBService = require("./mongoDBService");
 
-  let mongoDBSetting = new MongoDBSetting(config.mongoDBURL);
-
-  return new MongoDBService(mongoDBSetting);
+  return new MongoDBService({ url: config.mongoDBURL });
 };
 
 module.exports = {
   UserService: createUserService(),
   MongoDBService: createMongoDBService(),
+  utils: require("./utils"),
+  EmailService: require("./emailService"),
 };

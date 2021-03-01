@@ -1,5 +1,4 @@
 const emailSendModel = require("./emailSendModel");
-const userModels = require("./userModel");
-const mongoDBSetting = require("./mongoDBSetting");
+const userModel = require("./userModel");
 
-module.exports = { emailSendModel, userModels, mongoDBSetting };
+module.exports = { emailSendModel, userModel };

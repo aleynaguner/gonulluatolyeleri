@@ -1,11 +1,4 @@
-class UserModel {
-  constructor(email, password) {
-    this.email = email;
-    this.password = password;
-  }
-}
-
-const userValidationModel = {
+const userModel = {
   modelName: "userModel",
   model: {
     id: "string",
@@ -14,4 +7,4 @@ const userValidationModel = {
   },
 };
 
-module.exports = { userValidationModel, UserModel };
+module.exports = userModel;
