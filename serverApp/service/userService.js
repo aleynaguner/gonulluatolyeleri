@@ -1,17 +1,38 @@
+console.log("userService module reading...");
+
+const bcrypt = require("bcrypt");
+
 class UserService {
   constructor(userCollection) {
     this.userCollection = userCollection;
   }
 
-  CreateUser = async (user) => {
-    await this.userCollection.create(user);
+  createUser = async (user) => {
+    let hashedPassword = await bcrypt.hash(user.password, 10);
+
+    await this.userCollection.create({
+      email: user.email,
+      hashedPassword: hashedPassword,
+    });
   };
 
-  GetAllUsers = async () => {
-    let users = await this.userCollection.find({});
-    
-    return users;
+  getAllUsers = async () => {
+    return await this.userCollection.find({});
+  };
+
+  getUserByEmail = async (email) => {
+    return await this.userCollection.find({ email: email });
+  };
+
+  updateTokenByEmail = async (email, token) => {
+    await this.userCollection.findOneAndUpdate(
+      { email: email },
+      { token: token }
+    );
   };
 }
 
-module.exports = UserService;
+module.exports = (function () {
+  console.log("userService module exported!");
+  return UserService;
+})();

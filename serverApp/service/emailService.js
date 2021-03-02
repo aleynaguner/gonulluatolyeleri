@@ -1,3 +1,5 @@
+console.log("emailService module reading...");
+
 const nodemailer = require("nodemailer");
 
 const OUTLOOK_SERVICE = "outlook";
@@ -71,4 +73,7 @@ const prepareSendEmailResult = (isSuccess, response) => {
   }
 };
 
-module.exports = { sendEmail };
+module.exports = (function () {
+  console.log("emailService module exported!");
+  return sendEmail;
+})();

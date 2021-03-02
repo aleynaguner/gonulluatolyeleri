@@ -1,4 +1,6 @@
-function GetType(obj) {
+console.log("utils module reading...");
+
+const getType = (obj) => {
   var type = typeof obj;
 
   if (type !== "object") return type;
@@ -8,9 +10,9 @@ function GetType(obj) {
   var name = typeof ctor === "function" && ctor.name;
 
   return typeof name === "string" && name.length > 0 ? name : "object";
-}
+};
 
-function GetDefaultValue(type) {
+const getDefaultValue = (type) => {
   if (typeof type !== "string") throw new TypeError("Type must be a string.");
 
   switch (type) {
@@ -39,23 +41,34 @@ function GetDefaultValue(type) {
   } catch (e) {
     return {};
   }
-}
+};
 
-function HasDefaultValue(obj) {
+const hasDefaultValue = (obj) => {
   let objType = GetType(obj);
 
   let defaultValueOfObj = GetDefaultValue(objType);
 
   return obj === defaultValueOfObj;
-}
-
-function TestRegularExpression(string, regularExpression) {
-  return regularExpression.test(String(string).toLowerCase());
-}
-
-module.exports = {
-  GetType,
-  GetDefaultValue,
-  HasDefaultValue,
-  TestRegularExpression,
 };
+
+const testRegularExpression = (string, regularExpression) => {
+  return regularExpression.test(String(string).toLowerCase());
+};
+
+const createProcessResult = (isSuccessful, message = "") => {
+  return {
+    isSuccessful: isSuccessful,
+    message: message,
+  };
+};
+
+module.exports = (function () {
+  console.log("utils module exported!");
+  return {
+    getType,
+    getDefaultValue,
+    hasDefaultValue,
+    testRegularExpression,
+    createProcessResult,
+  };
+})();

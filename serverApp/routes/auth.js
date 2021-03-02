@@ -1,22 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
-router.post("/login", async (req, res) => {
-  let emailServiceResponse = await emailService.sendEmail(
-    {
-      user: config.senderUser,
-      pass: config.senderPass,
-    },
-    config.emailService,
-    config.receiverUser,
-    req.body.topic,
-    req.body.message
-  );
+const authService = require("../service/service").AuthService;
 
-  res.status(emailServiceResponse.responseCode).send({
-    isSuccess: emailServiceResponse.isSuccess,
-    message: emailServiceResponse.message,
-  });
+router.post("/login", async (req, res) => {
+  let loginResult = await authService.login(req.body);
+
+  res.status(200).send(loginResult);
 });
 
 module.exports = router;

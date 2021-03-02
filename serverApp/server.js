@@ -4,15 +4,23 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const modelsValidator = require("models-validator");
 
-const model = require("./model/model");
-const Service = require("./service/service");
-
-const authRoutes = require("./routes/auth");
 const config = require("./config");
+
+const model = require("./model/model");
+const service = require("./service/service");
+const authRoutes = require("./routes/auth");
 //#endregion
 
 const connectToMongo = (async function () {
-  await Service.MongoDBService.ConnectToMongo();
+  try {
+    await service.mongoDBService.connectToMongo();
+  } catch (error) {
+    console.log("Couldn't connect to MongoDB!", error);
+  }
+  await service.userService.createUser({
+    email: config.adminEmail,
+    password: config.adminPassword,
+  });
 })();
 const router = express.Router();
 
@@ -25,7 +33,7 @@ const configureMiddlewares = (function (_router) {
         model.emailSendModel.modelName,
         model.emailSendModel.model
       ),
-      "/api/login": modelsValidator.createModel(
+      "/api/auth/login": modelsValidator.createModel(
         model.userModel.modelName,
         model.userModel.model
       ),
@@ -44,12 +52,12 @@ const configureClientAppRoute = function (_router) {
 };
 
 const configureRoutes = (function (_router) {
-  _router.use("/api/auth", authRoutes);
-
   configureClientAppRoute(_router);
 
+  _router.use("/api/auth", authRoutes);
+
   _router.post("/api/sendEmail", async (req, res) => {
-    let emailServiceResponse = await Service.EmailService.sendEmail(
+    let emailServiceResponse = await service.emailService.sendEmail(
       {
         user: config.senderUser,
         pass: config.senderPass,
@@ -67,10 +75,12 @@ const configureRoutes = (function (_router) {
   });
 
   _router.post("/api/getAllUsers", async (req, res) => {
-    let users = await Service.UserService.GetAllUsers();
-
+    let users = await service.userService.getAllUsers();
+    console.log(users);
     res.statusCode(200).send(users);
   });
 })(router);
 
-const app = express().use(router).listen(3000);
+const app = express()
+  .use(router)
+  .listen(3000, () => console.log("serverApp listening on 3000!"));
