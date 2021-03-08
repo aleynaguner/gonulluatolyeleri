@@ -2,23 +2,48 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Container, Row, Col } from "../../components/Grid";
 import { CommonButton } from "../../components/CommonButton";
+import { HttpRequestSender } from "../../utility/HttpRequestSender";
+import config from "../../config.json";
+import { hasDefaultValue, createProcessResult } from "../../utility/Utils";
 
-function loginUser(credentials) {
-  return `${credentials.email}${credentials.password}`;
+const requestSender = new HttpRequestSender(config.BASE_URL);
+
+async function loginUser(email, password) {
+  if (hasDefaultValue(email)) {
+    return createProcessResult(false, "EnterEmail");
+  }
+  if (hasDefaultValue(password)) {
+    return createProcessResult(false, "EnterPassword");
+  }
+
+  var loginResult = await requestSender.AwaitableSendRequest(
+    "POST",
+    "/api/auth/login",
+    {
+      email: email,
+      password: password,
+    }
+  );
+
+  return loginResult;
 }
 
 export default function Login({ setToken }) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    // TO-DO: loading spinner true
+    const loginResult = await loginUser(email, password);
+    console.log("loginResult:", loginResult);
 
-    const token = loginUser({
-      email,
-      password,
-    });
-    if (email !== undefined) setToken(token);
+    if (!hasDefaultValue(loginResult) && loginResult.isSuccess) {
+      setToken(loginResult.responseData.token);
+    } else {
+      alert("login unsuccessful!");
+    }
+    // TO-DO: loading spinner false
   };
 
   return (

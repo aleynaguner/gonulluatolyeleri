@@ -24,11 +24,19 @@ const getClientInfo = async () => {
 };
 //#endregion
 
+export const UserRole = {
+  User: "User",
+  Admin: "Admin",
+};
+
 //#region Public methods
 export const ConfigureApp = async function () {
   let configuration = {
     Config: config,
     ClientInfo: undefined,
+    AuthorityInfo: {
+      Role: UserRole.User,
+    },
     Dictionary: {},
     Services: {
       RequestSender: RequestSender,

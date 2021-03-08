@@ -5,7 +5,7 @@ export class HttpRequestSender {
     this.baseUrl = baseUrl;
   }
 
-  SendRequest = async (method, endpoint, data) => {
+  AwaitableSendRequest = async (method, endpoint, data) => {
     let response = {
       isSuccess: false,
       responseData: null,
@@ -14,7 +14,7 @@ export class HttpRequestSender {
     try {
       let responseFromWebService = await Axios.request({
         method: method,
-        url: `${this.baseUrl}/${endpoint}`,
+        url: `${this.baseUrl}${endpoint}`,
         data: data,
       });
 

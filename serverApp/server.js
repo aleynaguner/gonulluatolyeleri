@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
 const modelsValidator = require("models-validator");
+const cors = require("cors");
 
 const config = require("./config");
 
@@ -33,6 +34,7 @@ const configureRoutesToBeAuth = (_router) => {
 const configureMiddlewares = (function (_router) {
   _router.use(express.static(path.join(__dirname, "../client-app/build")));
   _router.use(bodyParser());
+  _router.use(cors({ origin: "http://localhost:3000" }));
   configureRoutesToBeAuth(_router);
   _router.use(
     modelsValidator.modelValidatorMiddleware({
@@ -81,13 +83,21 @@ const configureRoutes = (function (_router) {
     });
   });
 
-  _router.post("/api/getAllUsers", async (req, res) => {
-    let users = await service.userService.getAllUsers();
-    console.log(users);
-    res.status(200).send(users);
+  _router.post("/api/getAllUsersIpAddress", async (req, res) => {
+    let ipAddresses = await service.userService.getAllUsersIpAddress();
+    res.status(200).send(ipAddresses);
+  });
+
+  _router.post("/api/createUser", async (req, res) => {
+    let ipAddresses = await service.userService.createUser({
+      email: req.body.email,
+      password: req.body.password,
+      ip: req.ip.toString(),
+    });
+    res.status(200).send(ipAddresses);
   });
 })(router);
 
 const app = express()
   .use(router)
-  .listen(3000, () => console.log("serverApp listening on 3000!"));
+  .listen(3001, () => console.log("serverApp listening on 3000!"));

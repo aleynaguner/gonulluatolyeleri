@@ -30,6 +30,13 @@ class UserService {
       { token: token }
     );
   };
+
+  getAllUsersIpAddress = async () => {
+    return await this.userCollection
+      .findOne({ email: email })
+      .select("ipAddress")
+      .lean();
+  };
 }
 
 module.exports = (function () {
