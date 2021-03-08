@@ -17,11 +17,11 @@ class UserService {
   };
 
   getAllUsers = async () => {
-    return await this.userCollection.find({});
+    return await this.userCollection.find({}).lean();
   };
 
   getUserByEmail = async (email) => {
-    return await this.userCollection.find({ email: email });
+    return await this.userCollection.findOne({ email: email }).lean();
   };
 
   updateTokenByEmail = async (email, token) => {

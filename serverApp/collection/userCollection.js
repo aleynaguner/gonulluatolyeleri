@@ -7,6 +7,7 @@ const UserSchema = mongoose.Schema({
   },
   email: String,
   hashedPassword: String,
+  token: String,
 });
 
 module.exports = mongoose.model("user", UserSchema, "user");

@@ -13,11 +13,11 @@ class AuthService {
     let validationResult = { isValid: false };
 
     if (utils.hasDefaultValue(userModel.email)) {
-      result.message = "EMAIL_HAS_DEFAULT_VALUE";
+      validationResult.message = "EMAIL_HAS_DEFAULT_VALUE";
     } else if (utils.hasDefaultValue(userModel.password)) {
-      result.message = "PASSWORD_HAS_DEFAULT_VALUE";
+      validationResult.message = "PASSWORD_HAS_DEFAULT_VALUE";
     } else {
-      result.isValid = true;
+      validationResult.isValid = true;
     }
 
     return validationResult;
@@ -52,7 +52,7 @@ class AuthService {
   _userModelValidationRules = [
     this._checkValueIsDefault,
     this._checkEmailForm,
-    this._checkPasswordForm,
+    // this._checkPasswordForm,
   ];
 
   constructor(authContext) {
@@ -75,10 +75,14 @@ class AuthService {
     if (!submittedUserInfoVerificationResult.isSuccessful)
       return submittedUserInfoVerificationResult;
 
-    let token = this._createToken(user);
-    await this.userService.updateTokenByEmail(user.email, token);
+    submittedUserInfo = submittedUserInfoVerificationResult.user;
 
-    return utils.createProcessResult(true);
+    let token = this._createToken(submittedUserInfo);
+    await this.userService.updateTokenByEmail(submittedUserInfo.email, token);
+
+    return utils.createProcessResult(true, "TokenCreatedSuccessfully", {
+      token: token,
+    });
   };
 
   _verifySubmittedUserInfo = async (submittedUserInfo) => {
@@ -87,15 +91,15 @@ class AuthService {
       return utils.createProcessResult(false, "NoUserExistsHasThisUsername");
     }
 
-    let isPasswordValid = this._verifyPassword(
+    let isPasswordValid = await this._verifyPassword(
       submittedUserInfo.password,
-      user.encryptedPassword
+      user.hashedPassword
     );
     if (!isPasswordValid) {
       return utils.createProcessResult(false, "PasswordIsNotCorrect");
     }
 
-    return utils.createProcessResult(true);
+    return utils.createProcessResult(true, "", { user: user });
   };
 
   _verifyPassword = async (checkedPassword, encryptedReferencePassword) => {
@@ -107,7 +111,7 @@ class AuthService {
       this._getTokenPayloadInfo(user),
       this.secretKey,
       {
-        expiresIn: 120 /*minutes*/,
+        expiresIn: "1 day",
       }
     );
 
@@ -116,7 +120,7 @@ class AuthService {
 
   _getTokenPayloadInfo = (user) => {
     return {
-      id: user.id,
+      id: user._id,
       email: user.email,
     };
   };

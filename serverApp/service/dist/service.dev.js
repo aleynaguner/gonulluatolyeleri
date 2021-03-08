@@ -1,38 +1,46 @@
+"use strict";
+
 console.log("service module reading...");
 
-const config = require("../config");
-const collection = require("../collection/collection");
-const utils = require("./utils");
+var config = require("../config");
 
-const mongoDBService = require("./mongoDBService");
+var collection = require("../collection/collection");
+
+var utils = require("./utils");
+
+var mongoDBService = require("./mongoDBService");
+
 function createMongoDBService() {
-  return new mongoDBService({ url: config.mongoDBURL });
+  return new mongoDBService({
+    url: config.mongoDBURL
+  });
 }
 
-const _userService = require("./userService");
+var _userService = require("./userService");
+
 function createUserService() {
   return new _userService(collection.userCollection);
 }
 
-const _authService = require("./authService");
+var _authService = require("./authService");
+
 function createAuthService(userService) {
   return new _authService({
     userService: userService,
-    secretKey: config.secretKey,
+    secretKey: config.secretKey
   });
 }
 
-const emailService = require("./emailService");
+var emailService = require("./emailService");
 
-module.exports = (function () {
+module.exports = function () {
   console.log("service module exported!");
-  let service = {
+  var service = {
     utils: utils,
     mongoDBService: createMongoDBService(),
     userService: createUserService(),
-    emailService: emailService,
+    emailService: emailService
   };
   service.authService = createAuthService(service.userService);
-
   return service;
-})();
+}();

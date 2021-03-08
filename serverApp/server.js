@@ -9,6 +9,8 @@ const config = require("./config");
 const model = require("./model/model");
 const service = require("./service/service");
 const authRoutes = require("./routes/auth");
+
+const middlewareExtension = require("./host-extension/middlewareExtension");
 //#endregion
 
 const connectToMongo = (async function () {
@@ -24,9 +26,14 @@ const connectToMongo = (async function () {
 })();
 const router = express.Router();
 
+const configureRoutesToBeAuth = (_router) => {
+  _router.use("/api/getAllUsers", middlewareExtension.authMiddleware);
+};
+
 const configureMiddlewares = (function (_router) {
-  _router.use(bodyParser());
   _router.use(express.static(path.join(__dirname, "../client-app/build")));
+  _router.use(bodyParser());
+  configureRoutesToBeAuth(_router);
   _router.use(
     modelsValidator.modelValidatorMiddleware({
       "/api/sendEmail": modelsValidator.createModel(
@@ -77,7 +84,7 @@ const configureRoutes = (function (_router) {
   _router.post("/api/getAllUsers", async (req, res) => {
     let users = await service.userService.getAllUsers();
     console.log(users);
-    res.statusCode(200).send(users);
+    res.status(200).send(users);
   });
 })(router);
 

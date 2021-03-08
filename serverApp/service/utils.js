@@ -44,9 +44,9 @@ const getDefaultValue = (type) => {
 };
 
 const hasDefaultValue = (obj) => {
-  let objType = GetType(obj);
+  let objType = getType(obj);
 
-  let defaultValueOfObj = GetDefaultValue(objType);
+  let defaultValueOfObj = getDefaultValue(objType);
 
   return obj === defaultValueOfObj;
 };
@@ -55,10 +55,15 @@ const testRegularExpression = (string, regularExpression) => {
   return regularExpression.test(String(string).toLowerCase());
 };
 
-const createProcessResult = (isSuccessful, message = "") => {
+const createProcessResult = (
+  isSuccessful,
+  message = "",
+  processResult = undefined
+) => {
   return {
     isSuccessful: isSuccessful,
     message: message,
+    ...processResult,
   };
 };
 
