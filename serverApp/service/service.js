@@ -5,13 +5,26 @@ const collection = require("../collection/collection");
 const utils = require("./utils");
 
 const mongoDBService = require("./mongoDBService");
-function createMongoDBService() {
-  return new mongoDBService({ url: config.mongoDBURL });
+async function createCollections() {
+  let gonulluAtolyeleriDb = new mongoDBService({
+    url: config.mongoDBURL,
+    dbName: config.gonulluAtolyeleriDbName,
+  });
+
+  try {
+    await mongoDBService.connectToMongo();
+  } catch (error) {
+    throw Error("Couldn't connect to MongoDB!", error);
+  }
+
+  return {
+    user: new collection.userCollection(gonulluAtolyeleriDb),
+  };
 }
 
 const _userService = require("./userService");
-function createUserService() {
-  return new _userService(collection.userCollection);
+function createUserService(userCollection) {
+  return new _userService(userCollection);
 }
 
 const _authService = require("./authService");
@@ -24,15 +37,19 @@ function createAuthService(userService) {
 
 const emailService = require("./emailService");
 
-module.exports = (function () {
+async function getServices() {
   console.log("service module exported!");
+
+  const collections = await createCollections();
   let service = {
     utils: utils,
-    mongoDBService: createMongoDBService(),
-    userService: createUserService(),
+    collections: collections,
+    userService: createUserService(collections.user),
     emailService: emailService,
   };
   service.authService = createAuthService(service.userService);
 
   return service;
-})();
+}
+
+module.exports = getServices;

@@ -14,5 +14,6 @@ module.exports = (function () {
     secretKey: process.env.SECRET_KEY,
     adminEmail: process.env.ADMIN_EMAIL,
     adminPassword: process.env.ADMIN_PASSWORD,
+    gonulluAtolyeleriDbName: process.env.GONULLU_ATOLYELERI_DB_NAME,
   };
 })();

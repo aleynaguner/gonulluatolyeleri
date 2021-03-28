@@ -1,4 +1,4 @@
-const emailSendModel = require("./emailSendModel");
-const userModel = require("./userModel");
+const modelValidatorModels = require("./modelValidatorModels");
+const User = require("./user");
 
-module.exports = { emailSendModel, userModel };
+module.exports = { modelValidatorModels, User };

@@ -1,6 +1,7 @@
 console.log("userService module reading...");
 
 const bcrypt = require("bcrypt");
+const utils = require("./utils");
 
 class UserService {
   constructor(userCollection) {
@@ -10,33 +11,30 @@ class UserService {
   createUser = async (user) => {
     let hashedPassword = await bcrypt.hash(user.password, 10);
 
-    await this.userCollection.create({
-      email: user.email,
-      hashedPassword: hashedPassword,
-    });
+    try {
+      await this.userCollection.insert({
+        email: user.email,
+        hashedPassword: hashedPassword,
+        ipAddress: user.ipAddress,
+      });
+    } catch (error) {
+      console.error("Error occured when createUser!", error);
+      return utils.createProcessResult(false, error.message.toString());
+    }
+
+    return utils.createProcessResult(true);
   };
 
-  getAllUsers = async () => {
-    return await this.userCollection.find({}).lean();
-  };
+  getAllUsers = async () => await this.userCollection.getAllUsers();
 
-  getUserByEmail = async (email) => {
-    return await this.userCollection.findOne({ email: email }).lean();
-  };
+  getUserByEmail = async (email) =>
+    await this.userCollection.getUserByEmail(email);
 
-  updateTokenByEmail = async (email, token) => {
-    await this.userCollection.findOneAndUpdate(
-      { email: email },
-      { token: token }
-    );
-  };
+  updateTokenByEmail = async (email, token) =>
+    await this.userCollection.updateTokenByEmail(email, token);
 
-  getAllUsersIpAddress = async () => {
-    return await this.userCollection
-      .findOne({ email: email })
-      .select("ipAddress")
-      .lean();
-  };
+  getAllUsersIpAddress = async () =>
+    await this.userCollection.getAllUsersIpAddress();
 }
 
 module.exports = (function () {

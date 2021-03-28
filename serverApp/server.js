@@ -10,21 +10,18 @@ const config = require("./config");
 const model = require("./model/model");
 const service = require("./service/service");
 const authRoutes = require("./routes/auth");
+const userRoutes = require("./routes/user");
 
 const middlewareExtension = require("./host-extension/middlewareExtension");
 //#endregion
 
-const connectToMongo = (async function () {
-  try {
-    await service.mongoDBService.connectToMongo();
-  } catch (error) {
-    console.log("Couldn't connect to MongoDB!", error);
-  }
+const createAdminUser = (async function () {
   await service.userService.createUser({
     email: config.adminEmail,
     password: config.adminPassword,
   });
 })();
+
 const router = express.Router();
 
 const configureRoutesToBeAuth = (_router) => {
@@ -46,6 +43,10 @@ const configureMiddlewares = (function (_router) {
         model.userModel.modelName,
         model.userModel.model
       ),
+      "/api/user/createUser": modelsValidator.createModel(
+        `${model.userModel.modelName}ForCreateUser`,
+        model.userModel.model
+      ),
     })
   );
 })(router);
@@ -64,6 +65,7 @@ const configureRoutes = (function (_router) {
   configureClientAppRoute(_router);
 
   _router.use("/api/auth", authRoutes);
+  _router.use("/api/user", userRoutes);
 
   _router.post("/api/sendEmail", async (req, res) => {
     let emailServiceResponse = await service.emailService.sendEmail(
