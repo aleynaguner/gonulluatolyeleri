@@ -13,7 +13,7 @@ class UserCollection extends CollectionBase {
     return await this.collection.find({ email: email });
   };
 
-  updateTokenByEmail = (email, token) => {
+  updateTokenByEmail = async (email, token) => {
     await this.collection.updateOne(
       { email: email },
       { $set: { token: token } }
@@ -22,7 +22,7 @@ class UserCollection extends CollectionBase {
 
   getAllUsersIpAddress = async () => {
     return await this.collection.find({}).project({ ipAddress: 1 }).toArray();
-  }
+  };
 }
 
 module.exports = (function () {

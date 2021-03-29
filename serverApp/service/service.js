@@ -12,7 +12,7 @@ async function createCollections() {
   });
 
   try {
-    await mongoDBService.connectToMongo();
+    await gonulluAtolyeleriDb.connectToMongo();
   } catch (error) {
     throw Error("Couldn't connect to MongoDB!", error);
   }

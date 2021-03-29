@@ -12,7 +12,9 @@ class MongoDBService {
   connectToMongo = async () => {
     let connected = false;
 
-    let client = new MongoClient(this.mongoDBSettings.url);
+    let client = new MongoClient(this.mongoDBSettings.url, {
+      useUnifiedTopology: true,
+    });
     try {
       await client.connect();
       await client.db(this.mongoDBSettings.dbName).command({ ping: 1 });
