@@ -10,7 +10,7 @@ class UserCollection extends CollectionBase {
   }
 
   getUserByEmail = async (email) => {
-    return await this.collection.find({ email: email });
+    return await this.collection.findOne({ email: email });
   };
 
   updateTokenByEmail = async (email, token) => {
@@ -21,7 +21,7 @@ class UserCollection extends CollectionBase {
   };
 
   getAllUsersIpAddress = async () => {
-    return await this.collection.find({}).project({ ipAddress: 1 }).toArray();
+    return await this.collection.findOne({}).project({ ipAddress: 1 }).toArray();
   };
 }
 

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const userService = require("../service/service").userService;
+const userService = require("../service/service").services.getUserService();
 
 router.post("/createUser", async (req, res) => {
   let createUserResult = await userService.createUser({

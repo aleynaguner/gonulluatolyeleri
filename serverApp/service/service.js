@@ -23,32 +23,50 @@ async function createCollections() {
 }
 
 const _userService = require("./userService");
+let userServiceSingletonInstance = undefined;
 function createUserService(userCollection) {
-  return new _userService(userCollection);
+  if (userServiceSingletonInstance === undefined) {
+    userServiceSingletonInstance = new _userService(userCollection);
+  }
+  return userServiceSingletonInstance;
 }
 
 const authService = require("./authService");
+let authServiceSingletonInstance = undefined;
 function createAuthService(userService) {
-  return new authService({
-    userService: userService,
-    secretKey: config.secretKey,
-  });
+  if (authServiceSingletonInstance === undefined) {
+    authServiceSingletonInstance = new authService({
+      userService: userService,
+      secretKey: config.secretKey,
+    });
+  }
+  return authServiceSingletonInstance;
 }
 
 const emailService = require("./emailService");
 
-async function getServices() {
-  console.log("service module exported!");
+let _services = undefined;
+async function configure() {
+  if (_services !== undefined) return;
 
   const collections = await createCollections();
-  let service = {
+
+  _services = {
     utils: utils,
     userService: createUserService(collections.user),
     emailService: emailService,
   };
-  service.authService = createAuthService(service.userService);
-
-  return service;
+  _services.authService = createAuthService(_services.userService);
 }
 
-module.exports = getServices;
+const services = {
+  getUtils: () => _services.utils,
+  getUserService: () => _services.userService,
+  getEmailService: () => _services.emailService,
+  getAuthService: () => _services.authService,
+};
+
+module.exports = (function () {
+  console.log("service module exported!");
+  return { configure, services };
+})();

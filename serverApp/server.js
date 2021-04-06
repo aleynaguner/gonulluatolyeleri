@@ -8,16 +8,22 @@ const cors = require("cors");
 const config = require("./config");
 
 const model = require("./model/model");
-const getServices = require("./service/service");
-const authRoutes = require("./routes/auth");
-const userRoutes = require("./routes/user");
+const _service = require("./service/service");
 
 const middlewareExtension = require("./host-extension/middlewareExtension");
 const utils = require("./service/utils");
 //#endregion
 
 async function main() {
-  const service = await getServices();
+  const service = await (async function () {
+    await _service.configure();
+    return {
+      utils: _service.services.getUtils(),
+      userService: _service.services.getUserService(),
+      emailService: _service.services.getEmailService(),
+      authService: _service.services.getAuthService(),
+    };
+  })();
 
   const createAdminUser = await (async function () {
     await service.userService.createUser({
@@ -31,6 +37,7 @@ async function main() {
 
   const configureRoutesToBeAuth = (router) => {
     router.use("/api/getAllUsers", middlewareExtension.authMiddleware);
+    router.use("/checkHealth", middlewareExtension.authMiddleware);
   };
 
   const configureMiddlewares = (function (router) {
@@ -67,6 +74,9 @@ async function main() {
   };
 
   const configureRoutes = (function (router) {
+    const authRoutes = require("./routes/auth");
+    const userRoutes = require("./routes/user");
+
     router.use("/api/auth", authRoutes);
     router.use("/api/user", userRoutes);
 
@@ -94,15 +104,6 @@ async function main() {
 
     router.post("/api/getAllUsersIpAddress", async (req, res) => {
       let ipAddresses = await service.userService.getAllUsersIpAddress();
-      res.status(200).send(ipAddresses);
-    });
-
-    router.post("/api/createUser", async (req, res) => {
-      let ipAddresses = await service.userService.createUser({
-        email: req.body.email,
-        password: req.body.password,
-        ip: req.ip.toString(),
-      });
       res.status(200).send(ipAddresses);
     });
 
