@@ -67,6 +67,10 @@ const createProcessResult = (
   };
 };
 
+const HttpStatus = {
+  OK: 200,
+};
+
 module.exports = (function () {
   console.log("utils module exported!");
   return {
@@ -75,5 +79,6 @@ module.exports = (function () {
     hasDefaultValue,
     testRegularExpression,
     createProcessResult,
+    HttpStatus,
   };
 })();

@@ -13,13 +13,13 @@ const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 
 const middlewareExtension = require("./host-extension/middlewareExtension");
+const utils = require("./service/utils");
 //#endregion
 
 async function main() {
   const service = await getServices();
 
-  console.log("service is: ", service);
-  const createAdminUser = (async function () {
+  const createAdminUser = await (async function () {
     await service.userService.createUser({
       email: config.adminEmail,
       password: config.adminPassword,
@@ -27,19 +27,18 @@ async function main() {
     console.log("createAdminUser completed !");
   })();
 
-  console.log("router setted !");
-  const router = express.Router();
+  const _router = express.Router();
 
-  const configureRoutesToBeAuth = (_router) => {
-    _router.use("/api/getAllUsers", middlewareExtension.authMiddleware);
+  const configureRoutesToBeAuth = (router) => {
+    router.use("/api/getAllUsers", middlewareExtension.authMiddleware);
   };
 
-  const configureMiddlewares = (function (_router) {
-    _router.use(express.static(path.join(__dirname, "../client-app/build")));
-    _router.use(bodyParser());
-    _router.use(cors({ origin: "http://localhost:3000" }));
-    configureRoutesToBeAuth(_router);
-    _router.use(
+  const configureMiddlewares = (function (router) {
+    router.use(express.static(path.join(__dirname, "../client-app/build")));
+    router.use(bodyParser());
+    router.use(cors({ origin: "http://localhost:3000" }));
+    configureRoutesToBeAuth(router);
+    router.use(
       modelsValidator.modelValidatorMiddleware({
         "/api/sendEmail": modelsValidator.createModel(
           model.modelValidatorModels.emailSendModel.modelName,
@@ -55,25 +54,27 @@ async function main() {
         ),
       })
     );
-  })(router);
+  })(_router);
 
-  const configureClientAppRoute = function (_router) {
-    _router.get("/", (req, res) => {
+  const configureClientAppRoute = function (router) {
+    router.get("/", (req, res) => {
       res.sendFile(path.join(__dirname, "../client-app/build"));
     });
     // Yukarıda belirtilen pointler hariç tüm GET requestleri "/" ya yani React app yönlendirir.
-    _router.get("*", function (req, res) {
+    router.get("*", function (req, res) {
       res.redirect("/");
     });
   };
 
-  const configureRoutes = (function (_router) {
-    configureClientAppRoute(_router);
+  const configureRoutes = (function (router) {
+    router.use("/api/auth", authRoutes);
+    router.use("/api/user", userRoutes);
 
-    _router.use("/api/auth", authRoutes);
-    _router.use("/api/user", userRoutes);
+    router.get("/checkHealth", async (req, res) =>
+      res.status(utils.HttpStatus.OK).send("I'm healthy !")
+    );
 
-    _router.post("/api/sendEmail", async (req, res) => {
+    router.post("/api/sendEmail", async (req, res) => {
       let emailServiceResponse = await service.emailService.sendEmail(
         {
           user: config.senderUser,
@@ -91,12 +92,12 @@ async function main() {
       });
     });
 
-    _router.post("/api/getAllUsersIpAddress", async (req, res) => {
+    router.post("/api/getAllUsersIpAddress", async (req, res) => {
       let ipAddresses = await service.userService.getAllUsersIpAddress();
       res.status(200).send(ipAddresses);
     });
 
-    _router.post("/api/createUser", async (req, res) => {
+    router.post("/api/createUser", async (req, res) => {
       let ipAddresses = await service.userService.createUser({
         email: req.body.email,
         password: req.body.password,
@@ -104,10 +105,12 @@ async function main() {
       });
       res.status(200).send(ipAddresses);
     });
-  })(router);
+
+    configureClientAppRoute(router);
+  })(_router);
 
   const app = express()
-    .use(router)
+    .use(_router)
     .listen(3001, () => console.log("serverApp listening on 3000!"));
 }
 

@@ -12,7 +12,7 @@ class UserService {
     let hashedPassword = await bcrypt.hash(user.password, 10);
 
     try {
-      await this.userCollection.insert({
+      await this.userCollection.insertOne({
         email: user.email,
         hashedPassword: hashedPassword,
         ipAddress: user.ipAddress,

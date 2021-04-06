@@ -6,7 +6,7 @@ class CollectionBase {
   }
 
   insertOne = async (doc) => {
-    await collection.insertOne(doc);
+    await this.collection.insertOne(doc);
   };
 
   getAll = async () => {

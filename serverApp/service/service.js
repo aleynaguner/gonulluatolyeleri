@@ -6,19 +6,19 @@ const utils = require("./utils");
 
 const mongoDBService = require("./mongoDBService");
 async function createCollections() {
-  let gonulluAtolyeleriDb = new mongoDBService({
+  let gonulluAtolyeleriDbService = new mongoDBService({
     url: config.mongoDBURL,
     dbName: config.gonulluAtolyeleriDbName,
   });
 
   try {
-    await gonulluAtolyeleriDb.connectToMongo();
+    await gonulluAtolyeleriDbService.connectToMongo();
   } catch (error) {
     throw Error("Couldn't connect to MongoDB!", error);
   }
 
   return {
-    user: new collection.userCollection(gonulluAtolyeleriDb),
+    user: new collection.userCollection(gonulluAtolyeleriDbService.db),
   };
 }
 
@@ -27,9 +27,9 @@ function createUserService(userCollection) {
   return new _userService(userCollection);
 }
 
-const _authService = require("./authService");
+const authService = require("./authService");
 function createAuthService(userService) {
-  return new _authService({
+  return new authService({
     userService: userService,
     secretKey: config.secretKey,
   });
@@ -43,7 +43,6 @@ async function getServices() {
   const collections = await createCollections();
   let service = {
     utils: utils,
-    collections: collections,
     userService: createUserService(collections.user),
     emailService: emailService,
   };
