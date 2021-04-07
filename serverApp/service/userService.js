@@ -35,6 +35,20 @@ class UserService {
 
   getAllUsersIpAddress = async () =>
     await this.userCollection.getAllUsersIpAddress();
+
+  getUserSessionInfo = (request) => {
+    if (
+      utils.hasDefaultValue(request.decode) ||
+      utils.hasDefaultValue(request.decode.email)
+    )
+      return { isAnonymous: true };
+    else
+      return {
+        isAnonymous: false,
+        email: request.decode.email,
+        ipAddress: request.decode.ipAddress,
+      };
+  };
 }
 
 module.exports = (function () {

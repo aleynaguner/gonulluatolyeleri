@@ -32,17 +32,9 @@ const getBearerTokenFromRequestHeader = (header) => {
   }
 };
 
-const ipAddressValidator = (request, response, next) => {
-  if (request.ip !== request.decode.ipAddress) response.status(401).send();
-  else {
-    next();
-  }
-};
-
 module.exports = (function () {
   console.log("middlewareExtension module exported!");
   return {
     authMiddleware: authMiddleware,
-    ipAddressValidator: ipAddressValidator,
   };
 })();

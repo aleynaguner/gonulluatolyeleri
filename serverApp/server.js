@@ -36,7 +36,7 @@ async function main() {
   const _router = express.Router();
 
   const configureRoutesToBeAuth = (router) => {
-    router.use("/checkHealth", middlewareExtension.authMiddleware, middlewareExtension.ipAddressValidator);
+    router.use("/checkHealth", middlewareExtension.authMiddleware);
   };
 
   const configureMiddlewares = (function (router) {
