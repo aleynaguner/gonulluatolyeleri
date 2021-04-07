@@ -36,7 +36,7 @@ async function main() {
   const _router = express.Router();
 
   const configureRoutesToBeAuth = (router) => {
-    router.use("/checkHealth", middlewareExtension.authMiddleware);
+    router.use("/checkAdminHealth", middlewareExtension.authMiddleware);
   };
 
   const configureMiddlewares = (function (router) {
@@ -80,6 +80,10 @@ async function main() {
     router.use("/api/user", userRoutes);
 
     router.get("/checkHealth", async (req, res) =>
+      res.status(utils.HttpStatus.OK).send("I'm healthy !")
+    );
+
+    router.get("/checkAdminHealth", async (req, res) =>
       res.status(utils.HttpStatus.OK).send("I'm healthy !")
     );
 

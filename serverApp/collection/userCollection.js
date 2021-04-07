@@ -7,6 +7,7 @@ const USER_COLLECTION_NAME = "user";
 class UserCollection extends CollectionBase {
   constructor(db) {
     super(db, USER_COLLECTION_NAME);
+    this.collection.createIndex({ email: 1 }, { unique: true });
   }
 
   getUserByEmail = async (email) => {
@@ -21,7 +22,10 @@ class UserCollection extends CollectionBase {
   };
 
   getAllUsersIpAddress = async () => {
-    return await this.collection.findOne({}).project({ ipAddress: 1 }).toArray();
+    return await this.collection
+      .findOne({})
+      .project({ ipAddress: 1 })
+      .toArray();
   };
 }
 
