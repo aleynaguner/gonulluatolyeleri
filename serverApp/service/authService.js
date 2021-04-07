@@ -111,7 +111,7 @@ class AuthService {
       this._getTokenPayloadInfo(user),
       this.secretKey,
       {
-        expiresIn: "1 day",
+        expiresIn: "12h",
       }
     );
 
@@ -122,6 +122,7 @@ class AuthService {
     return {
       id: user._id,
       email: user.email,
+      ipAddress: user.ipAddress,
     };
   };
 
