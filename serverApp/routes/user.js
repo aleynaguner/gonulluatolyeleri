@@ -9,7 +9,7 @@ router.post("/createUser", async (req, res) => {
     ipAddress: req.ip,
   });
 
-  if (createUserResult.isSuccess) {
+  if (createUserResult.isSuccessful) {
     res.status(200).send(createUserResult);
   } else {
     res.status(500).send(createUserResult);
@@ -18,7 +18,6 @@ router.post("/createUser", async (req, res) => {
 
 router.get("/getUserSessionInfo", async (req, res) => {
   let userSessionInfo = userService.getUserSessionInfo(req);
-
   res.status(200).send(userSessionInfo);
 });
 

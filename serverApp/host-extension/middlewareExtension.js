@@ -2,20 +2,26 @@ console.log("middlewareExtension module reading...");
 
 const jwt = require("jsonwebtoken");
 const config = require("../config");
+const utils = require("../service/utils");
 
-const authMiddleware = (request, response, next) => {
+const authMiddleware = async (request, response, next) => {
   const token = getAuthTokenFromRequest(request);
+  const pathToBeVerified =
+    utils.hasDefaultValue(token) &&
+    !config.pathsToBeVerified.includes(request.path);
 
-  if (!token) response.status(401).send();
-  else {
-    jwt.verify(token, config.secretKey, (error, decoded) => {
-      if (error) response.status(401).send();
-      else {
-        request.decode = decoded;
-        next();
-      }
-    });
+  if (pathToBeVerified) {
+    await next();
+    return;
   }
+
+  await jwt.verify(token, config.secretKey, async (error, decoded) => {
+    if (error) response.status(401).send();
+    else {
+      request.decode = decoded;
+      await next();
+    }
+  });
 };
 
 const getAuthTokenFromRequest = (request) => {

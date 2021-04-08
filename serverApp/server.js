@@ -30,20 +30,14 @@ async function main() {
       email: config.adminEmail,
       password: config.adminPassword,
     });
-    console.log("createAdminUser completed !");
   })();
 
   const _router = express.Router();
-
-  const configureRoutesToBeAuth = (router) => {
-    router.use("/checkAdminHealth", middlewareExtension.authMiddleware);
-  };
 
   const configureMiddlewares = (function (router) {
     router.use(express.static(path.join(__dirname, "../client-app/build")));
     router.use(bodyParser());
     router.use(cors({ origin: "http://localhost:3000" }));
-    configureRoutesToBeAuth(router);
     router.use(
       modelsValidator.modelValidatorMiddleware({
         "/api/sendEmail": modelsValidator.createModel(
@@ -60,6 +54,7 @@ async function main() {
         ),
       })
     );
+    router.use(middlewareExtension.authMiddleware);
   })(_router);
 
   const configureClientAppRoute = function (router) {
