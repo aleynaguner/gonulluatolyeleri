@@ -61,18 +61,25 @@ export class HttpRequestSender {
   };
 }
 
-export const SendRequest = async (method, url, data) => {
+export const SendRequest = async (method, url, data, bearerToken = null) => {
   let response = {
     isSuccess: false,
     responseData: null,
   };
 
   try {
-    let responseFromWebService = await Axios.request({
+    let request = {
       method: method,
       url: url,
       data: data,
-    });
+    };
+    if (bearerToken !== null) {
+      request.headers = {
+        Authorization: `Bearer ${bearerToken}`,
+      };
+    }
+
+    let responseFromWebService = await Axios.request(request);
 
     response.isSuccess =
       responseFromWebService.status >= 200 &&

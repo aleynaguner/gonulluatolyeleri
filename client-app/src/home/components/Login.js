@@ -28,13 +28,13 @@ async function loginUser(email, password) {
   return loginResult;
 }
 
-export default function Login({ setToken }) {
+export default function Login({ setToken, setContext }) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // TO-DO: loading spinner true
+
     const loginResult = await loginUser(email, password);
     console.log("loginResult:", loginResult);
 
@@ -43,7 +43,6 @@ export default function Login({ setToken }) {
     } else {
       alert("login unsuccessful!");
     }
-    // TO-DO: loading spinner false
   };
 
   return (

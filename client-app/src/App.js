@@ -27,9 +27,20 @@ export default class App extends React.Component {
     };
   }
 
-  async componentDidMount() {
+  configureApp = async () => {
+    console.log("Application configuring...");
+
     let configuration = await ConfigureApp();
+    configuration.SetAppConfig = (appConfig) => {
+      this.setState({ Config: appConfig });
+    };
+
     this.setState({ Config: configuration });
+    console.log("Application configured !", configuration);
+  };
+
+  async componentDidMount() {
+    await this.configureApp();
   }
 
   render() {

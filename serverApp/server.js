@@ -37,7 +37,8 @@ async function main() {
   const configureMiddlewares = (function (router) {
     router.use(express.static(path.join(__dirname, "../client-app/build")));
     router.use(bodyParser());
-    router.use(cors({ origin: "http://localhost:3000" }));
+    router.use((req, res, next) => { console.log(req); next();})
+    router.use(cors());
     router.use(
       modelsValidator.modelValidatorMiddleware({
         "/api/sendEmail": modelsValidator.createModel(

@@ -1,13 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import { Sidebar } from "./components/Sidebar";
 import { Container } from "../components/Grid";
-
 import { BlogPostConfirmation } from "./components/BlogPostConfirmation";
 import { AdminUserManagement } from "./components/AdminUserManagement";
 import Login from "../home/components/Login";
 import BaseComponent from "../utility/BaseComponent";
-import { UserRole } from "../utility/AppConfig";
 import { hasDefaultValue } from "../utility/Utils";
+import { ConfigureAppAsPromise } from "../utility/AppConfig";
 
 export default class AdminDashboard extends BaseComponent {
   constructor(props) {
@@ -19,12 +18,15 @@ export default class AdminDashboard extends BaseComponent {
   }
 
   setToken = (userToken) => {
-    if (!hasDefaultValue(userToken)) {
-      sessionStorage.setItem("authtoken", JSON.stringify(userToken));
-      this.context.AuthorityInfo.Role = UserRole.Admin;
-      this.setState({ loggedIn: true });
-      console.log(this.context);
-    }
+    if (hasDefaultValue(userToken)) return;
+
+    sessionStorage.setItem("authtoken", JSON.stringify(userToken));
+
+    this.setState({ loggedIn: true }, () => {
+      ConfigureAppAsPromise({
+        ClientToken: userToken,
+      }).then((configuration) => this.context.SetAppConfig(configuration));
+    });
   };
 
   getToken = () => {
@@ -37,7 +39,15 @@ export default class AdminDashboard extends BaseComponent {
     let token = this.getToken();
 
     if (token === null || token === undefined) {
-      return <Login setToken={this.setToken} />;
+      return (
+        <Login
+          setToken={this.setToken}
+          setContext={(ctx) => {
+            this.context = ctx;
+            console.log(this.context);
+          }}
+        />
+      );
     } else {
       return (
         <Sidebar

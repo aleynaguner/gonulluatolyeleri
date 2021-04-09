@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.createProcessResult = exports.testRegularExpression = exports.hasDefaultValue = exports.getDefaultValue = exports.getType = void 0;
+exports.Constants = exports.createProcessResult = exports.testRegularExpression = exports.hasDefaultValue = exports.getDefaultValue = exports.getType = void 0;
 
 var _this = void 0;
 
@@ -90,3 +90,14 @@ var createProcessResult = function createProcessResult(isSuccessful) {
 };
 
 exports.createProcessResult = createProcessResult;
+var Constants = {
+  HttpMethods: {
+    GET: "GET",
+    POST: "POST",
+    PUT: "PUT"
+  },
+  DefaultValues: {
+    String: ""
+  }
+};
+exports.Constants = Constants;

@@ -64,3 +64,14 @@ export const createProcessResult = (
     ...processResult,
   };
 };
+
+export const Constants = {
+  HttpMethods: {
+    GET: "GET",
+    POST: "POST",
+    PUT: "PUT",
+  },
+  DefaultValues: {
+    String: "",
+  },
+};
