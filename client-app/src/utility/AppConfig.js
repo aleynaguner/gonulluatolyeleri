@@ -1,7 +1,7 @@
 import React from "react";
 import config from "../config.json";
 import { HttpRequestSender, SendRequest } from "./HttpRequestSender";
-import { Constants } from "./Utils";
+import { Constants, hasDefaultValue } from "./Utils";
 const FormValidator = require("./FormValidator");
 
 //#region Global instances
@@ -16,7 +16,7 @@ const getClientInfo = async () => {
 
     let clientLocationInfo = await SendRequest(
       Constants.HttpMethods.GET,
-      confi["CLIENT_INFO_API"]
+      config["CLIENT_INFO_API"]
     );
 
     clientInfo = clientLocationInfo.responseData;
@@ -56,7 +56,7 @@ const getAuthorityInfoByResponseData = (responseData) => {
   };
 };
 
-const getAuthorityInfo = async (clientToken) => {
+const getAuthorityInfo = async (clientToken = null) => {
   const getAuthorityInfoUrl = `${config.BASE_URL}${config.EndPoints.getUserSessionInfo}`;
   let getAuthorityInfoResponse = await SendRequest(
     Constants.HttpMethods.GET,
@@ -74,13 +74,17 @@ const getAuthorityInfo = async (clientToken) => {
   }
 };
 
-const configureApp = async (configurationContext) => {
+const configureApp = async (configurationContext = null) => {
   let configuration = getDefaultConfiguration();
 
   configuration.ClientInfo = await getClientInfo();
-  configuration.AuthorityInfo = await getAuthorityInfo(
-    configurationContext.ClientToken
-  );
+  if (!hasDefaultValue(configurationContext)) {
+    configuration.AuthorityInfo = await getAuthorityInfo(
+      configurationContext.ClientToken
+    );
+  } else {
+    configuration.AuthorityInfo = await getAuthorityInfo();
+  }
 
   for (const key in config.CONTENT_DICTIONARY) {
     configuration.Dictionary[key] =

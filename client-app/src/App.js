@@ -14,7 +14,7 @@ import { OurWorkShops } from "./ourworkshops/OurWorkShops";
 import { Projects } from "./projects/Projects";
 import { Blog } from "./blog/Blog";
 import { ContactUs } from "./contactus/ContactUs";
-import { AppConfig, ConfigureApp } from "./utility/AppConfig";
+import { AppConfig, ConfigureAppAsAwaitable } from "./utility/AppConfig";
 import AdminDashboard from "./admindashboard/AdminDashboard";
 //#endregion
 
@@ -30,13 +30,15 @@ export default class App extends React.Component {
   configureApp = async () => {
     console.log("Application configuring...");
 
-    let configuration = await ConfigureApp();
+    let configuration = await ConfigureAppAsAwaitable();
     configuration.SetAppConfig = (appConfig) => {
-      this.setState({ Config: appConfig });
+      this.setState({ Config: appConfig }, () =>
+        console.log("Application configured again!", appConfig)
+      );
     };
 
     this.setState({ Config: configuration });
-    console.log("Application configured !", configuration);
+    console.log("Application configured!", configuration);
   };
 
   async componentDidMount() {
