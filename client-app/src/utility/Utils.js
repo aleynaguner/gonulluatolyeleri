@@ -74,4 +74,8 @@ export const Constants = {
   DefaultValues: {
     String: "",
   },
+  UserRole: {
+    User: "User",
+    Admin: "Admin",
+  },
 };

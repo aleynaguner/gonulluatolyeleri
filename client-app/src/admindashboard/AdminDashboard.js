@@ -39,15 +39,7 @@ export default class AdminDashboard extends BaseComponent {
     let token = this.getToken();
 
     if (token === null || token === undefined) {
-      return (
-        <Login
-          setToken={this.setToken}
-          setContext={(ctx) => {
-            this.context = ctx;
-            console.log(this.context);
-          }}
-        />
-      );
+      return <Login setToken={this.setToken} />;
     } else {
       return (
         <Sidebar

@@ -16,7 +16,7 @@ const getClientInfo = async () => {
 
     let clientLocationInfo = await SendRequest(
       Constants.HttpMethods.GET,
-      "https://ipapi.co/json/"
+      confi["CLIENT_INFO_API"]
     );
 
     clientInfo = clientLocationInfo.responseData;
@@ -26,19 +26,13 @@ const getClientInfo = async () => {
     return clientInfo;
   }
 };
-//#endregion
-
-export const UserRole = {
-  User: "User",
-  Admin: "Admin",
-};
 
 const getDefaultConfiguration = () => {
   return {
     Config: config,
     ClientInfo: undefined,
     AuthorityInfo: {
-      Role: UserRole.User,
+      Role: Constants.UserRole.User,
     },
     Dictionary: {},
     Services: {
@@ -52,7 +46,7 @@ const getDefaultConfiguration = () => {
 const getAuthorityInfoByResponseData = (responseData) => {
   let userIsAnonymous = responseData.isAnonymous;
   return {
-    Role: userIsAnonymous ? UserRole.User : UserRole.Admin,
+    Role: userIsAnonymous ? Constants.UserRole.User : Constants.UserRole.Admin,
     Email: !userIsAnonymous
       ? responseData.email
       : Constants.DefaultValues.String,
@@ -61,6 +55,7 @@ const getAuthorityInfoByResponseData = (responseData) => {
       : Constants.DefaultValues.String,
   };
 };
+
 const getAuthorityInfo = async (clientToken) => {
   const getAuthorityInfoUrl = `${config.BASE_URL}${config.EndPoints.getUserSessionInfo}`;
   let getAuthorityInfoResponse = await SendRequest(
@@ -69,7 +64,7 @@ const getAuthorityInfo = async (clientToken) => {
     null,
     clientToken
   );
-  console.log("getAuthorityInfoResponse", getAuthorityInfoResponse);
+
   if (getAuthorityInfoResponse.isSuccess) {
     return getAuthorityInfoByResponseData(
       getAuthorityInfoResponse.responseData
@@ -79,11 +74,13 @@ const getAuthorityInfo = async (clientToken) => {
   }
 };
 
-//#region Public methods
-export const ConfigureApp = async function (clientToken = null) {
+const configureApp = async (configurationContext) => {
   let configuration = getDefaultConfiguration();
+
   configuration.ClientInfo = await getClientInfo();
-  configuration.AuthorityInfo = await getAuthorityInfo(clientToken);
+  configuration.AuthorityInfo = await getAuthorityInfo(
+    configurationContext.ClientToken
+  );
 
   for (const key in config.CONTENT_DICTIONARY) {
     configuration.Dictionary[key] =
@@ -91,26 +88,26 @@ export const ConfigureApp = async function (clientToken = null) {
         ? config.CONTENT_DICTIONARY[key]["ENG"]
         : config.CONTENT_DICTIONARY[key][clientInfo.country];
   }
+  return configuration;
+};
+//#endregion
 
+//#region Public methods
+export const ConfigureAppAsAwaitable = async function (configurationContext) {
+  let configuration;
+  try {
+    configuration = await configureApp(configurationContext);
+  } catch (error) {
+    console.error("Error occured when ConfigureAppAsAwaitable", error);
+    configuration = {};
+  }
   return configuration;
 };
 
 export const ConfigureAppAsPromise = (configurationContext) => {
   return new Promise(async function (resolve, reject) {
-    let configuration = getDefaultConfiguration();
-
     try {
-      configuration.ClientInfo = await getClientInfo();
-      configuration.AuthorityInfo = await getAuthorityInfo(
-        configurationContext.ClientToken
-      );
-
-      for (const key in config.CONTENT_DICTIONARY) {
-        configuration.Dictionary[key] =
-          config.CONTENT_DICTIONARY[key][clientInfo.country] === undefined
-            ? config.CONTENT_DICTIONARY[key]["ENG"]
-            : config.CONTENT_DICTIONARY[key][clientInfo.country];
-      }
+      let configuration = configureApp(configurationContext);
       resolve(configuration);
     } catch (error) {
       reject(error);

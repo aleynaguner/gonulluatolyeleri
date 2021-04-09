@@ -98,6 +98,10 @@ var Constants = {
   },
   DefaultValues: {
     String: ""
+  },
+  UserRole: {
+    User: "User",
+    Admin: "Admin"
   }
 };
 exports.Constants = Constants;

@@ -4,21 +4,22 @@ import { Container, Row, Col } from "../../components/Grid";
 import { CommonButton } from "../../components/CommonButton";
 import { HttpRequestSender } from "../../utility/HttpRequestSender";
 import config from "../../config.json";
-import { hasDefaultValue, createProcessResult } from "../../utility/Utils";
+import {
+  hasDefaultValue,
+  createProcessResult,
+  Constants,
+} from "../../utility/Utils";
 
 const requestSender = new HttpRequestSender(config.BASE_URL);
 
 async function loginUser(email, password) {
-  if (hasDefaultValue(email)) {
-    return createProcessResult(false, "EnterEmail");
-  }
-  if (hasDefaultValue(password)) {
+  if (hasDefaultValue(email)) return createProcessResult(false, "EnterEmail");
+  if (hasDefaultValue(password))
     return createProcessResult(false, "EnterPassword");
-  }
 
   var loginResult = await requestSender.AwaitableSendRequest(
-    "POST",
-    "/api/auth/login",
+    Constants.HttpMethods.POST,
+    config.EndPoints.login,
     {
       email: email,
       password: password,
@@ -28,7 +29,7 @@ async function loginUser(email, password) {
   return loginResult;
 }
 
-export default function Login({ setToken, setContext }) {
+export default function Login({ setToken }) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
@@ -36,8 +37,6 @@ export default function Login({ setToken, setContext }) {
     e.preventDefault();
 
     const loginResult = await loginUser(email, password);
-    console.log("loginResult:", loginResult);
-
     if (!hasDefaultValue(loginResult) && loginResult.isSuccess) {
       setToken(loginResult.responseData.token);
     } else {

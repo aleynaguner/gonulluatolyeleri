@@ -1,8 +1,10 @@
 {
   "BASE_URL": "http://localhost:3001",
   "EndPoints": {
-    "getUserSessionInfo": "/api/user/getUserSessionInfo"
+    "getUserSessionInfo": "/api/user/getUserSessionInfo",
+    "login": "/api/auth/login"
   },
+  "CLIENT_INFO_API": "https://ipapi.co/json/",
   "CONTENT_DICTIONARY": {
     "VolunteerButton_Text": {
       "TR": "GÖNÜLLÜ OL !",

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.AppConfig = exports.ConfigureAppAsPromise = exports.ConfigureApp = exports.UserRole = void 0;
+exports.AppConfig = exports.ConfigureAppAsPromise = exports.ConfigureAppAsAwaitable = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -36,7 +36,7 @@ var getClientInfo = function getClientInfo() {
 
           clientInfo = {};
           _context.next = 4;
-          return regeneratorRuntime.awrap((0, _HttpRequestSender.SendRequest)(_Utils.Constants.HttpMethods.GET, "https://ipapi.co/json/"));
+          return regeneratorRuntime.awrap((0, _HttpRequestSender.SendRequest)(_Utils.Constants.HttpMethods.GET, confi["CLIENT_INFO_API"]));
 
         case 4:
           clientLocationInfo = _context.sent;
@@ -52,21 +52,14 @@ var getClientInfo = function getClientInfo() {
       }
     }
   });
-}; //#endregion
-
-
-var UserRole = {
-  User: "User",
-  Admin: "Admin"
 };
-exports.UserRole = UserRole;
 
 var getDefaultConfiguration = function getDefaultConfiguration() {
   return {
     Config: _config["default"],
     ClientInfo: undefined,
     AuthorityInfo: {
-      Role: UserRole.User
+      Role: _Utils.Constants.UserRole.User
     },
     Dictionary: {},
     Services: {
@@ -80,7 +73,7 @@ var getDefaultConfiguration = function getDefaultConfiguration() {
 var getAuthorityInfoByResponseData = function getAuthorityInfoByResponseData(responseData) {
   var userIsAnonymous = responseData.isAnonymous;
   return {
-    Role: userIsAnonymous ? UserRole.User : UserRole.Admin,
+    Role: userIsAnonymous ? _Utils.Constants.UserRole.User : _Utils.Constants.UserRole.Admin,
     Email: !userIsAnonymous ? responseData.email : _Utils.Constants.DefaultValues.String,
     IpAddress: !userIsAnonymous ? responseData.ipAddress : _Utils.Constants.DefaultValues.String
   };
@@ -98,49 +91,43 @@ var getAuthorityInfo = function getAuthorityInfo(clientToken) {
 
         case 3:
           getAuthorityInfoResponse = _context2.sent;
-          console.log("getAuthorityInfoResponse", getAuthorityInfoResponse);
 
           if (!getAuthorityInfoResponse.isSuccess) {
-            _context2.next = 9;
+            _context2.next = 8;
             break;
           }
 
           return _context2.abrupt("return", getAuthorityInfoByResponseData(getAuthorityInfoResponse.responseData));
 
-        case 9:
+        case 8:
           return _context2.abrupt("return", getAuthorityInfoByResponseData({
             isAnonymous: true
           }));
 
-        case 10:
+        case 9:
         case "end":
           return _context2.stop();
       }
     }
   });
-}; //#region Public methods
+};
 
-
-var ConfigureApp = function ConfigureApp() {
-  var clientToken,
-      configuration,
-      key,
-      _args3 = arguments;
-  return regeneratorRuntime.async(function ConfigureApp$(_context3) {
+var configureApp = function configureApp(configurationContext) {
+  var configuration, key;
+  return regeneratorRuntime.async(function configureApp$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
-          clientToken = _args3.length > 0 && _args3[0] !== undefined ? _args3[0] : null;
           configuration = getDefaultConfiguration();
-          _context3.next = 4;
+          _context3.next = 3;
           return regeneratorRuntime.awrap(getClientInfo());
 
-        case 4:
+        case 3:
           configuration.ClientInfo = _context3.sent;
-          _context3.next = 7;
-          return regeneratorRuntime.awrap(getAuthorityInfo(clientToken));
+          _context3.next = 6;
+          return regeneratorRuntime.awrap(getAuthorityInfo(configurationContext.ClientToken));
 
-        case 7:
+        case 6:
           configuration.AuthorityInfo = _context3.sent;
 
           for (key in _config["default"].CONTENT_DICTIONARY) {
@@ -149,55 +136,70 @@ var ConfigureApp = function ConfigureApp() {
 
           return _context3.abrupt("return", configuration);
 
-        case 10:
+        case 9:
         case "end":
           return _context3.stop();
       }
     }
   });
+}; //#endregion
+//#region Public methods
+
+
+var ConfigureAppAsAwaitable = function ConfigureAppAsAwaitable(configurationContext) {
+  var configuration;
+  return regeneratorRuntime.async(function ConfigureAppAsAwaitable$(_context4) {
+    while (1) {
+      switch (_context4.prev = _context4.next) {
+        case 0:
+          _context4.prev = 0;
+          _context4.next = 3;
+          return regeneratorRuntime.awrap(configureApp(configurationContext));
+
+        case 3:
+          configuration = _context4.sent;
+          _context4.next = 10;
+          break;
+
+        case 6:
+          _context4.prev = 6;
+          _context4.t0 = _context4["catch"](0);
+          console.error("Error occured when ConfigureAppAsAwaitable", _context4.t0);
+          configuration = {};
+
+        case 10:
+          return _context4.abrupt("return", configuration);
+
+        case 11:
+        case "end":
+          return _context4.stop();
+      }
+    }
+  }, null, null, [[0, 6]]);
 };
 
-exports.ConfigureApp = ConfigureApp;
+exports.ConfigureAppAsAwaitable = ConfigureAppAsAwaitable;
 
 var ConfigureAppAsPromise = function ConfigureAppAsPromise(configurationContext) {
   return new Promise(function _callee(resolve, reject) {
-    var configuration, key;
-    return regeneratorRuntime.async(function _callee$(_context4) {
+    var configuration;
+    return regeneratorRuntime.async(function _callee$(_context5) {
       while (1) {
-        switch (_context4.prev = _context4.next) {
+        switch (_context5.prev = _context5.next) {
           case 0:
-            configuration = getDefaultConfiguration();
-            _context4.prev = 1;
-            _context4.next = 4;
-            return regeneratorRuntime.awrap(getClientInfo());
-
-          case 4:
-            configuration.ClientInfo = _context4.sent;
-            _context4.next = 7;
-            return regeneratorRuntime.awrap(getAuthorityInfo(configurationContext.ClientToken));
-
-          case 7:
-            configuration.AuthorityInfo = _context4.sent;
-
-            for (key in _config["default"].CONTENT_DICTIONARY) {
-              configuration.Dictionary[key] = _config["default"].CONTENT_DICTIONARY[key][clientInfo.country] === undefined ? _config["default"].CONTENT_DICTIONARY[key]["ENG"] : _config["default"].CONTENT_DICTIONARY[key][clientInfo.country];
+            try {
+              configuration = configureApp(configurationContext);
+              resolve(configuration);
+            } catch (error) {
+              reject(error);
             }
 
-            resolve(configuration);
-            _context4.next = 15;
-            break;
-
-          case 12:
-            _context4.prev = 12;
-            _context4.t0 = _context4["catch"](1);
-            reject(_context4.t0);
-
-          case 15:
+          case 1:
           case "end":
-            return _context4.stop();
+            return _context5.stop();
         }
       }
-    }, null, null, [[1, 12]]);
+    });
   });
 };
 
