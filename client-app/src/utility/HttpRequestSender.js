@@ -5,7 +5,7 @@ export class HttpRequestSender {
     this.baseUrl = baseUrl;
   }
 
-  AwaitableSendRequest = async (method, endpoint, data) => {
+  AwaitableSendRequest = async (method, endpoint, data = null) => {
     let response = {
       isSuccess: false,
       responseData: null,
@@ -30,17 +30,31 @@ export class HttpRequestSender {
     return response;
   };
 
-  SendRequest = (method, endpoint, data, callback) => {
+  SendRequest = (
+    method,
+    endpoint,
+    callback,
+    data = null,
+    bearerToken = null
+  ) => {
     let res = {
       isSuccess: false,
       responseData: null,
     };
 
-    Axios.request({
+    let request = {
       method: method,
-      url: `${this.baseUrl}/${endpoint}`,
+      url: `${this.baseUrl}${endpoint}`,
       data: data,
-    })
+    };
+
+    if (bearerToken !== null) {
+      request.headers = {
+        Authorization: `Bearer ${bearerToken}`,
+      };
+    }
+
+    Axios.request(request)
       .then(function (response) {
         res.isSuccess = response.status >= 200 && response.status < 300;
         res.responseData = response.data;

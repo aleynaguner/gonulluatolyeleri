@@ -27,6 +27,14 @@ class UserCollection extends CollectionBase {
       .project({ ipAddress: 1 })
       .toArray();
   };
+
+  getAllUsers = async () => {
+    let allUsers = await this.collection
+      .find({})
+      .project({ _id: 1, email: 1 })
+      .toArray();
+    return allUsers;
+  };
 }
 
 module.exports = (function () {

@@ -14,9 +14,10 @@ import { OurWorkShops } from "./ourworkshops/OurWorkShops";
 import { Projects } from "./projects/Projects";
 import { Blog } from "./blog/Blog";
 import { ContactUs } from "./contactus/ContactUs";
-import { AppConfig, ConfigureAppAsAwaitable } from "./utility/AppConfig";
+import { AppConfig, GetAppConfigurationAsAwaitable } from "./utility/AppConfig";
 import AdminDashboard from "./admindashboard/AdminDashboard";
 import Loading from "./components/Loading";
+import config from "./config.json";
 //#endregion
 
 export default class App extends React.Component {
@@ -31,7 +32,11 @@ export default class App extends React.Component {
   configureApp = async () => {
     console.log("Application configuring...");
 
-    let configuration = await ConfigureAppAsAwaitable();
+    let configuration = await GetAppConfigurationAsAwaitable();
+
+    configuration.AuthorityInfo.Token = sessionStorage.getItem(
+      config.ATUH_TOKEN_KEY_NAME
+    );
     configuration.SetAppConfig = (appConfig) => {
       this.setState({ Config: appConfig }, () =>
         console.log("Application configured again!", appConfig)

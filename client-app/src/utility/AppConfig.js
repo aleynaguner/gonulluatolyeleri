@@ -74,7 +74,7 @@ const getAuthorityInfo = async (clientToken = null) => {
   }
 };
 
-const configureApp = async (configurationContext = null) => {
+const getAppConfiguration = async (configurationContext = null) => {
   let configuration = getDefaultConfiguration();
 
   configuration.ClientInfo = await getClientInfo();
@@ -97,10 +97,10 @@ const configureApp = async (configurationContext = null) => {
 //#endregion
 
 //#region Public methods
-export const ConfigureAppAsAwaitable = async function (configurationContext) {
+export const GetAppConfigurationAsAwaitable = async function (configurationContext) {
   let configuration;
   try {
-    configuration = await configureApp(configurationContext);
+    configuration = await getAppConfiguration(configurationContext);
   } catch (error) {
     console.error("Error occured when ConfigureAppAsAwaitable", error);
     configuration = {};
@@ -108,10 +108,10 @@ export const ConfigureAppAsAwaitable = async function (configurationContext) {
   return configuration;
 };
 
-export const ConfigureAppAsPromise = (configurationContext) => {
+export const GetAppConfigurationAsPromise = (configurationContext) => {
   return new Promise(async function (resolve, reject) {
     try {
-      let configuration = configureApp(configurationContext);
+      let configuration = getAppConfiguration(configurationContext);
       resolve(configuration);
     } catch (error) {
       reject(error);

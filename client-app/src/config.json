@@ -2,8 +2,12 @@
   "BASE_URL": "http://localhost:3001",
   "EndPoints": {
     "getUserSessionInfo": "/api/user/getUserSessionInfo",
-    "login": "/api/auth/login"
+    "login": "/api/auth/login",
+    "getAllUsers": "/api/user/getAllUsers",
+    "createUser": "/api/user/createUser",
+    "deleteUserById": "/api/user/deleteUserById"
   },
+  "ATUH_TOKEN_KEY_NAME": "authtoken",
   "CLIENT_INFO_API": "https://ipapi.co/json/",
   "CONTENT_DICTIONARY": {
     "VolunteerButton_Text": {

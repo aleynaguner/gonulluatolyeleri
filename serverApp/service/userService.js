@@ -25,7 +25,10 @@ class UserService {
     return utils.createProcessResult(true);
   };
 
-  getAllUsers = async () => await this.userCollection.getAllUsers();
+  getAllUsers = async () => {
+    let allUsers = await this.userCollection.getAllUsers();
+    return allUsers;
+  };
 
   getUserByEmail = async (email) =>
     await this.userCollection.getUserByEmail(email);
@@ -48,6 +51,11 @@ class UserService {
         email: request.decode.email,
         ipAddress: request.decode.ipAddress,
       };
+  };
+
+  deleteUserById = async (id) => {
+    let deleteUserByIdResult = await this.userCollection.deleteById(id);
+    return deleteUserByIdResult;
   };
 }
 

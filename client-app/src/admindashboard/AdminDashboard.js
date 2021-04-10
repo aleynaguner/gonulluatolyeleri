@@ -6,7 +6,8 @@ import { AdminUserManagement } from "./components/AdminUserManagement";
 import Login from "../home/components/Login";
 import BaseComponent from "../utility/BaseComponent";
 import { hasDefaultValue } from "../utility/Utils";
-import { ConfigureAppAsPromise } from "../utility/AppConfig";
+import { GetAppConfigurationAsPromise } from "../utility/AppConfig";
+import config from "../config.json";
 
 const authTokenKeyName = "authtoken";
 
@@ -22,17 +23,28 @@ export default class AdminDashboard extends BaseComponent {
   setToken = (userToken) => {
     if (hasDefaultValue(userToken)) return;
 
-    sessionStorage.setItem(authTokenKeyName, JSON.stringify(userToken));
+    sessionStorage.setItem(
+      config.ATUH_TOKEN_KEY_NAME,
+      JSON.stringify(userToken)
+    );
 
     this.setState({ loggedIn: true }, () => {
-      ConfigureAppAsPromise({
+      GetAppConfigurationAsPromise({
         ClientToken: userToken,
-      }).then((configuration) => this.context.SetAppConfig(configuration));
+      }).then((configuration) => {
+        configuration.AuthorityInfo = {
+          ...configuration.AuthorityInfo,
+          Token: userToken,
+        };
+        this.context.SetAppConfig(configuration);
+      });
     });
   };
 
   getToken = () => {
-    const userToken = JSON.parse(sessionStorage.getItem(authTokenKeyName));
+    const userToken = JSON.parse(
+      sessionStorage.getItem(config.ATUH_TOKEN_KEY_NAME)
+    );
     return userToken;
   };
 

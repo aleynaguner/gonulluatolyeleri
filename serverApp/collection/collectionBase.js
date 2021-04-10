@@ -10,7 +10,21 @@ class CollectionBase {
   };
 
   getAll = async () => {
-    return this.collection.find();
+    let all = await this.collection.find({});
+    return all.toArray();
+  };
+
+  deleteById = async (id) => {
+    let deleted = true;
+    try {
+      let deleteResult = await this.collection.deleteOne({
+        _id: id,
+      });
+    } catch (error) {
+      deleted = false;
+    }
+
+    return deleted;
   };
 }
 

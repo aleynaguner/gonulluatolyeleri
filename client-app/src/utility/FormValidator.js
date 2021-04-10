@@ -5,6 +5,7 @@ const ErrorCodes = {
   REQUIRED_FORMAT_FOR_EMAIL: "REQUIRED_FORMAT_FOR_EMAIL",
   REQUIRED_NONNUMERIC_FORMAT: "REQUIRED_NONNUMERIC_FORMAT",
   MAX_LENGTH: "MAX_LENGTH",
+  MIN_LENGTH: "MIN_LENGTH",
 };
 
 const validateName = (val) => {
@@ -83,6 +84,20 @@ const validateMessage = (val) => {
   return errors;
 };
 
+const validatePassword = (val) => {
+  let errors = [];
+
+  if (validator.isEmpty(val)) {
+    errors.push(ErrorCodes.REQUIRED_VALUE);
+  }
+
+  if (!validator.isLength(val, { min: 8 })) {
+    errors.push(ErrorCodes.MIN_LENGTH);
+  }
+
+  return errors;
+};
+
 const Validate = (values) => {
   let validationResult = {
     isSuccess: true,
@@ -120,6 +135,14 @@ const Validate = (values) => {
       if (messageValidationResult.length > 0) {
         validationResult.isSuccess = false;
         validationResult.errors.message = messageValidationResult;
+      }
+    }
+    if (prop === "password") {
+      let passwordValidationResult = validatePassword(values[prop]);
+
+      if (passwordValidationResult.length > 0) {
+        validationResult.isSuccess = false;
+        validationResult.errors.password = passwordValidationResult;
       }
     }
   }

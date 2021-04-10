@@ -21,4 +21,15 @@ router.get("/getUserSessionInfo", async (req, res) => {
   res.status(200).send(userSessionInfo);
 });
 
+router.get("/getAllUsers", async (req, res) => {
+  let allUsers = await userService.getAllUsers();
+  res.status(200).send(allUsers);
+});
+
+router.delete("/deleteUserById/:id", async (req, res) => {
+  let toBeDeletedUserId = req.params["id"];
+  let deleteResult = await userService.deleteUserById(toBeDeletedUserId);
+  res.status(200).send(deleteResult);
+});
+
 module.exports = router;
