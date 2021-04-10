@@ -1,16 +1,17 @@
 import React, { Component } from "react";
+import { Container, Row, Col } from "../components/Grid";
 import "./style/loading.css";
 
-export class Loading extends Component {
+export default class Loading extends Component {
   render() {
     return (
-      <div className="loading">
-        <div className="dot"></div>
-        <div className="dot"></div>
-        <div className="dot"></div>
-        <div className="dot"></div>
-        <div className="dot"></div>
-      </div>
+      <Container>
+        <Row isCentered={true}>
+          <Col isCentered={true}>
+            <div className="loading" />
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

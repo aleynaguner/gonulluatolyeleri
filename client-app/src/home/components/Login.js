@@ -11,11 +11,21 @@ import {
 } from "../../utility/Utils";
 
 const requestSender = new HttpRequestSender(config.BASE_URL);
+const unsuccesfulLoginMessage =
+  "Login unsuccessful! Make sure that your input values in correct format";
 
-async function loginUser(email, password) {
+const validateLoginParams = (email, password) => {
   if (hasDefaultValue(email)) return createProcessResult(false, "EnterEmail");
   if (hasDefaultValue(password))
     return createProcessResult(false, "EnterPassword");
+
+  return createProcessResult(true);
+};
+
+async function loginUser(email, password) {
+  let loginParamsValidationResult = validateLoginParams(email, password);
+  if (!loginParamsValidationResult.isSuccessful)
+    return loginParamsValidationResult;
 
   var loginResult = await requestSender.AwaitableSendRequest(
     Constants.HttpMethods.POST,
@@ -40,7 +50,7 @@ export default function Login({ setToken }) {
     if (!hasDefaultValue(loginResult) && loginResult.isSuccess) {
       setToken(loginResult.responseData.token);
     } else {
-      alert("login unsuccessful!");
+      alert(unsuccesfulLoginMessage);
     }
   };
 

@@ -16,6 +16,7 @@ import { Blog } from "./blog/Blog";
 import { ContactUs } from "./contactus/ContactUs";
 import { AppConfig, ConfigureAppAsAwaitable } from "./utility/AppConfig";
 import AdminDashboard from "./admindashboard/AdminDashboard";
+import Loading from "./components/Loading";
 //#endregion
 
 export default class App extends React.Component {
@@ -23,7 +24,7 @@ export default class App extends React.Component {
     super(props);
 
     this.state = {
-      Config: {},
+      Config: null,
     };
   }
 
@@ -37,8 +38,9 @@ export default class App extends React.Component {
       );
     };
 
-    this.setState({ Config: configuration });
-    console.log("Application configured!", configuration);
+    this.setState({ Config: configuration }, () =>
+      console.log("Application configured!", configuration)
+    );
   };
 
   async componentDidMount() {
@@ -46,6 +48,11 @@ export default class App extends React.Component {
   }
 
   render() {
+    let appConfigured = this.state.Config !== null;
+    if (!appConfigured) {
+      return <Loading />;
+    }
+
     return (
       <AppConfig.Provider value={this.state.Config}>
         <Router>

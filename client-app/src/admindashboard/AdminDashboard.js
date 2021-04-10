@@ -8,6 +8,8 @@ import BaseComponent from "../utility/BaseComponent";
 import { hasDefaultValue } from "../utility/Utils";
 import { ConfigureAppAsPromise } from "../utility/AppConfig";
 
+const authTokenKeyName = "authtoken";
+
 export default class AdminDashboard extends BaseComponent {
   constructor(props) {
     super(props);
@@ -20,7 +22,7 @@ export default class AdminDashboard extends BaseComponent {
   setToken = (userToken) => {
     if (hasDefaultValue(userToken)) return;
 
-    sessionStorage.setItem("authtoken", JSON.stringify(userToken));
+    sessionStorage.setItem(authTokenKeyName, JSON.stringify(userToken));
 
     this.setState({ loggedIn: true }, () => {
       ConfigureAppAsPromise({
@@ -30,15 +32,14 @@ export default class AdminDashboard extends BaseComponent {
   };
 
   getToken = () => {
-    const authToken = sessionStorage.getItem("authtoken");
-    const userToken = JSON.parse(authToken);
+    const userToken = JSON.parse(sessionStorage.getItem(authTokenKeyName));
     return userToken;
   };
 
   render() {
-    let token = this.getToken();
+    let userToken = this.getToken();
 
-    if (token === null || token === undefined) {
+    if (hasDefaultValue(userToken)) {
       return <Login setToken={this.setToken} />;
     } else {
       return (

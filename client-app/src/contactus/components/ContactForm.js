@@ -1,7 +1,7 @@
 import React from "react";
 import { FormItem } from "./FormItem";
 import "../style/contactForm.css";
-import { Loading } from "../../components/Loading";
+import Loading from "../../components/Loading";
 import { Container, Row, Col } from "../../components/Grid";
 import BaseComponent from "../../utility/BaseComponent";
 
@@ -53,7 +53,9 @@ export class ContactForm extends BaseComponent {
   handleSubmit = async (e) => {
     e.preventDefault();
 
-    let validationResult = this.context.Services.FormValidator.Validate(this.state.formData);
+    let validationResult = this.context.Services.FormValidator.Validate(
+      this.state.formData
+    );
 
     this.setState({ inputsWithError: validationResult.errors });
 
@@ -67,12 +69,16 @@ export class ContactForm extends BaseComponent {
   sendEmail = async () => {
     this.setState({ loading: true });
 
-    let response = await this.context.Services.RequestSender.SendRequest("post", "api/sendEmail", this.state.formData);
+    let response = await this.context.Services.RequestSender.SendRequest(
+      "post",
+      "api/sendEmail",
+      this.state.formData
+    );
 
     this.setState({ loading: false });
 
     return response;
-  }
+  };
 
   executeAfterSendEmail = (isSuccess) => {
     if (isSuccess) {
