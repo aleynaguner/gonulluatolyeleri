@@ -1,17 +1,18 @@
-const validator = require("validator");
+"use strict";
 
-const ErrorCodes = {
+var validator = require("validator");
+
+var ErrorCodes = {
   REQUIRED_VALUE: "REQUIRED_VALUE",
   REQUIRED_FORMAT_FOR_EMAIL: "REQUIRED_FORMAT_FOR_EMAIL",
   REQUIRED_NONNUMERIC_FORMAT: "REQUIRED_NONNUMERIC_FORMAT",
   MAX_LENGTH: "MAX_LENGTH",
-  MIN_LENGTH: "MIN_LENGTH",
+  MIN_LENGTH: "MIN_LENGTH"
 };
 
-const validateName = (val) => {
-  let errors = [];
-
-  let spaceControl = val.replace(/ /g, "");
+var validateName = function validateName(val) {
+  var errors = [];
+  var spaceControl = val.replace(/ /g, "");
 
   if (validator.isEmpty(val)) {
     errors.push(ErrorCodes.REQUIRED_VALUE);
@@ -21,15 +22,17 @@ const validateName = (val) => {
     errors.push(ErrorCodes.REQUIRED_NONNUMERIC_FORMAT);
   }
 
-  if (!validator.isLength(val, { max: 25 })) {
+  if (!validator.isLength(val, {
+    max: 25
+  })) {
     errors.push(ErrorCodes.MAX_LENGTH);
   }
 
   return errors;
 };
 
-const validateEmail = (val) => {
-  let errors = [];
+var validateEmail = function validateEmail(val) {
+  var errors = [];
 
   if (validator.isEmpty(val)) {
     errors.push(ErrorCodes.REQUIRED_VALUE);
@@ -42,10 +45,9 @@ const validateEmail = (val) => {
   return errors;
 };
 
-const validateTopic = (val) => {
-  let errors = [];
-
-  let spaceControl = val.replace(/ /g, "");
+var validateTopic = function validateTopic(val) {
+  var errors = [];
+  var spaceControl = val.replace(/ /g, "");
 
   if (validator.isEmpty(val)) {
     errors.push(ErrorCodes.REQUIRED_VALUE);
@@ -59,15 +61,17 @@ const validateTopic = (val) => {
     errors.push(ErrorCodes.REQUIRED_NONNUMERIC_FORMAT);
   }
 
-  if (!validator.isLength(val, { max: 25 })) {
+  if (!validator.isLength(val, {
+    max: 25
+  })) {
     errors.push(ErrorCodes.MAX_LENGTH);
   }
 
   return errors;
 };
 
-const validateMessage = (val) => {
-  let errors = [];
+var validateMessage = function validateMessage(val) {
+  var errors = [];
 
   if (validator.isEmpty(val)) {
     errors.push(ErrorCodes.REQUIRED_VALUE);
@@ -77,82 +81,92 @@ const validateMessage = (val) => {
     errors.push(ErrorCodes.REQUIRED_NONNUMERIC_FORMAT);
   }
 
-  if (!validator.isLength(val, { max: 350 })) {
+  if (!validator.isLength(val, {
+    max: 350
+  })) {
     errors.push(ErrorCodes.MAX_LENGTH);
   }
 
   return errors;
 };
 
-const validatePassword = (val) => {
-  let errors = [];
+var validatePassword = function validatePassword(val) {
+  var errors = [];
 
   if (validator.isEmpty(val)) {
     errors.push(ErrorCodes.REQUIRED_VALUE);
   }
 
-  if (!validator.isLength(val, { min: 8 })) {
+  if (!validator.isLength(val, {
+    min: 8
+  })) {
     errors.push(ErrorCodes.MIN_LENGTH);
   }
 
   return errors;
 };
 
-const validatePostContent = (val) => {
-  let errors = [];
+var validatePostContent = function validatePostContent(val) {
+  var errors = [];
 
   if (validator.isEmpty(val)) {
     errors.push(ErrorCodes.REQUIRED_VALUE);
   }
 
-  if (!validator.isLength(val, { min: 50 })) {
+  if (!validator.isLength(val, {
+    min: 50
+  })) {
     errors.push(ErrorCodes.MIN_LENGTH);
   }
 
   return errors;
 };
 
-const Validate = (values) => {
-  let validationResult = {
+var Validate = function Validate(values) {
+  var validationResult = {
     isSuccess: true,
-    errors: {},
+    errors: {}
   };
 
-  for (let prop in values) {
+  for (var prop in values) {
     if (prop === "name") {
-      let nameValidationResult = validateName(values[prop]);
+      var nameValidationResult = validateName(values[prop]);
 
       if (nameValidationResult.length > 0) {
         validationResult.isSuccess = false;
         validationResult.errors.name = nameValidationResult;
       }
     }
+
     if (prop === "email") {
-      let emailValidationResult = validateEmail(values[prop]);
+      var emailValidationResult = validateEmail(values[prop]);
 
       if (emailValidationResult.length > 0) {
         validationResult.isSuccess = false;
         validationResult.errors.email = emailValidationResult;
       }
     }
+
     if (prop === "topic") {
-      let topicValidationResult = validateTopic(values[prop]);
+      var topicValidationResult = validateTopic(values[prop]);
 
       if (topicValidationResult.length > 0) {
         validationResult.isSuccess = false;
         validationResult.errors.topic = topicValidationResult;
       }
     }
+
     if (prop === "message") {
-      let messageValidationResult = validateMessage(values[prop]);
+      var messageValidationResult = validateMessage(values[prop]);
 
       if (messageValidationResult.length > 0) {
         validationResult.isSuccess = false;
         validationResult.errors.message = messageValidationResult;
       }
     }
+
     if (prop === "password") {
-      let passwordValidationResult = validatePassword(values[prop]);
+      var passwordValidationResult = validatePassword(values[prop]);
 
       if (passwordValidationResult.length > 0) {
         validationResult.isSuccess = false;
@@ -164,44 +178,44 @@ const Validate = (values) => {
   return validationResult;
 };
 
-const Post = {
-  Validate: (values) => {
-    let validationResult = {
+var Post = {
+  Validate: function Validate(values) {
+    var validationResult = {
       isSuccess: true,
-      errors: {},
+      errors: {}
     };
 
-    for (let prop in values) {
+    for (var prop in values) {
       if (prop === "firstName") {
-        let nameValidationResult = validateName(values[prop]);
+        var nameValidationResult = validateName(values[prop]);
 
         if (nameValidationResult.length > 0) {
           validationResult.isSuccess = false;
           validationResult.errors.firstName = nameValidationResult;
         }
       } else if (prop === "lastName") {
-        let nameValidationResult = validateName(values[prop]);
+        var _nameValidationResult = validateName(values[prop]);
 
-        if (nameValidationResult.length > 0) {
+        if (_nameValidationResult.length > 0) {
           validationResult.isSuccess = false;
-          validationResult.errors.lastName = nameValidationResult;
+          validationResult.errors.lastName = _nameValidationResult;
         }
       } else if (prop === "email") {
-        let emailValidationResult = validateEmail(values[prop]);
+        var emailValidationResult = validateEmail(values[prop]);
 
         if (emailValidationResult.length > 0) {
           validationResult.isSuccess = false;
           validationResult.errors.email = emailValidationResult;
         }
       } else if (prop === "header") {
-        let headerValidationResult = validateName(values[prop]);
+        var headerValidationResult = validateName(values[prop]);
 
         if (headerValidationResult.length > 0) {
           validationResult.isSuccess = false;
           validationResult.errors.header = headerValidationResult;
         }
       } else if (prop === "content") {
-        let contentValidationResult = validatePostContent(values[prop]);
+        var contentValidationResult = validatePostContent(values[prop]);
 
         if (contentValidationResult.length > 0) {
           validationResult.isSuccess = false;
@@ -211,11 +225,10 @@ const Post = {
     }
 
     return validationResult;
-  },
+  }
 };
-
 module.exports = {
-  Validate,
-  Post,
-  ErrorCodes,
+  Validate: Validate,
+  Post: Post,
+  ErrorCodes: ErrorCodes
 };

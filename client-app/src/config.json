@@ -37,6 +37,18 @@
     "ContactUsPage_Name": {
       "TR": "İletişim",
       "ENG": "Contact Us"
+    },
+    "SendBlogPost": {
+      "TR": "Blog Post Oluştur",
+      "ENG": "Send Blog Post"
+    },
+    "Send": {
+      "TR": "Gönder",
+      "ENG": "Send"
+    },
+    "UploadPhoto": {
+      "TR": "Fotoğraf Yükle",
+      "ENG": "Upload Photo"
     }
   }
 }
