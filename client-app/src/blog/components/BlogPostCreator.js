@@ -54,6 +54,9 @@ export default class BlogPostCreator extends BaseComponent {
     e.preventDefault();
 
     let postInfoValidationResult = this.validatePostInfo();
+    if(!postInfoValidationResult.isSuccess) return;
+
+    // send CreatePost Request
   };
 
   validatePostInfo = () => {
@@ -73,22 +76,17 @@ export default class BlogPostCreator extends BaseComponent {
   setPostInfoAfterValidationByErroneousState = (erroneousData) => {
     for (const data in this.state) {
       let dataIsErroneous = erroneousData.hasOwnProperty(data);
-
       if (dataIsErroneous) {
-        this.setState((state) => {
-          return {
-            ...state,
-            [data]: {
-              value: "",
-              erroneous: true,
-              errorCode: erroneousData[data][0],
-            },
-          };
+        this.setState({
+          [data]: {
+            value: "",
+            erroneous: true,
+            errorCode: erroneousData[data][0],
+          },
         });
       } else {
         this.setState((state) => {
           return {
-            ...state,
             [data]: {
               ...state[data],
               erroneous: false,
