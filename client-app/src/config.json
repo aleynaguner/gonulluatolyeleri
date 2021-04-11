@@ -5,7 +5,8 @@
     "login": "/api/auth/login",
     "getAllUsers": "/api/user/getAllUsers",
     "createUser": "/api/user/createUser",
-    "deleteUserById": "/api/user/deleteUserById"
+    "deleteUserById": "/api/user/deleteUserById",
+    "createBlogPost": "/api/blogPost/createBlogPost"
   },
   "ATUH_TOKEN_KEY_NAME": "authtoken",
   "CLIENT_INFO_API": "https://ipapi.co/json/",

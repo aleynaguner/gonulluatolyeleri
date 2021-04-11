@@ -11,13 +11,13 @@ class BlogPostService {
     try {
       await this.blogPostCollection.insertOne({
         senderInfo: {
-            firstName: blogPost.senderInfo.firstName,
-            lastName: blogPost.senderInfo.lastName,
-            email: blogPost.senderInfo.email
+          firstName: blogPost.senderInfo.firstName,
+          lastName: blogPost.senderInfo.lastName,
+          email: blogPost.senderInfo.email,
         },
         header: blogPost.header,
         image: "blabla",
-        content: blogPost.content
+        content: blogPost.content,
       });
     } catch (error) {
       console.error("Error occured when createBlogPost!", error);

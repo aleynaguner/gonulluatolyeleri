@@ -3,6 +3,8 @@ import BaseComponent from "../../utility/BaseComponent";
 import { Container, Row, Col } from "../../components/Grid";
 import { FormItem } from "../../contactus/components/FormItem";
 import { CommonButton } from "../../components/CommonButton";
+import { Constants } from "../../utility/Utils";
+import config from "../../config.json";
 
 export default class BlogPostCreator extends BaseComponent {
   constructor(props) {
@@ -33,6 +35,7 @@ export default class BlogPostCreator extends BaseComponent {
         erroneous: false,
         errorCode: "",
       },
+      image: null,
     };
   }
 
@@ -54,9 +57,17 @@ export default class BlogPostCreator extends BaseComponent {
     e.preventDefault();
 
     let postInfoValidationResult = this.validatePostInfo();
-    if(!postInfoValidationResult.isSuccess) return;
+    if (!postInfoValidationResult.isSuccess) return;
 
     // send CreatePost Request
+    this.sendCreateBlogPostRequest(async (res) => {
+      // will be changed
+      if (!res.isSuccess) alert("createBlogPost unsuccessful");
+      else {
+        alert("createBlogPost successful");
+        this.clearBlogPostData();
+      }
+    });
   };
 
   validatePostInfo = () => {
@@ -96,6 +107,55 @@ export default class BlogPostCreator extends BaseComponent {
         });
       }
     }
+  };
+
+  sendCreateBlogPostRequest = (callback) => {
+    const formData = new FormData();
+    formData.append("image", this.state.image, this.state.image.name);
+    formData.append("firstName", this.state.firstName.value);
+    formData.append("lastName", this.state.lastName.value);
+    formData.append("email", this.state.email.value);
+    formData.append("header", this.state.header.value);
+    formData.append("content", this.state.content.value);
+    
+    this.context.Services.RequestSender.SendRequest(
+      Constants.HttpMethods.POST,
+      config.EndPoints["createBlogPost"],
+      callback,
+      formData,
+      null,
+      { "Content-Type": "multipart/form-data" }
+    );
+  };
+
+  clearBlogPostData = () => {
+    this.setState({
+      firstName: {
+        value: "",
+        erroneous: false,
+        errorCode: "",
+      },
+      lastName: {
+        value: "",
+        erroneous: false,
+        errorCode: "",
+      },
+      email: {
+        value: "",
+        erroneous: false,
+        errorCode: "",
+      },
+      header: {
+        value: "",
+        erroneous: false,
+        errorCode: "",
+      },
+      content: {
+        value: "",
+        erroneous: false,
+        errorCode: "",
+      },
+    });
   };
 
   render() {
@@ -195,14 +255,21 @@ export default class BlogPostCreator extends BaseComponent {
                   customStyle={{ float: "right", width: "8%" }}
                   handleClick={this.sendPost}
                 />
-                <CommonButton
-                  text={this.context.Dictionary?.UploadPhoto}
-                  customStyle={{
-                    float: "right",
-                    width: "15%",
-                    marginRight: "0.5em",
-                  }}
-                />
+                <Row isCentered={true}>
+                  <Col isCentered={true} margins={{ b: 5 }}>
+                    <label for="exampleFormControlFile1">
+                      {this.context.Dictionary?.UploadPhoto}
+                    </label>
+                    <input
+                      type="file"
+                      class="form-control-file"
+                      accept="image/*"
+                      onChange={(e) => {
+                        this.setState({ image: e.target.files[0] });
+                      }}
+                    />
+                  </Col>
+                </Row>
               </Col>
             </Row>
           </Col>

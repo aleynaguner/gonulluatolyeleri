@@ -5,7 +5,11 @@ export class HttpRequestSender {
     this.baseUrl = baseUrl;
   }
 
-  AwaitableSendRequest = async (method, endpoint, data = null) => {
+  AwaitableSendRequest = async (
+    method,
+    endpoint,
+    data = null,
+  ) => {
     let response = {
       isSuccess: false,
       responseData: null,
@@ -35,7 +39,8 @@ export class HttpRequestSender {
     endpoint,
     callback,
     data = null,
-    bearerToken = null
+    bearerToken = null,
+    extraHeaderInfo = null
   ) => {
     let res = {
       isSuccess: false,
@@ -51,6 +56,13 @@ export class HttpRequestSender {
     if (bearerToken !== null) {
       request.headers = {
         Authorization: `Bearer ${bearerToken}`,
+      };
+    }
+
+    if (extraHeaderInfo !== null) {
+      request.headers = {
+        ...request.headers,
+        ...extraHeaderInfo,
       };
     }
 

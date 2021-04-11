@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { FormValidationError } from "./FormValidationError";
+import {hasDefaultValue} from "../../utility/Utils";
 
 export class FormItem extends Component {
   render() {
@@ -10,7 +11,7 @@ export class FormItem extends Component {
           className: this.props.erroneous
             ? "form-control has-error"
             : "form-control ",
-          type: "text",
+          type: hasDefaultValue(this.props.inputType) ? "text" : this.props.inputType,
           name: this.props.name,
           value: this.props.value,
           onChange: this.props.onChange,
