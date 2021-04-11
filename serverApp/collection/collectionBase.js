@@ -1,3 +1,5 @@
+const ObjectID = require("mongodb").ObjectID;
+
 class CollectionBase {
   collection = undefined;
 
@@ -18,7 +20,7 @@ class CollectionBase {
     let deleted = true;
     try {
       let deleteResult = await this.collection.deleteOne({
-        _id: id,
+        _id: new ObjectID(id),
       });
     } catch (error) {
       deleted = false;

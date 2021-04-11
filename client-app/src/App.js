@@ -34,8 +34,8 @@ export default class App extends React.Component {
 
     let configuration = await GetAppConfigurationAsAwaitable();
 
-    configuration.AuthorityInfo.Token = sessionStorage.getItem(
-      config.ATUH_TOKEN_KEY_NAME
+    configuration.AuthorityInfo.Token = this.formatToken(
+      sessionStorage.getItem(config.ATUH_TOKEN_KEY_NAME)
     );
     configuration.SetAppConfig = (appConfig) => {
       this.setState({ Config: appConfig }, () =>
@@ -46,6 +46,13 @@ export default class App extends React.Component {
     this.setState({ Config: configuration }, () =>
       console.log("Application configured!", configuration)
     );
+  };
+
+  formatToken = (token) => {
+    if (token[0] === `"` || token[token.length - 1] === `"`) {
+      return token.substring(1, token.length - 1);
+    }
+    return token;
   };
 
   async componentDidMount() {

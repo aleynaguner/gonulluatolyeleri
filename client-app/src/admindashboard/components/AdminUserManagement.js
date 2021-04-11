@@ -2,7 +2,7 @@ import React from "react";
 import BaseComponent from "../../utility/BaseComponent";
 import { Container, Row, Col } from "../../components/Grid";
 import Loading from "../../components/Loading";
-import { Constants } from "../../utility/Utils";
+import { Constants, hasDefaultValue } from "../../utility/Utils";
 import config from "../../config.json";
 import { FormItem } from "../../contactus/components/FormItem";
 import { CommonButton } from "../../components/CommonButton";
@@ -52,22 +52,25 @@ export class AdminUserManagement extends BaseComponent {
 
   deleteUser = (e) => {
     let toBeDeletedUserId = this.state.selectedAdminId;
-    if (alert("Are you sure ?")) {
-      this.sendDeleteUserByIdRequest(toBeDeletedUserId);
-    }
-  };
-
-  sendDeleteUserByIdRequest = (id) => {
-    this.context.Services.RequestSender.SendRequest(
-      Constants.HttpMethods.DELETE,
-      `${config.EndPoints["deleteUserById"]}/${id}`,
-      (res) => {
+    if (hasDefaultValue(toBeDeletedUserId)) return;
+    
+    if (window.confirm("Are you sure ?")) {
+      this.sendDeleteUserByIdRequest(toBeDeletedUserId, async (res) => {
         // will be changed
         if (!res.isSuccess) alert("deleteUserById unsuccessful");
         else {
-          if (alert("deleteUserById successful")) this.clearNewUserInfoData();
+          alert("deleteUserById successful");
+          await this.loadAdmins();
         }
-      },
+      });
+    }
+  };
+
+  sendDeleteUserByIdRequest = (id, callback) => {
+    this.context.Services.RequestSender.SendRequest(
+      Constants.HttpMethods.DELETE,
+      `${config.EndPoints["deleteUserById"]}/${id}`,
+      callback,
       this.context.AuthorityInfo.Token
     );
   };
@@ -84,13 +87,21 @@ export class AdminUserManagement extends BaseComponent {
     });
   };
 
-  createUserHandler = (e) => {
+  createUser = (e) => {
     e.preventDefault();
 
     let newAdminInfoValidation = this.validateNewAdminInfo();
     if (!newAdminInfoValidation.isSuccess) return;
 
-    this.sendCreateUserRequest();
+    this.sendCreateUserRequest(async (res) => {
+      // will be changed
+      if (!res.isSuccess) alert("createUser unsuccessful");
+      else {
+        alert("createUser successful");
+        this.clearNewUserInfoData();
+        await this.loadAdmins();
+      }
+    });
   };
 
   validateNewAdminInfo = () => {
@@ -139,17 +150,11 @@ export class AdminUserManagement extends BaseComponent {
     });
   };
 
-  sendCreateUserRequest = () => {
+  sendCreateUserRequest = (callback) => {
     this.context.Services.RequestSender.SendRequest(
       Constants.HttpMethods.POST,
       config.EndPoints["createUser"],
-      (res) => {
-        // will be changed
-        if (!res.isSuccess) alert("createUser unsuccessful");
-        else {
-          if (alert("createUser successful")) this.clearNewUserInfoData();
-        }
-      },
+      callback,
       {
         email: this.state.newAdminInfo.email.value,
         password: this.state.newAdminInfo.password.value,
@@ -189,7 +194,7 @@ export class AdminUserManagement extends BaseComponent {
     return (
       <Container>
         <Row>
-          <Col>
+          <Col responsiveSystem={{ sm: 12, md: 6 }}>
             <Row>
               <Col margins={{ t: 2, b: 2 }}>
                 <h2>Current Admins</h2>
@@ -236,7 +241,7 @@ export class AdminUserManagement extends BaseComponent {
               </Col>
             </Row>
           </Col>
-          <Col>
+          <Col responsiveSystem={{ sm: 12, md: 6 }}>
             <Row>
               <Col margins={{ t: 2, b: 2 }}>
                 <h2>Create Admin</h2>
@@ -285,7 +290,7 @@ export class AdminUserManagement extends BaseComponent {
                     height: "auto",
                     float: "right",
                   }}
-                  handleClick={this.createUserHandler}
+                  handleClick={this.createUser}
                 />
               </Col>
             </Row>
