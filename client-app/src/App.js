@@ -18,6 +18,7 @@ import { AppConfig, GetAppConfigurationAsAwaitable } from "./utility/AppConfig";
 import AdminDashboard from "./admindashboard/AdminDashboard";
 import Loading from "./components/Loading";
 import config from "./config.json";
+import { hasDefaultValue } from "./utility/Utils";
 //#endregion
 
 export default class App extends React.Component {
@@ -49,6 +50,8 @@ export default class App extends React.Component {
   };
 
   formatToken = (token) => {
+    if (hasDefaultValue(token)) return;
+    
     if (token[0] === `"` || token[token.length - 1] === `"`) {
       return token.substring(1, token.length - 1);
     }
