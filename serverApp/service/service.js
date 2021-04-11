@@ -19,22 +19,33 @@ async function createCollections() {
 
   return {
     user: new collection.userCollection(gonulluAtolyeleriDbService.db),
+    blogPost: new collection.blogPostCollection(gonulluAtolyeleriDbService.db),
   };
 }
 
 const _userService = require("./userService");
-let userServiceSingletonInstance = undefined;
+let userServiceSingletonInstance = null;
 function createUserService(userCollection) {
-  if (userServiceSingletonInstance === undefined) {
+  if (userServiceSingletonInstance === null) {
     userServiceSingletonInstance = new _userService(userCollection);
   }
   return userServiceSingletonInstance;
 }
 
+const _blogPostService = require("./blogPostService");
+let blogPostServiceSingletonInstance = null;
+function createBlogPostService(blogPostCollection) {
+  if (blogPostServiceSingletonInstance === null) {
+    blogPostServiceSingletonInstance = new _blogPostService(blogPostCollection);
+  }
+
+  return blogPostServiceSingletonInstance;
+}
+
 const authService = require("./authService");
-let authServiceSingletonInstance = undefined;
+let authServiceSingletonInstance = null;
 function createAuthService(userService) {
-  if (authServiceSingletonInstance === undefined) {
+  if (authServiceSingletonInstance === null) {
     authServiceSingletonInstance = new authService({
       userService: userService,
       secretKey: config.secretKey,
@@ -45,15 +56,16 @@ function createAuthService(userService) {
 
 const emailService = require("./emailService");
 
-let _services = undefined;
+let _services = null;
 async function configure() {
-  if (_services !== undefined) return;
+  if (_services !== null) return;
 
   const collections = await createCollections();
 
   _services = {
     utils: utils,
     userService: createUserService(collections.user),
+    blogPostService: createBlogPostService(collection.blogPostCollection),
     emailService: emailService,
   };
   _services.authService = createAuthService(_services.userService);
@@ -62,6 +74,7 @@ async function configure() {
 const services = {
   getUtils: () => _services.utils,
   getUserService: () => _services.userService,
+  getBlogPostService: () => _services.blogPostService,
   getEmailService: () => _services.emailService,
   getAuthService: () => _services.authService,
 };

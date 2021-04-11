@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Col } from "./Grid";
 
 export class Modal extends Component {
   render() {
@@ -12,6 +13,7 @@ export class Modal extends Component {
       >
         <div className="modal-dialog modal-lg">
           <div className="modal-content">
+            <Col isCentered={true}>TEST</Col>
             <div class="modal-header">
               <h4 class="modal-title">{this.props.heading}</h4>
             </div>

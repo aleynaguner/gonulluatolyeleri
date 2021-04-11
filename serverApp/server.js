@@ -37,7 +37,10 @@ async function main() {
   const configureMiddlewares = (function (router) {
     router.use(express.static(path.join(__dirname, "../client-app/build")));
     router.use(bodyParser());
-    router.use((req, res, next) => { console.log(req); next();})
+    router.use((req, res, next) => {
+      console.log(req);
+      next();
+    });
     router.use(cors());
     router.use(
       modelsValidator.modelValidatorMiddleware({
@@ -71,9 +74,11 @@ async function main() {
   const configureRoutes = (function (router) {
     const authRoutes = require("./routes/auth");
     const userRoutes = require("./routes/user");
+    const blogPostRoutes = require("./routes/blogPost");
 
     router.use("/api/auth", authRoutes);
     router.use("/api/user", userRoutes);
+    router.use("/api/blogPost", blogPostRoutes);
 
     router.get("/checkHealth", async (req, res) =>
       res.status(utils.HttpStatus.OK).send("I'm healthy !")
