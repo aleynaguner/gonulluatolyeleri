@@ -16,7 +16,6 @@ class BlogPostService {
           email: blogPost.senderInfo.email,
         },
         header: blogPost.header,
-        image: "blabla",
         content: blogPost.content,
       });
     } catch (error) {

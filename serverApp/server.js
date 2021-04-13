@@ -10,7 +10,7 @@ const config = require("./config");
 const model = require("./model/model");
 const _service = require("./service/service");
 
-const middlewareExtension = require("./host-extension/middlewareExtension");
+const hostextension = require("./hostextension/hostextension");
 const utils = require("./service/utils");
 //#endregion
 
@@ -58,7 +58,7 @@ async function main() {
         ),
       })
     );
-    router.use(middlewareExtension.authMiddleware);
+    router.use(hostextension.authMiddleware);
   })(_router);
 
   const configureClientAppRoute = function (router) {

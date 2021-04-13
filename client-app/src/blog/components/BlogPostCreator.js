@@ -110,14 +110,8 @@ export default class BlogPostCreator extends BaseComponent {
   };
 
   sendCreateBlogPostRequest = (callback) => {
-    const formData = new FormData();
-    formData.append("image", this.state.image, this.state.image.name);
-    formData.append("firstName", this.state.firstName.value);
-    formData.append("lastName", this.state.lastName.value);
-    formData.append("email", this.state.email.value);
-    formData.append("header", this.state.header.value);
-    formData.append("content", this.state.content.value);
-    
+    const formData = this.getCreateBlogPostRequestFormData();
+
     this.context.Services.RequestSender.SendRequest(
       Constants.HttpMethods.POST,
       config.EndPoints["createBlogPost"],
@@ -126,6 +120,21 @@ export default class BlogPostCreator extends BaseComponent {
       null,
       { "Content-Type": "multipart/form-data" }
     );
+  };
+
+  getCreateBlogPostRequestFormData = () => {
+    const formData = new FormData();
+    formData.append("image", this.state.image, this.state.image.name);
+    let senderInfo = JSON.stringify({
+      firstName: this.state.firstName.value,
+      lastName: this.state.lastName.value,
+      email: this.state.email.value,
+    });
+    formData.append("senderInfo", senderInfo);
+    formData.append("header", this.state.header.value);
+    formData.append("content", this.state.content.value);
+
+    return formData;
   };
 
   clearBlogPostData = () => {
