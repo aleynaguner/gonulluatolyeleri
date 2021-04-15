@@ -36,6 +36,7 @@ async function main() {
 
   const configureMiddlewares = (function (router) {
     router.use(express.static(path.join(__dirname, "../client-app/build")));
+    router.use(express.static(config.fileStorePath));
     router.use(bodyParser());
     router.use((req, res, next) => {
       console.log(req);

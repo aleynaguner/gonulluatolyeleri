@@ -29,6 +29,15 @@ class BlogPostService {
 
     return utils.createProcessResult(true);
   };
+
+  getAllBlogPosts = async () => {
+    return await this.blogPostCollection.getAll();
+  };
+
+  getImageFileNameById = async (id) => {
+    let fileName = await this.blogPostCollection.getImageFileNameById(id);
+    return fileName;
+  };
 }
 
 module.exports = (function () {

@@ -2,11 +2,13 @@ console.log("imageUploader module reading...");
 
 const multer = require("multer");
 const ObjectID = require("mongodb").ObjectID;
+const path = require("path");
+const config = require("../config");
 
 const getImageStore = (storeName) => {
   return multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, `../filestore/${storeName}/`);
+      cb(null, path.join(config.fileStorePath, storeName));
     },
     filename: function (req, file, cb) {
       let imageId = new ObjectID().toHexString();

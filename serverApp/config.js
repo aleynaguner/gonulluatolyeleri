@@ -3,6 +3,8 @@ const dotenv = require("dotenv");
 
 const PATHS_TO_BE_VERIFIED = ["/checkAdminHealth", "/api/user/createUser"];
 
+const path = require("path");
+
 dotenv.config();
 
 module.exports = (function () {
@@ -18,5 +20,6 @@ module.exports = (function () {
     adminPassword: process.env.ADMIN_PASSWORD,
     gonulluAtolyeleriDbName: process.env.GONULLU_ATOLYELERI_DB_NAME,
     pathsToBeVerified: PATHS_TO_BE_VERIFIED,
+    fileStorePath: path.join(__dirname, "./filestore"),
   };
 })();
