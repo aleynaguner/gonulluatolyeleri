@@ -9,6 +9,8 @@ import config from "../../config.json";
 export default class BlogPostCreator extends BaseComponent {
   constructor(props) {
     super(props);
+    this.imageRef = React.createRef();
+
     this.state = {
       firstName: {
         value: "",
@@ -59,15 +61,19 @@ export default class BlogPostCreator extends BaseComponent {
     let postInfoValidationResult = this.validatePostInfo();
     if (!postInfoValidationResult.isSuccess) return;
 
-    // send CreatePost Request
-    this.sendCreateBlogPostRequest(async (res) => {
-      // will be changed
-      if (!res.isSuccess) alert("createBlogPost unsuccessful");
-      else {
-        alert("createBlogPost successful");
-        this.clearBlogPostData();
-      }
-    });
+    try {
+      this.sendCreateBlogPostRequest(async (res) => {
+        // will be changed
+        if (!res.isSuccess) alert("createBlogPost unsuccessful");
+        else {
+          alert("createBlogPost successful");
+          this.clearBlogPostData();
+        }
+      });
+    } catch (error) {
+      alert(error.message);
+      this.clearBlogPostData();
+    }
   };
 
   validatePostInfo = () => {
@@ -140,6 +146,8 @@ export default class BlogPostCreator extends BaseComponent {
   };
 
   clearBlogPostData = () => {
+    this.imageRef.current.value = null;
+
     this.setState({
       firstName: {
         value: "",
@@ -188,6 +196,7 @@ export default class BlogPostCreator extends BaseComponent {
                   itemType="input"
                   tag="First Name"
                   name="firstName"
+                  value={this.state.firstName.value}
                   erroneous={this.state.firstName.erroneous}
                   errorCode={
                     this.state.firstName.erroneous
@@ -202,6 +211,7 @@ export default class BlogPostCreator extends BaseComponent {
                   itemType="input"
                   tag="Last Name"
                   name="lastName"
+                  value={this.state.lastName.value}
                   erroneous={this.state.lastName.erroneous}
                   errorCode={
                     this.state.lastName.erroneous
@@ -218,6 +228,7 @@ export default class BlogPostCreator extends BaseComponent {
                   itemType="input"
                   tag="Email"
                   name="email"
+                  value={this.state.email.value}
                   erroneous={this.state.email.erroneous}
                   errorCode={
                     this.state.email.erroneous
@@ -232,6 +243,7 @@ export default class BlogPostCreator extends BaseComponent {
                   itemType="input"
                   tag="Header"
                   name="header"
+                  value={this.state.header.value}
                   erroneous={this.state.header.erroneous}
                   errorCode={
                     this.state.header.erroneous
@@ -248,6 +260,7 @@ export default class BlogPostCreator extends BaseComponent {
                   itemType="textarea"
                   name="content"
                   tag={"Content"}
+                  value={this.state.content.value}
                   erroneous={this.state.content.erroneous}
                   errorCode={
                     this.state.content.erroneous
@@ -268,13 +281,12 @@ export default class BlogPostCreator extends BaseComponent {
                 />
                 <Row isCentered={true}>
                   <Col isCentered={true} margins={{ b: 5 }}>
-                    <label for="exampleFormControlFile1">
-                      {this.context.Dictionary?.UploadPhoto}
-                    </label>
+                    <label>{this.context.Dictionary?.UploadPhoto}</label>
                     <input
                       type="file"
                       class="form-control-file"
                       accept="image/*"
+                      ref={this.imageRef}
                       onChange={(e) => {
                         this.setState({ image: e.target.files[0] });
                       }}
