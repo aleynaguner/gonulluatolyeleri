@@ -19,6 +19,14 @@ class BlogPostCollection extends CollectionBase {
 
     return blogPostImageFileInfo["imageFileName"];
   };
+
+  getAll = async () => {
+    let all = await this.collection.find(
+      {},
+      { projection: { _id: 1, senderInfo: 1, header: 1, content: 1 } }
+    );
+    return all.toArray();
+  };
 }
 
 module.exports = (function () {

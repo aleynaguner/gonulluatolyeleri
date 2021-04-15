@@ -15,9 +15,12 @@ router.post(
   "/createBlogPost",
   postImageUploader.single("image"),
   async (req, res) => {
+    req.body.senderInfo = JSON.parse(req.body.senderInfo);
+
     let createBlogPostResult = await blogPostService.createBlogPost({
       ...req.body,
     });
+
     if (createBlogPostResult.isSuccessful) {
       res.status(200).send(createBlogPostResult);
     } else {
@@ -25,6 +28,11 @@ router.post(
     }
   }
 );
+
+router.get("/getAllBlogPosts", async (req, res) => {
+  let allBlogPosts = await blogPostService.getAllBlogPosts();
+  res.status(200).send(allBlogPosts);
+});
 
 router.get("/getImageById/:id", async (req, res) => {
   let imageFileName = await blogPostService.getImageFileNameById(
