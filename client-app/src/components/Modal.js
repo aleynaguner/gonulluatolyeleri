@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Col } from "./Grid";
+import { Row, Col } from "./Grid";
+import { hasDefaultValue } from "../utility/Utils";
 
 export class Modal extends Component {
   render() {
@@ -13,7 +14,21 @@ export class Modal extends Component {
       >
         <div className="modal-dialog modal-lg">
           <div className="modal-content">
-            <Col isCentered={true}>TEST</Col>
+            {!hasDefaultValue(this.props.imgHeaderSrc) ? (
+              <Row isCentered={true} margins={{ t: 5 }}>
+                <Col isCentered={true}>
+                  <img
+                    src={this.props.imgHeaderSrc}
+                    style={{
+                      display: "block",
+                      marginLeft: "auto",
+                      marginRight: "auto",
+                      width: "50%",
+                    }}
+                  ></img>
+                </Col>
+              </Row>
+            ) : null}
             <div class="modal-header">
               <h4 class="modal-title">{this.props.heading}</h4>
             </div>
