@@ -4,7 +4,7 @@ const router = express.Router();
 const blogPostService = require("../service/service").services.getBlogPostService();
 
 const postImageUploader = require("../hostextension/hostextension").imageUploader.createImageUploader(
-  { storeName: "postimagebyid" }
+  { storeName: "postimagesbyid" }
 );
 
 router.post(

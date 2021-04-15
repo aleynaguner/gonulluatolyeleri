@@ -1,6 +1,7 @@
 console.log("imageUploader module reading...");
 
 const multer = require("multer");
+const ObjectID = require("mongodb").ObjectID;
 
 const getImageStore = (storeName) => {
   return multer.diskStorage({
@@ -8,9 +9,22 @@ const getImageStore = (storeName) => {
       cb(null, `../filestore/${storeName}/`);
     },
     filename: function (req, file, cb) {
-      cb(null, file.originalname);
+      let imageId = new ObjectID().toHexString();
+      let imageFormat = getImageFormat(file);
+      let imageFullName = `${imageId}.${imageFormat}`;
+
+      cb(null, imageFullName);
+
+      req.body.imageInfo = {
+        id: imageId,
+        fileName: imageFullName,
+      };
     },
   });
+};
+
+const getImageFormat = (imgFile) => {
+  return imgFile.mimetype.split("/")[1];
 };
 
 const fileFilter = (req, file, cb) => {
@@ -25,7 +39,7 @@ const createImageUploader = (createImageLoaderContext) => {
   return multer({
     storage: getImageStore(createImageLoaderContext.storeName),
     limits: {
-      fileSize: 1024 * 1024 * 5,
+      fileSize: 1024 * 1024 * 10,
     },
     fileFilter: fileFilter,
   });

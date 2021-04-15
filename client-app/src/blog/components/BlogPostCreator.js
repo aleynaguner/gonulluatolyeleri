@@ -124,7 +124,9 @@ export default class BlogPostCreator extends BaseComponent {
 
   getCreateBlogPostRequestFormData = () => {
     const formData = new FormData();
-    formData.append("image", this.state.image, this.state.image.name);
+    if (this.state.image !== null)
+      formData.append("image", this.state.image, this.state.image.name);
+
     let senderInfo = JSON.stringify({
       firstName: this.state.firstName.value,
       lastName: this.state.lastName.value,

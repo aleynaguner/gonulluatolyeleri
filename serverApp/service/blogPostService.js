@@ -9,15 +9,19 @@ class BlogPostService {
 
   createBlogPost = async (blogPost) => {
     try {
-      await this.blogPostCollection.insertOne({
-        senderInfo: {
-          firstName: blogPost.senderInfo.firstName,
-          lastName: blogPost.senderInfo.lastName,
-          email: blogPost.senderInfo.email,
+      await this.blogPostCollection.insertOne(
+        {
+          senderInfo: {
+            firstName: blogPost.senderInfo.firstName,
+            lastName: blogPost.senderInfo.lastName,
+            email: blogPost.senderInfo.email,
+          },
+          header: blogPost.header,
+          content: blogPost.content,
+          imageFileName: blogPost.imageInfo.fileName,
         },
-        header: blogPost.header,
-        content: blogPost.content,
-      });
+        blogPost.imageInfo.id
+      );
     } catch (error) {
       console.error("Error occured when createBlogPost!", error);
       return utils.createProcessResult(false, error.message.toString());

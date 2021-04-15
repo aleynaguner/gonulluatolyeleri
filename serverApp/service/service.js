@@ -12,7 +12,8 @@ async function createCollections() {
   });
 
   try {
-    await gonulluAtolyeleriDbService.connectToMongo();
+    let connected = await gonulluAtolyeleriDbService.connectToMongo();
+    if (!connected) throw new Error();
   } catch (error) {
     throw Error("Couldn't connect to MongoDB!", error);
   }
@@ -65,7 +66,7 @@ async function configure() {
   _services = {
     utils: utils,
     userService: createUserService(collections.user),
-    blogPostService: createBlogPostService(collection.blogPostCollection),
+    blogPostService: createBlogPostService(collections.blogPost),
     emailService: emailService,
   };
   _services.authService = createAuthService(_services.userService);

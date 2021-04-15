@@ -7,7 +7,10 @@ class CollectionBase {
     this.collection = db.collection(collectionName);
   }
 
-  insertOne = async (doc) => {
+  insertOne = async (doc, id = null) => {
+    if (id !== null) {
+      doc["_id"] = new ObjectID(id);
+    }
     await this.collection.insertOne(doc);
   };
 

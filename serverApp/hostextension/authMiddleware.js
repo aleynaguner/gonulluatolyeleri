@@ -40,7 +40,5 @@ const getBearerTokenFromRequestHeader = (header) => {
 
 module.exports = (function () {
   console.log("middlewareExtension module exported!");
-  return {
-    authMiddleware: authMiddleware,
-  };
+  return authMiddleware;
 })();
