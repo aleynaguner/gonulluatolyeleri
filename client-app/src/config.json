@@ -52,6 +52,14 @@
     "UploadPhoto": {
       "TR": "Fotoğraf Yükle",
       "ENG": "Upload Photo"
+    },
+    "Blogs": {
+      "TR": "Bloglar",
+      "ENG": "Blogs"
+    },
+    "ReadMore": {
+      "TR": "Detaya git",
+      "ENG": "Read More"
     }
   }
 }
