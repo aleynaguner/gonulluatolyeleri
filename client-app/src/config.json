@@ -8,7 +8,10 @@
     "deleteUserById": "/api/user/deleteUserById",
     "createBlogPost": "/api/blogPost/createBlogPost",
     "getAllBlogPosts": "/api/blogPost/getAllBlogPosts",
-    "getImageById": "/api/blogPost/getImageById"
+    "getAllAwaitingApproval": "/api/blogPost/getAllAwaitingApproval",
+    "getImageById": "/api/blogPost/getImageById",
+    "approveWaitingBlogPost": "/api/blogPost/approveWaitingBlogPost",
+    "rejectWaitingBlogPost": "/api/blogPost/rejectWaitingBlogPost"
   },
   "ATUH_TOKEN_KEY_NAME": "authtoken",
   "CLIENT_INFO_API": "https://ipapi.co/json/",

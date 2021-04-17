@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Modal } from "../../components/Modal";
 import Loading from "../../components/Loading";
 import BaseComponent from "../../utility/BaseComponent";
@@ -14,19 +14,19 @@ export class BlogPostConfirmation extends BaseComponent {
     };
   }
 
-  getAllBlogPosts = async () => {
-    let getAllBlogPostsResponse = await this.context.Services.RequestSender.AwaitableSendRequest(
+  getAllAwaitingApproval = async () => {
+    let getAllAwaitingApprovalResponse = await this.context.Services.RequestSender.AwaitableSendRequest(
       Constants.HttpMethods.GET,
-      config.EndPoints["getAllBlogPosts"]
+      config.EndPoints["getAllAwaitingApproval"]
     );
 
-    return getAllBlogPostsResponse.isSuccess
-      ? getAllBlogPostsResponse.responseData
+    return getAllAwaitingApprovalResponse.isSuccess
+      ? getAllAwaitingApprovalResponse.responseData
       : [];
   };
 
   async componentDidMount() {
-    let posts = await this.getAllBlogPosts();
+    let posts = await this.getAllAwaitingApproval();
     this.setState({
       posts: posts,
       loading: false,

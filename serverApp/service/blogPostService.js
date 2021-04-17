@@ -9,29 +9,40 @@ class BlogPostService {
 
   createBlogPost = async (blogPost) => {
     try {
-      await this.blogPostCollection.insertOne(
-        {
-          senderInfo: {
-            firstName: blogPost.senderInfo.firstName,
-            lastName: blogPost.senderInfo.lastName,
-            email: blogPost.senderInfo.email,
-          },
-          header: blogPost.header,
-          content: blogPost.content,
-          imageFileName: blogPost.imageInfo.fileName,
-        },
-        blogPost.imageInfo.id
-      );
+      await this.blogPostCollection.create(blogPost);
     } catch (error) {
       console.error("Error occured when createBlogPost!", error);
       return utils.createProcessResult(false, error.message.toString());
     }
-
     return utils.createProcessResult(true);
   };
 
+  approveWaitingBlogPost = async (blogPostId) => {
+    try {
+      await this.blogPostCollection.updateApprovalStatus(blogPostId, true);
+    } catch (error) {
+      console.error("Error occured when rejectWaitingBlogPost!", error);
+      return utils.createProcessResult(false, error.message.toString());
+    }
+    return utils.createProcessResult(true);
+  };
+
+  rejectWaitingBlogPost = async (blogPostId) => {
+    try {
+      await this.blogPostCollection.updateApprovalStatus(blogPostId, false);
+    } catch (error) {
+      console.error("Error occured when rejectWaitingBlogPost!", error);
+      return utils.createProcessResult(false, error.message.toString());
+    }
+    return utils.createProcessResult(true);
+  };
+
+  getAllAwaitingApproval = async () => {
+    return await this.blogPostCollection.getAllAwaitingApproval();
+  };
+
   getAllBlogPosts = async () => {
-    return await this.blogPostCollection.getAll();
+    return await this.blogPostCollection.getAllApproved();
   };
 
   getImageFileNameById = async (id) => {

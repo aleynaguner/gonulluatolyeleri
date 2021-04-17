@@ -29,9 +29,38 @@ router.post(
   }
 );
 
+router.post("/approveWaitingBlogPost/:id", async (req, res) => {
+  let approveWaitingBlogPostResult = await blogPostService.approveWaitingBlogPost(
+    req.params.id.trim()
+  );
+
+  if (approveWaitingBlogPostResult.isSuccessful) {
+    res.status(200).send(approveWaitingBlogPostResult);
+  } else {
+    res.status(500).send(approveWaitingBlogPostResult);
+  }
+});
+
+router.post("/rejectWaitingBlogPost/:id", async (req, res) => {
+  let rejectWaitingBlogPostResult = await blogPostService.rejectWaitingBlogPost(
+    req.params.id.trim()
+  );
+
+  if (approveWaitingBlogPostResult.isSuccessful) {
+    res.status(200).send(rejectWaitingBlogPostResult);
+  } else {
+    res.status(500).send(rejectWaitingBlogPostResult);
+  }
+});
+
 router.get("/getAllBlogPosts", async (req, res) => {
   let allBlogPosts = await blogPostService.getAllBlogPosts();
   res.status(200).send(allBlogPosts);
+});
+
+router.get("/getAllAwaitingApproval", async (req, res) => {
+  let allAwaitingApproval = await blogPostService.getAllAwaitingApproval();
+  res.status(200).send(allAwaitingApproval);
 });
 
 router.get("/getImageById/:id", async (req, res) => {
