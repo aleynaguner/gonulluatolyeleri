@@ -5,11 +5,7 @@ export class HttpRequestSender {
     this.baseUrl = baseUrl;
   }
 
-  AwaitableSendRequest = async (
-    method,
-    endpoint,
-    data = null,
-  ) => {
+  AwaitableSendRequest = async (method, endpoint, data = null) => {
     let response = {
       isSuccess: false,
       responseData: null,
@@ -37,7 +33,7 @@ export class HttpRequestSender {
   SendRequest = (
     method,
     endpoint,
-    callback,
+    callback = null,
     data = null,
     bearerToken = null,
     extraHeaderInfo = null
@@ -71,7 +67,7 @@ export class HttpRequestSender {
         res.isSuccess = response.status >= 200 && response.status < 300;
         res.responseData = response.data;
 
-        callback(res);
+        if (callback !== null) callback(res);
       })
       .catch(function (error) {
         console.log(error);

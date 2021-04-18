@@ -25,6 +25,41 @@ export class BlogPostConfirmation extends BaseComponent {
       : [];
   };
 
+  handleBlogPostApprovalStatusChange = (e, isApproved) => {
+    e.preventDefault();
+    let currentPosts = this.state.posts.filter(
+      (post) => post["_id"] !== e.target.value
+    );
+    this.setState({
+      posts: currentPosts,
+    });
+    try {
+      this.sendUpdateBlogPostApprovalStatusRequest(e.target.value, isApproved);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  sendUpdateBlogPostApprovalStatusRequest = (blogPostId, isApproved) => {
+    debugger
+    let targetEndPoint = `${
+      isApproved
+        ? config.EndPoints["approveWaitingBlogPost"]
+        : config.EndPoints["rejectWaitingBlogPost"]
+    }/${blogPostId}`;
+    this.context.Services.RequestSender.SendRequest(
+      Constants.HttpMethods.POST,
+      targetEndPoint,
+      null,
+      null,
+      this.context.AuthorityInfo.Token
+    );
+  };
+
+  createBlogPostImgSourceLinkById = (postId) => {
+    return `${config.BASE_URL}${config.EndPoints["getImageById"]}/${postId}`;
+  };
+
   async componentDidMount() {
     let posts = await this.getAllAwaitingApproval();
     this.setState({
@@ -32,10 +67,6 @@ export class BlogPostConfirmation extends BaseComponent {
       loading: false,
     });
   }
-
-  createBlogPostImgSourceLinkById = (postId) => {
-    return `${config.BASE_URL}${config.EndPoints["getImageById"]}/${postId}`;
-  };
 
   render() {
     if (this.state.loading) {
@@ -81,13 +112,24 @@ export class BlogPostConfirmation extends BaseComponent {
                 </td>
                 <td>
                   <button
+                    value={post["_id"]}
+                    onClick={(e) =>
+                      this.handleBlogPostApprovalStatusChange(e, false)
+                    }
                     type="button"
                     class="btn btn-danger"
                     style={{ marginRight: "0.5em" }}
                   >
                     Reject
                   </button>
-                  <button type="button" class="btn btn-success">
+                  <button
+                    value={post["_id"]}
+                    onClick={(e) =>
+                      this.handleBlogPostApprovalStatusChange(e, true)
+                    }
+                    type="button"
+                    class="btn btn-success"
+                  >
                     Approve
                   </button>
                 </td>
