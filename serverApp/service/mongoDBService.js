@@ -10,6 +10,8 @@ class MongoDBService {
   }
 
   connectToMongo = async () => {
+    if (this.db !== undefined) return;
+
     let connected = false;
 
     let client = new MongoClient(this.mongoDBSettings.url, {

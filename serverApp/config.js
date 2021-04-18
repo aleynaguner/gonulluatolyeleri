@@ -1,11 +1,8 @@
 console.log("config module reading...");
-const dotenv = require("dotenv");
-
 const PATHS_TO_BE_VERIFIED = ["/checkAdminHealth", "/api/user/createUser"];
 
 const path = require("path");
-
-dotenv.config();
+require("dotenv").config({ path: path.join(__dirname, "/.env") });
 
 module.exports = (function () {
   console.log("config module exported!");

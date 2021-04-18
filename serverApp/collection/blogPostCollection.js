@@ -34,7 +34,7 @@ class BlogPostCollection extends CollectionBase {
       ? constants.ApprovalStatus.Approved
       : constants.ApprovalStatus.Rejected;
     await this.collection.updateOne(
-      { _id: blogPostId },
+      { _id: new ObjectID(blogPostId) },
       {
         $set: {
           approvalStatus: newStatus,

@@ -46,7 +46,7 @@ router.post("/rejectWaitingBlogPost/:id", async (req, res) => {
     req.params.id.trim()
   );
 
-  if (approveWaitingBlogPostResult.isSuccessful) {
+  if (rejectWaitingBlogPostResult.isSuccessful) {
     res.status(200).send(rejectWaitingBlogPostResult);
   } else {
     res.status(500).send(rejectWaitingBlogPostResult);
