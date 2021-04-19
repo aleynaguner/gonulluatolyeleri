@@ -1,4 +1,5 @@
 console.log("blogPostService module reading...");
+const documentConstants = require("../collection/documentsConstants").blogPost;
 
 const utils = require("./utils");
 
@@ -19,7 +20,7 @@ class BlogPostService {
 
   approveWaitingBlogPost = async (blogPostId) => {
     try {
-      await this.blogPostCollection.updateApprovalStatus(blogPostId, true);
+      await this.blogPostCollection.updateApprovalStatus(blogPostId, documentConstants.ApprovalStatus.Approved);
     } catch (error) {
       console.error("Error occured when rejectWaitingBlogPost!", error);
       return utils.createProcessResult(false, error.message.toString());
@@ -29,7 +30,7 @@ class BlogPostService {
 
   rejectWaitingBlogPost = async (blogPostId) => {
     try {
-      await this.blogPostCollection.updateApprovalStatus(blogPostId, false);
+      await this.blogPostCollection.deleteById(blogPostId);
     } catch (error) {
       console.error("Error occured when rejectWaitingBlogPost!", error);
       return utils.createProcessResult(false, error.message.toString());

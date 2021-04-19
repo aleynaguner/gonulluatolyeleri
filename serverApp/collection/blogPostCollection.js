@@ -3,7 +3,6 @@ console.log("blogPostCollection module reading...");
 const ObjectID = require("mongodb").ObjectID;
 
 const CollectionBase = require("./collectionBase");
-const constants = require("./documentsConstants").blogPost;
 
 const BLOG_POST_COLLECTION_NAME = "blogpost";
 
@@ -29,15 +28,12 @@ class BlogPostCollection extends CollectionBase {
     );
   };
 
-  updateApprovalStatus = async (blogPostId, isApproved) => {
-    let newStatus = isApproved
-      ? constants.ApprovalStatus.Approved
-      : constants.ApprovalStatus.Rejected;
+  updateApprovalStatus = async (blogPostId, newApprovalStatus) => {
     await this.collection.updateOne(
       { _id: new ObjectID(blogPostId) },
       {
         $set: {
-          approvalStatus: newStatus,
+          approvalStatus: newApprovalStatus,
         },
       }
     );
