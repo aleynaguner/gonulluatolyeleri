@@ -3,6 +3,7 @@ console.log("blogPostCollection module reading...");
 const ObjectID = require("mongodb").ObjectID;
 
 const CollectionBase = require("./collectionBase");
+const constants = require("../collection/documentsConstants").blogPost;
 
 const BLOG_POST_COLLECTION_NAME = "blogpost";
 

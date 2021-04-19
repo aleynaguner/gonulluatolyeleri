@@ -17,7 +17,7 @@ export class BlogPostConfirmation extends BaseComponent {
   getAllAwaitingApproval = async () => {
     let getAllAwaitingApprovalResponse = await this.context.Services.RequestSender.AwaitableSendRequest(
       Constants.HttpMethods.GET,
-      config.EndPoints["getAllAwaitingApproval"]
+      config.EndPoints.getAllAwaitingApproval
     );
 
     return getAllAwaitingApprovalResponse.isSuccess
@@ -41,7 +41,7 @@ export class BlogPostConfirmation extends BaseComponent {
   };
 
   sendUpdateBlogPostApprovalStatusRequest = (blogPostId, isApproved) => {
-    debugger
+    debugger;
     let targetEndPoint = `${
       isApproved
         ? config.EndPoints["approveWaitingBlogPost"]

@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:900");
+* {
+  box-sizing: border-box;
+}
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+button {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  vertical-align: middle;
+  text-decoration: none;
+  font-size: inherit;
+  font-family: inherit;
+}
+button.learn-more {
+  transition: all 0.5s cubic-bezier(0.65, -0.25, 0.25, 1.95);
+  font-weight: 700;
+  color: #F7F7F7;
+  padding: 0.75rem 1.5rem;
+  background: #80c08c;
+  border-radius: 2%;
+}
+button.learn-more:hover,
+button.learn-more:focus,
+button.learn-more:active {
+  letter-spacing: 0.125rem;
+}

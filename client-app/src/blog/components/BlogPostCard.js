@@ -2,6 +2,12 @@ import React from "react";
 import BaseComponent from "../../utility/BaseComponent";
 import { Container, Row, Col } from "../../components/Grid";
 import { CommonButton } from "../../components/CommonButton";
+import {
+  BasicCommonButton,
+  BasicCommonButtonColor,
+  BasicCommonButtonType,
+} from "../../components/BasicCommonButton";
+import ReadMoreButton from "./ReadMoreButton";
 
 export default class BlogPostCard extends BaseComponent {
   render() {
@@ -14,7 +20,7 @@ export default class BlogPostCard extends BaseComponent {
           customStyle={{
             padding: "2em",
             backgroundColor: "#F7F7F7",
-            borderStyle: "inset",
+            borderStyle: "outset",
             borderRadius: "1em",
           }}
         >
@@ -25,7 +31,7 @@ export default class BlogPostCard extends BaseComponent {
           </Row>
           <Row margins={{ b: 2 }}>
             <Col>
-              <p>{this.props.postInfo.content}</p>
+              <p>{`${this.props.postInfo.content?.substring(0, 500)}...`}</p>
             </Col>
           </Row>
           <Row>
@@ -34,14 +40,18 @@ export default class BlogPostCard extends BaseComponent {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "flex-start",
-                marginLeft: "1em",
+                marginLeft: "0.8em",
               }}
             >
-              <CommonButton
+              {/* <BasicCommonButton
                 text={this.context.Dictionary?.ReadMore}
-                customStyle={{ marginRight: "1.5em" }}
-              />
-              <strong>No Comment</strong>
+                type={BasicCommonButtonType.ShadowOnHover}
+                color={BasicCommonButtonColor.Green}
+                
+                handleClick={(e) => {}}
+              /> */}
+              <ReadMoreButton customStyle={{ marginRight: "1.5em" }} />
+              <strong style={{ whiteSpace: "nowrap" }}>No Comment</strong>
             </div>
             <div className="mx-auto"></div>
             <div

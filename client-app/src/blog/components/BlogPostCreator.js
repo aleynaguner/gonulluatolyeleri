@@ -2,7 +2,7 @@ import React from "react";
 import BaseComponent from "../../utility/BaseComponent";
 import { Container, Row, Col } from "../../components/Grid";
 import { FormItem } from "../../contactus/components/FormItem";
-import { CommonButton } from "../../components/CommonButton";
+import { BasicCommonButton } from "../../components/BasicCommonButton";
 import { Constants } from "../../utility/Utils";
 import config from "../../config.json";
 
@@ -272,27 +272,28 @@ export default class BlogPostCreator extends BaseComponent {
                 />
               </Col>
             </Row>
-            <Row>
-              <Col>
-                <CommonButton
+            <Row isCentered={true}>
+              <Col isCentered={true}>
+                <label>{this.context.Dictionary?.UploadPhoto}</label>
+                <input
+                  type="file"
+                  class="form-control-file"
+                  accept="image/*"
+                  ref={this.imageRef}
+                  onChange={(e) => {
+                    this.setState({ image: e.target.files[0] });
+                  }}
+                />
+              </Col>
+              <Col
+                isCentered={true}
+                responsiveSystem={{ sm: 3, md: 3, lg: 2, xl: 2 }}
+              >
+                <BasicCommonButton
                   text={this.context.Dictionary?.Send}
-                  customStyle={{ float: "right", width: "8%" }}
+                  customStyle={{ height: "3em" }}
                   handleClick={this.sendPost}
                 />
-                <Row isCentered={true}>
-                  <Col isCentered={true} margins={{ b: 5 }}>
-                    <label>{this.context.Dictionary?.UploadPhoto}</label>
-                    <input
-                      type="file"
-                      class="form-control-file"
-                      accept="image/*"
-                      ref={this.imageRef}
-                      onChange={(e) => {
-                        this.setState({ image: e.target.files[0] });
-                      }}
-                    />
-                  </Col>
-                </Row>
               </Col>
             </Row>
           </Col>

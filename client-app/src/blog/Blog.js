@@ -71,12 +71,12 @@ export class Blog extends BaseComponent {
             </h2>
           </Col>
         </Row>
-        <Row margins={{ b: 5 }}>
+        <Row margins={{ l: 3, r: 3, b: 5 }}>
           {this.state.blogPosts.map((post) => (
             <BlogPostCard
               postInfo={post}
               responsiveSystem={{ sm: 12, md: 12, lg: 6 }}
-              margins={{ l: 5, r: 5, b: 3 }}
+              // margins={{ l: 2, r: 2, b: 3 }}
             />
           ))}
         </Row>

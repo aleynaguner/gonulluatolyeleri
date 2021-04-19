@@ -26,7 +26,9 @@ export class Container extends Component {
     return (
       <div
         className={`container${this.props.notFluid ? "" : "-fluid"}`}
-        style={this.props.customStyle !== undefined ? this.props.customStyle : {}}
+        style={
+          this.props.customStyle !== undefined ? this.props.customStyle : {}
+        }
       >
         {this.props.children}
       </div>
@@ -39,6 +41,11 @@ export class Row extends Component {
     super(props);
 
     this.className = this.createClassName();
+    this.style = this.props.isCentered
+      ? {
+          alignItems: "center",
+        }
+      : undefined;
   }
 
   createClassName = () => {
@@ -52,7 +59,11 @@ export class Row extends Component {
     return (
       <div
         className={this.className}
-        style={this.props.customStyle !== undefined ? this.props.customStyle : {}}
+        style={
+          this.props.customStyle !== undefined
+            ? { ...this.props.customStyle, ...this.style }
+            : this.style
+        }
       >
         {this.props.children}
       </div>
@@ -66,12 +77,16 @@ export class Col extends Component {
 
     this.className = this.createClassName(
       this.props.responsiveSystem,
-      this.props.margins,
-      this.props.isCentered
+      this.props.margins
     );
+    this.style = this.props.isCentered
+      ? {
+          alignItems: "center",
+        }
+      : undefined;
   }
 
-  createClassName = (responsiveSystem, margins, isCentered) => {
+  createClassName = (responsiveSystem, margins) => {
     let className = "col";
 
     if (responsiveSystem !== undefined && responsiveSystem !== null) {
@@ -107,8 +122,6 @@ export class Col extends Component {
     className =
       margins !== undefined ? addMarginSettings(className, margins) : className;
 
-    className = isCentered ? `${className} align-self-center` : className;
-
     return className;
   };
 
@@ -117,7 +130,11 @@ export class Col extends Component {
       <div
         id={this.props?.id}
         className={this.className}
-        style={this.props.customStyle !== undefined ? this.props.customStyle : {}}
+        style={
+          this.props.customStyle !== undefined
+            ? { ...this.props.customStyle, ...this.style }
+            : this.style
+        }
       >
         {this.props.children}
       </div>

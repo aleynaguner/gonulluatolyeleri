@@ -2,6 +2,11 @@ import React from "react";
 import "./style/volunteerButton.css";
 import { Component } from "react";
 
+const defaultStyles = {
+  width: "100%",
+  height: "auto",
+};
+
 export class CommonButton extends Component {
   constructor(props) {
     super(props);
@@ -9,7 +14,6 @@ export class CommonButton extends Component {
 
   handleClick = (e) => {
     e.persist();
-
     this.props.handleClick(e);
   };
 
@@ -21,7 +25,7 @@ export class CommonButton extends Component {
         style={
           this.props.customStyle !== undefined
             ? { ...this.props.customStyle }
-            : {}
+            : defaultStyles
         }
       >
         {this.props.text}
