@@ -1,22 +1,29 @@
 import React, { Component } from "react";
+import { Container, Row, Col } from "../components/Grid";
+import WorkShop from "./components/WorkShop";
 
 export class OurWorkShops extends Component {
   render() {
     return (
-      <div className="row m-5">
-        <div className="mx-auto">
-          <div className="row mb-2">
-            <div className="mx-auto">
-              <p className="h3 font-weight-normal">Atölyelerimiz</p>
-            </div>
-          </div>
-          <div className="row">
-            <div className="mx-auto">
-              <div>İçerik</div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Container>
+        <Row isCentered={true}>
+          <p className="h3 font-weight-normal">Atölyelerimiz</p>
+        </Row>
+        <Row margins={{ l: 1, r: 1, t: 1, b: 1 }}>
+          <Col responsiveSystem={{ sm: 12, md: 3, lg: 3, xl: 3 }}>
+            <WorkShop name="WorkShop!" margins={{ t: 3, l: 2, r: 2 }} />
+          </Col>
+          <Col responsiveSystem={{ sm: 12, md: 3, lg: 3, xl: 3 }}>
+            <WorkShop name="WorkShop!" margins={{ t: 3, l: 2, r: 2 }} />
+          </Col>
+          <Col responsiveSystem={{ sm: 12, md: 3, lg: 3, xl: 3 }}>
+            <WorkShop name="WorkShop!" margins={{ t: 3, l: 2, r: 2 }} />
+          </Col>
+          <Col responsiveSystem={{ sm: 12, md: 3, lg: 3, xl: 3 }}>
+            <WorkShop name="WorkShop!" margins={{ t: 3, l: 2, r: 2 }} />
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

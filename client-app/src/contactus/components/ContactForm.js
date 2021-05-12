@@ -4,6 +4,7 @@ import "../style/contactForm.css";
 import Loading from "../../components/Loading";
 import { Container, Row, Col } from "../../components/Grid";
 import BaseComponent from "../../utility/BaseComponent";
+import { BasicCommonButton } from "../../components/BasicCommonButton";
 
 export class ContactForm extends BaseComponent {
   constructor(props) {
@@ -180,15 +181,14 @@ export class ContactForm extends BaseComponent {
                     onChange={this.updateFormValues}
                     customAttributes={{ id: "messageTextArea", rows: "5" }}
                   />
-                  <div className="mt-3">
-                    <button
-                      id="sendBtn"
-                      className="btn text-white float-right"
-                      type="submit"
-                      onClick={this.handleSubmit}
-                    >
-                      Gönder
-                    </button>
+                  <div
+                    className="col-4 float-right"
+                    style={{ marginRight: "-0.80em" }}
+                  >
+                    <BasicCommonButton
+                      text={this.context.Dictionary?.Send}
+                      handleClick={this.handleSubmit}
+                    />
                   </div>
                 </div>
                 <div className="col-md-2"></div>

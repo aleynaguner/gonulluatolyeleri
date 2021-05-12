@@ -291,7 +291,6 @@ export default class BlogPostCreator extends BaseComponent {
               >
                 <BasicCommonButton
                   text={this.context.Dictionary?.Send}
-                  customStyle={{ height: "3em" }}
                   handleClick={this.sendPost}
                 />
               </Col>

@@ -49,10 +49,15 @@ export class Row extends Component {
   }
 
   createClassName = () => {
-    return addMarginSettings(
-      this.props.isCentered ? "row justify-content-center" : "row",
-      this.props.margins
-    );
+    let className = "row";
+    if (this.props.pushToRight) {
+      className += " justify-content-end";
+    } else if (this.props.pushToLeft) {
+      className += " justify-content-start";
+    } else {
+      className += " justify-content-center";
+    }
+    return addMarginSettings(className, this.props.margins);
   };
 
   render() {
@@ -81,9 +86,10 @@ export class Col extends Component {
     );
     this.style = this.props.isCentered
       ? {
+          ...this.props.style,
           alignItems: "center",
         }
-      : undefined;
+      : this.props.style;
   }
 
   createClassName = (responsiveSystem, margins) => {
@@ -121,6 +127,10 @@ export class Col extends Component {
 
     className =
       margins !== undefined ? addMarginSettings(className, margins) : className;
+
+    if (this.props.pushToRight) {
+      className += " float-right";
+    }
 
     return className;
   };
