@@ -19,6 +19,7 @@ import AdminDashboard from "./admindashboard/AdminDashboard";
 import Loading from "./components/Loading";
 import config from "./config.json";
 import { hasDefaultValue } from "./utility/Utils";
+import WorkShopDetail from "./ourworkshops/components/WorkShopDetail";
 //#endregion
 
 export default class App extends React.Component {
@@ -51,7 +52,7 @@ export default class App extends React.Component {
 
   formatToken = (token) => {
     if (hasDefaultValue(token)) return;
-    
+
     if (token[0] === `"` || token[token.length - 1] === `"`) {
       return token.substring(1, token.length - 1);
     }
@@ -74,12 +75,18 @@ export default class App extends React.Component {
           <Header />
           <Switch>
             <Route path="/home" component={Home} />
-            <Route path="/ourworkshops" component={OurWorkShops} />
+            <Route exact path="/ourworkshops" component={OurWorkShops} />
             <Route path="/projects" component={Projects} />
             <Route path="/aboutus" component={AboutUs} />
             <Route path="/blog" component={Blog} />
             <Route path="/contactus" component={ContactUs} />
             <Route path="/admindashboard" component={AdminDashboard} />
+            <Route
+              path="/ourworkshops/:id"
+              render={(routeProps) => (
+                <WorkShopDetail id={routeProps.match.params?.id} />
+              )}
+            />
             <Redirect to="/home" />
           </Switch>
         </Router>

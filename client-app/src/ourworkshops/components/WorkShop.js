@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { Row, Col } from "../../components/Grid";
+import { Link } from "react-router-dom";
 import "../style/workshop.css";
 
 export default class WorkShop extends Component {
   render() {
     return (
       <Col isCentered={true} margins={this.props.margins}>
-        <a href="google.com.tr" style={{ color: "inherit" }}>
+        <Link to={`/ourworkshops/${this.props.id}`}>
           <Row>
             <Col id="workshopcard">
               <img
@@ -25,7 +26,7 @@ export default class WorkShop extends Component {
               <span style={{ textAlign: "center" }}>1234</span>
             </div>
           </Row>
-        </a>
+        </Link>
       </Col>
     );
   }

@@ -11,16 +11,16 @@ export class OurWorkShops extends Component {
         </Row>
         <Row margins={{ l: 1, r: 1, t: 1, b: 1 }}>
           <Col responsiveSystem={{ sm: 12, md: 3, lg: 3, xl: 3 }}>
-            <WorkShop name="WorkShop!" margins={{ t: 3, l: 2, r: 2 }} />
+            <WorkShop id="1" name="WorkShop!" margins={{ t: 3, l: 2, r: 2 }} />
           </Col>
           <Col responsiveSystem={{ sm: 12, md: 3, lg: 3, xl: 3 }}>
-            <WorkShop name="WorkShop!" margins={{ t: 3, l: 2, r: 2 }} />
+            <WorkShop id="2" name="WorkShop!" margins={{ t: 3, l: 2, r: 2 }} />
           </Col>
           <Col responsiveSystem={{ sm: 12, md: 3, lg: 3, xl: 3 }}>
-            <WorkShop name="WorkShop!" margins={{ t: 3, l: 2, r: 2 }} />
+            <WorkShop id="3" name="WorkShop!" margins={{ t: 3, l: 2, r: 2 }} />
           </Col>
           <Col responsiveSystem={{ sm: 12, md: 3, lg: 3, xl: 3 }}>
-            <WorkShop name="WorkShop!" margins={{ t: 3, l: 2, r: 2 }} />
+            <WorkShop id="4" name="WorkShop!" margins={{ t: 3, l: 2, r: 2 }} />
           </Col>
         </Row>
       </Container>
