@@ -21,6 +21,7 @@ async function createCollections() {
   return {
     user: new collection.userCollection(gonulluAtolyeleriDbService.db),
     blogPost: new collection.blogPostCollection(gonulluAtolyeleriDbService.db),
+    workShop: new collection.workShopCollection(gonulluAtolyeleriDbService.db),
   };
 }
 
@@ -41,6 +42,16 @@ function createBlogPostService(blogPostCollection) {
   }
 
   return blogPostServiceSingletonInstance;
+}
+
+const _workShopService = require("./workShopService");
+let workShopServiceSingletonInstance = null;
+function createWorkShopService(workShopCollection) {
+  if (workShopServiceSingletonInstance === null) {
+    workShopServiceSingletonInstance = new _workShopService(workShopCollection);
+  }
+
+  return workShopServiceSingletonInstance;
 }
 
 const authService = require("./authService");
@@ -67,6 +78,7 @@ async function configure() {
     utils: utils,
     userService: createUserService(collections.user),
     blogPostService: createBlogPostService(collections.blogPost),
+    workShopService: createWorkShopService(collections.workShop),
     emailService: emailService,
   };
   _services.authService = createAuthService(_services.userService);
@@ -78,6 +90,7 @@ const services = {
   getBlogPostService: () => _services.blogPostService,
   getEmailService: () => _services.emailService,
   getAuthService: () => _services.authService,
+  getWorkShopService: () => _services.workShopService,
 };
 
 module.exports = (function () {
