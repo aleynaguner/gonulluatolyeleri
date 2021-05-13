@@ -63,6 +63,10 @@
     "ReadMore": {
       "TR": "Detaya git",
       "ENG": "Read More"
+    },
+    "SaveWorkShop": {
+      "TR": "Atölye Kaydet",
+      "ENG": "Save Work Shop"
     }
   }
 }

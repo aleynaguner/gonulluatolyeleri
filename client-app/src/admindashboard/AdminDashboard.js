@@ -3,6 +3,7 @@ import { Sidebar } from "./components/Sidebar";
 import { Container } from "../components/Grid";
 import { BlogPostConfirmation } from "./components/BlogPostConfirmation";
 import { AdminUserManagement } from "./components/AdminUserManagement";
+import WorkShopManagement from "./components/WorkShopManagement";
 import Login from "../home/components/Login";
 import BaseComponent from "../utility/BaseComponent";
 import { hasDefaultValue } from "../utility/Utils";
@@ -69,6 +70,11 @@ export default class AdminDashboard extends BaseComponent {
               text: "Admin User Management",
               onClick: () =>
                 this.setState({ currentAdminContent: <AdminUserManagement /> }),
+            },
+            {
+              text: "Work Shop Management",
+              onClick: () =>
+                this.setState({ currentAdminContent: <WorkShopManagement /> }),
             },
           ]}
         >
