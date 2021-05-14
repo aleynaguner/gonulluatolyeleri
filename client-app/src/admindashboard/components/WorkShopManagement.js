@@ -1,24 +1,77 @@
 import React from "react";
 import BaseComponent from "../../utility/BaseComponent";
 import { Container, Row, Col } from "../../components/Grid";
-import WorkShopCreator from "./WorkShopCreator";
+import WorkShopCreator, { NEW_WORKSHOP_ID } from "./WorkShopCreator";
+import Loading from "../../components/Loading";
+import config from "../../config.json";
+import { Constants } from "../../utility/Utils";
 
 export default class WorkShopManagement extends BaseComponent {
   constructor(props) {
     super(props);
     this.state = {
-      workShops: [],
+      loading: true,
+      workShops: [{ _id: NEW_WORKSHOP_ID, name: "Create New Workshop" }],
+      selectedWorkShop: { _id: NEW_WORKSHOP_ID },
     };
   }
 
-  setSelectedWorkShop = (e) => console.log("setSelectedWorkShop");
+  loadWorkshops = async () => {
+    let allWorkshops;
+    try {
+      allWorkshops = await this.getAllWorkShops();
+    } catch (error) {
+      console.error(error);
+      allWorkshops = [];
+    } finally {
+      this.setState((state) => {
+        return {
+          loading: false,
+          workShops: [...state.workShops, ...allWorkshops],
+        };
+      });
+    }
+  };
+
+  getAllWorkShops = async () => {
+    let getAllWorkShopsResponse =
+      await this.context.Services.RequestSender.AwaitableSendRequest(
+        Constants.HttpMethods.GET,
+        config.EndPoints.getAllWorkShops
+      );
+
+    return getAllWorkShopsResponse.isSuccess
+      ? getAllWorkShopsResponse.responseData
+      : [];
+  };
+
+  setSelectedWorkShop = (e) => {
+    e.persist();
+    this.setState(
+      (state) => {
+        let selected = state.workShops.filter(
+          (workShop) => workShop._id === e.target.id
+        )[0];
+        return { selectedWorkShop: selected };
+      },
+      () => console.log(this.state)
+    );
+  };
+
   deleteWorkShop = (e) => console.log("deleteWorkShop");
 
+  async componentDidMount() {
+    await this.loadWorkshops();
+  }
+
   render() {
+    if (this.state.loading) {
+      return <Loading />;
+    }
     return (
       <Container>
         <Row>
-          <Col responsiveSystem={{ sm: 12, md: 6 }}>
+          <Col responsiveSystem={{ sm: 12, md: 5 }}>
             <Row>
               <Col margins={{ t: 2, b: 2 }}>
                 <h2>{this.context.Dictionary?.OurworkshopsPage_Name}</h2>
@@ -65,8 +118,8 @@ export default class WorkShopManagement extends BaseComponent {
               </Col>
             </Row>
           </Col>
-          <Col responsiveSystem={{ sm: 12, md: 6 }}>
-            <WorkShopCreator />
+          <Col responsiveSystem={{ sm: 12, md: 7 }}>
+            <WorkShopCreator selectedWorkshop={this.state.selectedWorkShop} />
           </Col>
         </Row>
       </Container>

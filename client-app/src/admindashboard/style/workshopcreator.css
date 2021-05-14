@@ -1,0 +1,5 @@
+#responsibles:focus {
+  border-color: rgb(57, 122, 154);
+  box-shadow: 0 0.5px 0.5px rgb(57, 122, 154) inset, 0 0 4px rgb(57, 122, 154);
+  outline: 0 none;
+}

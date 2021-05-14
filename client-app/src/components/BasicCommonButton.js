@@ -13,6 +13,19 @@ export const BasicCommonButtonType = {
   ShadowOnHover: "shadowonhover",
 };
 
+export const buildBasicCommonStyle = (color) => {
+  color =
+    color === BasicCommonButtonColor.Green
+      ? BasicCommonButtonColor.Green
+      : BasicCommonButtonColor.Blue;
+  return {
+    width: "100%",
+    height: "auto",
+    backgroundColor: color,
+    borderColor: color,
+  };
+};
+
 export class BasicCommonButton extends Component {
   constructor(props) {
     super(props);
@@ -20,24 +33,13 @@ export class BasicCommonButton extends Component {
   }
 
   buildStyle = () => {
-    let color =
-      this.props.color === BasicCommonButtonColor.Green
-        ? BasicCommonButtonColor.Green
-        : BasicCommonButtonColor.Blue;
-    let style = {
-      width: "100%",
-      height: "auto",
-      backgroundColor: color,
-      borderColor: color,
-    };
-
+    let style = buildBasicCommonStyle(this.props.color);
     if (!hasDefaultValue(this.props.customStyle)) {
       style = {
         ...style,
         ...this.props.customStyle,
       };
     }
-
     return style;
   };
 

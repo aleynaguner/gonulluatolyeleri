@@ -11,7 +11,8 @@
     "getAllAwaitingApproval": "/api/blogPost/getAllAwaitingApproval",
     "getImageById": "/api/blogPost/getImageById",
     "approveWaitingBlogPost": "/api/blogPost/approveWaitingBlogPost",
-    "rejectWaitingBlogPost": "/api/blogPost/rejectWaitingBlogPost"
+    "rejectWaitingBlogPost": "/api/blogPost/rejectWaitingBlogPost",
+    "getAllWorkShops": "/api/workshop/getAllWorkShops"
   },
   "ATUH_TOKEN_KEY_NAME": "authtoken",
   "CLIENT_INFO_API": "https://ipapi.co/json/",

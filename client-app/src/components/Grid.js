@@ -52,10 +52,10 @@ export class Row extends Component {
     let className = "row";
     if (this.props.pushToRight) {
       className += " justify-content-end";
-    } else if (this.props.pushToLeft) {
-      className += " justify-content-start";
-    } else {
+    } else if (this.props.isCentered) {
       className += " justify-content-center";
+    } else {
+      className += " justify-content-start";
     }
     return addMarginSettings(className, this.props.margins);
   };
