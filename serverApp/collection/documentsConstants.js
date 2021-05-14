@@ -8,9 +8,17 @@ const blogPost = {
   },
 };
 
+const workShop = {
+  ResponsibleRole: {
+    ORGANIZER: 1,
+    SPEAKER: 2,
+  },
+};
+
 module.exports = (function () {
   console.log("documentsConstants module exported!");
   return {
     blogPost: blogPost,
+    workShop: workShop,
   };
 })();

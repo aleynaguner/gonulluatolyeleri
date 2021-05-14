@@ -57,6 +57,10 @@ async function main() {
           `${model.modelValidatorModels.userModel.modelName}ForCreateUser`,
           model.modelValidatorModels.userModel.model
         ),
+        "/api/workshop/createWorkShop": modelsValidator.createModel(
+          model.modelValidatorModels.workShopModel.modelName,
+          model.modelValidatorModels.workShopModel.model
+        ),
       })
     );
     router.use(hostextension.authMiddleware);
@@ -76,10 +80,12 @@ async function main() {
     const authRoutes = require("./routes/auth");
     const userRoutes = require("./routes/user");
     const blogPostRoutes = require("./routes/blogPost");
+    const workShopRouter = require("./routes/workShop");
 
     router.use("/api/auth", authRoutes);
     router.use("/api/user", userRoutes);
     router.use("/api/blogPost", blogPostRoutes);
+    router.use("/api/workshop", workShopRouter);
 
     router.get("/checkHealth", async (req, res) =>
       res.status(utils.HttpStatus.OK).send("I'm healthy !")

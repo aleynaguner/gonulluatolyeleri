@@ -14,7 +14,21 @@ const userModel = {
   },
 };
 
+const workShopModel = {
+  modelName: "workShopModel",
+  model: {
+    name: "string",
+    content: "string",
+    category: "string",
+    workshopDate: "string",
+    applicationDeadline: "string",
+    responsibles: "array",
+    location: "string",
+  },
+};
+
 module.exports = {
   emailSendModel: emailSendModel,
   userModel: userModel,
+  workShopModel: workShopModel,
 };

@@ -22,7 +22,7 @@ class CollectionBase {
   deleteById = async (id) => {
     let deleted = true;
     try {
-      let deleteResult = await this.collection.deleteOne({
+      await this.collection.deleteOne({
         _id: new ObjectID(id),
       });
     } catch (error) {

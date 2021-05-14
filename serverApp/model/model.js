@@ -1,4 +1,6 @@
 const modelValidatorModels = require("./modelValidatorModels");
 const User = require("./user");
+const WorkShopResponsible = require("./workShopResponsible");
+const Contants = require("./constants");
 
-module.exports = { modelValidatorModels, User };
+module.exports = { modelValidatorModels, Contants, User, WorkShopResponsible };
