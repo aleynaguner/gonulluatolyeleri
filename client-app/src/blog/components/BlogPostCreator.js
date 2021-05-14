@@ -77,14 +77,16 @@ export default class BlogPostCreator extends BaseComponent {
   };
 
   validatePostInfo = () => {
-    let validationResult = this.context.Services.FormValidator.Post.Validate({
-      firstName: this.state.firstName.value,
-      lastName: this.state.lastName.value,
-      email: this.state.email.value,
-      header: this.state.header.value,
-      content: this.state.content.value,
+    let validationResult = this.context.Services.Validator.Validate({
+      schema: this.context.Services.Validator.Schemas.BlogPost,
+      data: {
+        firstName: this.state.firstName.value,
+        lastName: this.state.lastName.value,
+        email: this.state.email.value,
+        header: this.state.header.value,
+        content: this.state.content.value,
+      },
     });
-
     this.setPostInfoAfterValidationByErroneousState(validationResult.errors);
 
     return validationResult;

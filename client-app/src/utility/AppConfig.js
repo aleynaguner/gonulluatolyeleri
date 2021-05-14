@@ -2,7 +2,7 @@ import React from "react";
 import config from "../config.json";
 import { HttpRequestSender, SendRequest } from "./HttpRequestSender";
 import { Constants, hasDefaultValue } from "./Utils";
-const FormValidator = require("./FormValidator");
+const Validator = require("./Validator");
 
 //#region Global instances
 const RequestSender = new HttpRequestSender(config["BASE_URL"]);
@@ -37,7 +37,7 @@ const getDefaultConfiguration = () => {
     Dictionary: {},
     Services: {
       RequestSender: RequestSender,
-      FormValidator: FormValidator,
+      Validator: Validator,
       SendRequest: SendRequest,
     },
   };
@@ -97,7 +97,9 @@ const getAppConfiguration = async (configurationContext = null) => {
 //#endregion
 
 //#region Public methods
-export const GetAppConfigurationAsAwaitable = async function (configurationContext) {
+export const GetAppConfigurationAsAwaitable = async function (
+  configurationContext
+) {
   let configuration;
   try {
     configuration = await getAppConfiguration(configurationContext);

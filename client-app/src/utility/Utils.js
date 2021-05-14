@@ -65,6 +65,13 @@ export const createProcessResult = (
   };
 };
 
+export const formatByDynamicValueIfExist = (completeString, dynamicVal) => {
+  if (completeString.includes("${DYNAMIC}")) {
+    completeString = completeString.replace("${DYNAMIC}", dynamicVal);
+  }
+  return completeString;
+};
+
 export const Constants = {
   HttpMethods: {
     GET: "GET",

@@ -67,6 +67,26 @@
     "SaveWorkShop": {
       "TR": "Atölye Kaydet",
       "ENG": "Save Work Shop"
+    },
+    "REQUIRED_VALUE": {
+      "TR": "${DYNAMIC} alanı boş bırakılamaz !",
+      "ENG": "Save Work Shop"
+    },
+    "REQUIRED_FORMAT_FOR_EMAIL": {
+      "TR": "Email formatında yazınız. 'example@example.com'",
+      "ENG": "Email formatında yazınız. 'example@example.com'"
+    },
+    "REQUIRED_NONNUMERIC_FORMAT": {
+      "TR": "Sayısal olmayan değer girin !",
+      "ENG": "Sayısal olmayan değer girin !"
+    },
+    "MAX_LENGTH": {
+      "TR": "Maksimum uzunluk sınırını geçtiniz !",
+      "ENG": "Maksimum uzunluk sınırını geçtiniz !"
+    },
+    "MIN_LENGTH": {
+      "TR": "Minimum uzuluk girilmeli !",
+      "ENG": "Minimum uzuluk girilmeli !"
     }
   }
 }

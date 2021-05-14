@@ -54,9 +54,10 @@ export class ContactForm extends BaseComponent {
   handleSubmit = async (e) => {
     e.preventDefault();
 
-    let validationResult = this.context.Services.FormValidator.Validate(
-      this.state.formData
-    );
+    let validationResult = this.context.Services.Validator.Validate({
+      schema: this.context.Services.Validator.Schemas.Contact,
+      data: this.state.formData,
+    });
 
     this.setState({ inputsWithError: validationResult.errors });
 
