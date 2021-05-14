@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
+const config = require("../config");
 
 const workShopService =
   require("../service/service").services.getWorkShopService();
