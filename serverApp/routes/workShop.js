@@ -1,16 +1,9 @@
 const express = require("express");
+
 const router = express.Router();
-const path = require("path");
-const config = require("../config");
 
 const workShopService =
   require("../service/service").services.getWorkShopService();
-
-const postimagesbyidPath = path.join(
-  config.fileStorePath,
-  "workshopimagesbyid"
-);
-
 const postImageUploader =
   require("../hostextension/hostextension").imageUploader.createImageUploader({
     storeName: "workshopimagesbyid",

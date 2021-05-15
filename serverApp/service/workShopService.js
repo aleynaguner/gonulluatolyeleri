@@ -7,18 +7,10 @@ const prepareWorkShopToInsert = (workShop) => {
   workShop.applicationDeadline = new Date(workShop.applicationDeadline);
   workShop.workshopDate = new Date(workShop.workshopDate);
   workShop.responsibles = workShop.responsibles.map((responsible) => {
-    let name = utils.hasDefaultValue(responsible.name.toString())
-      ? Contants.WorkShop.DefaultResponsibleName
-      : responsible.name.toString();
     let email = utils.hasDefaultValue(responsible.email.toString())
       ? Contants.WorkShop.DefaultResponsibleMail
       : responsible.email.toString();
-
-    let role =
-      responsible.role.toString() === Contants.WorkShop.ResponsibleRoles.SPEAKER
-        ? Contants.WorkShop.ResponsibleRoles.SPEAKER
-        : Contants.WorkShop.DefaultResponsibleRole;
-
+    let role = responsible.role.toUpperCase();
     return new WorkShopResponsible(name, role, email);
   });
   workShop.likeCount = 0;
@@ -35,7 +27,8 @@ class WorkShopService {
       prepareWorkShopToInsert(workShop);
       await this.workShopCollection.insertOne(workShop);
     } catch (error) {
-      return utils.createProcessResult(false, error.message);
+      console.error(error);
+      return utils.createProcessResult(false);
     }
     return utils.createProcessResult(true);
   };

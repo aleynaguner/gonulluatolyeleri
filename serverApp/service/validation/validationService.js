@@ -1,6 +1,7 @@
 const config = require("../../config");
 const validationUtils = require("./validationUtils");
 const workshopValidator = require("./validators/workshopValidator");
+const utils = require("../utils");
 
 const validators = {
   WorkshopValidator: workshopValidator,
@@ -19,7 +20,11 @@ const validationMiddleware = async (request, response, next) => {
       data: request.body,
     });
     if (!validationResult.isValid) {
-      response.status(400).send(validationResult);
+      response
+        .status(400)
+        .send(
+          utils.createProcessResult(false, validationResult.validationErrorCode)
+        );
     } else {
       await next();
     }

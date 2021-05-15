@@ -59,9 +59,9 @@ const validateResponsibles = (responsibles) => {
     let nameValidationResult = validateName(responsible.name);
     if (!nameValidationResult.isValid) return nameValidationResult;
 
-    let emailValidationResult = validationUtils.validateEmail(
-      responsible.email
-    );
+    let emailValidationResult =
+      !utils.hasDefaultValue(responsible.email) &&
+      validationUtils.validateEmail(responsible.email);
     if (!emailValidationResult.isValid) return emailValidationResult;
 
     let isRoleValid = modelConstants.ResponsibleRoles.hasOwnProperty(
