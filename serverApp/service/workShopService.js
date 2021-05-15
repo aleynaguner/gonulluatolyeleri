@@ -10,16 +10,16 @@ const prepareWorkShopToInsert = (workShop) => {
     let name = utils.hasDefaultValue(responsible.name.toString())
       ? Contants.WorkShop.DefaultResponsibleName
       : responsible.name.toString();
-    let mail = utils.hasDefaultValue(responsible.mail.toString())
+    let email = utils.hasDefaultValue(responsible.email.toString())
       ? Contants.WorkShop.DefaultResponsibleMail
-      : responsible.mail.toString();
+      : responsible.email.toString();
 
     let role =
       responsible.role.toString() === Contants.WorkShop.ResponsibleRoles.SPEAKER
         ? Contants.WorkShop.ResponsibleRoles.SPEAKER
         : Contants.WorkShop.DefaultResponsibleRole;
 
-    return new WorkShopResponsible(name, role, mail);
+    return new WorkShopResponsible(name, role, email);
   });
   workShop.likeCount = 0;
   workShop.viewCount = 0;

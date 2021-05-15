@@ -19,6 +19,7 @@
     "models-validator": "^1.0.3",
     "mongodb": "^3.6.5",
     "multer": "^1.4.2",
-    "nodemailer": "^6.4.13"
+    "nodemailer": "^6.4.13",
+    "validator": "^13.6.0"
   }
 }

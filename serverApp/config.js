@@ -4,6 +4,9 @@ const path = require("path");
 require("dotenv").config({ path: path.join(__dirname, "/.env") });
 
 const PATHS_TO_BE_VERIFIED = ["/checkAdminHealth", "/api/user/createUser"];
+const validationSchemasByEndPoints = {
+  "/api/workshop/createWorkShop": "WorkshopValidator",
+};
 
 module.exports = (function () {
   console.log("config module exported!");
@@ -19,5 +22,6 @@ module.exports = (function () {
     gonulluAtolyeleriDbName: process.env.GONULLU_ATOLYELERI_DB_NAME,
     pathsToBeVerified: PATHS_TO_BE_VERIFIED,
     fileStorePath: path.join(__dirname, "./filestore"),
+    validationSchemasByEndPoints: validationSchemasByEndPoints,
   };
 })();

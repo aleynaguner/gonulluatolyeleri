@@ -67,6 +67,7 @@ function createAuthService(userService) {
 }
 
 const emailService = require("./emailService");
+const validationService = require("./validation/validationService");
 
 let _services = null;
 async function configure() {
@@ -80,6 +81,7 @@ async function configure() {
     blogPostService: createBlogPostService(collections.blogPost),
     workShopService: createWorkShopService(collections.workShop),
     emailService: emailService,
+    validationService: validationService,
   };
   _services.authService = createAuthService(_services.userService);
 }
@@ -91,6 +93,7 @@ const services = {
   getEmailService: () => _services.emailService,
   getAuthService: () => _services.authService,
   getWorkShopService: () => _services.workShopService,
+  getValidationService: () => _services.validationService,
 };
 
 module.exports = (function () {

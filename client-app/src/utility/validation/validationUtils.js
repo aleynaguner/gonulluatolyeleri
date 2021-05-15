@@ -66,7 +66,6 @@ const validateByContext = (context) => {
     errors: {},
   };
   for (let toBeValidatedField in context.data) {
-    debugger;
     let validateField = context.rules[toBeValidatedField];
     let fieldValidationResult = validateField(context.data[toBeValidatedField]);
     if (!fieldValidationResult.isValid) {

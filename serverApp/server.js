@@ -22,6 +22,7 @@ async function main() {
       userService: _service.services.getUserService(),
       emailService: _service.services.getEmailService(),
       authService: _service.services.getAuthService(),
+      validationService: _service.services.getValidationService(),
     };
   })();
 
@@ -43,6 +44,8 @@ async function main() {
       next();
     });
     router.use(cors());
+    router.use(hostextension.authMiddleware);
+    router.use(service.validationService.validationMiddleware);
     router.use(
       modelsValidator.modelValidatorMiddleware({
         "/api/sendEmail": modelsValidator.createModel(
@@ -63,7 +66,6 @@ async function main() {
         ),
       })
     );
-    router.use(hostextension.authMiddleware);
   })(_router);
 
   const configureClientAppRoute = function (router) {
