@@ -46,6 +46,22 @@ const validatePassword = (val) => {
   return { isValid: errors.length <= 0, errors };
 };
 
+const validateDateStringIsValid = (val) => {
+  let errors = [];
+  if (validator.isEmpty(val)) {
+    errors.push(ErrorCodes.REQUIRED_VALUE);
+  }
+  if (!checkDateIsFutureDate(val)) {
+    errors.push(ErrorCodes.DATE_TIME_MUST_BE_FUTURE_DATE);
+  }
+  return { isValid: errors.length <= 0, errors };
+};
+
+const checkDateIsFutureDate = (dateAsString) => {
+  let now = new Date().getTime();
+  return new Date(dateAsString).getTime() > now;
+};
+
 const validateContent = (val) => {
   let errors = [];
 
@@ -81,6 +97,7 @@ module.exports = {
   validateName: validateName,
   validateEmail: validateEmail,
   validatePassword: validatePassword,
+  validateDateStringIsValid: validateDateStringIsValid,
   validateContent: validateContent,
   validateByContext: validateByContext,
 };

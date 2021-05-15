@@ -5,11 +5,15 @@ import { FormItem } from "../../contactus/components/FormItem";
 import { BasicCommonButton } from "../../components/BasicCommonButton";
 import { Modal } from "../../components/Modal";
 import "../style/workshopcreator.css";
+import { Constants } from "../../utility/Utils";
+import config from "../../config.json";
+import ResponsibleForm from "./ResponsibleForm";
 
 export const NEW_WORKSHOP_ID = "0";
 export default class WorkShopCreator extends BaseComponent {
   constructor(props) {
     super(props);
+    this.imageRef = React.createRef();
     this.state = {
       name: {
         value: "",
@@ -28,56 +32,53 @@ export default class WorkShopCreator extends BaseComponent {
       },
       workshopDate: {
         value: "",
+        erroneous: false,
+        errorCode: "",
       },
       applicationDeadline: {
         value: "",
+        erroneous: false,
+        errorCode: "",
       },
       location: {
         value: "",
         erroneous: false,
         errorCode: "",
       },
+      responsibles: [],
       image: null,
+      selectedResponsibleId: 0,
     };
   }
 
   updateFormValues = (e) => {
     let updatedFormValueName = e.target.name.toString();
-    let updateFormValue = e.target.value.toString();
-    this.setState(
-      (state) => {
-        return {
-          ...state,
-          [updatedFormValueName]: {
-            ...state[updatedFormValueName],
-            value: updateFormValue,
-          },
-        };
+    let updateFormValue = e.target.value;
+    this.setState((state) => ({
+      ...state,
+      [updatedFormValueName]: {
+        ...state[updatedFormValueName],
+        value: updateFormValue,
       },
-      () => console.log(this.state)
-    );
+    }));
   };
 
-  setStateByToBeUpdatedWorkshopValues = () => {
+  setStateByToBeUpdatedWorkshopValues = (exceptions) => {
     this.setState((state) => {
       let newValues = {};
-      for (const valueKey in state) {
-        if (valueKey === "image") continue;
-
-        state[valueKey]["value"] = this.props.selectedWorkshop[valueKey];
-        if (
-          !(valueKey == "workshopDate" && valueKey === "applicationDeadline")
-        ) {
-          state[valueKey]["erroneous"] = false;
-          state[valueKey]["errorCode"] = "";
-        }
-        newValues[valueKey] = state[valueKey];
+      for (const fieldName in state) {
+        if (exceptions.includes(fieldName)) continue;
+        state[fieldName]["value"] = this.props.selectedWorkshop[fieldName];
+        state[fieldName]["erroneous"] = false;
+        state[fieldName]["errorCode"] = "";
+        newValues[fieldName] = state[fieldName];
       }
       return { ...state, newValues };
     });
   };
 
   clearState = () => {
+    this.imageRef.current.value = null;
     this.setState({
       name: {
         value: "",
@@ -105,8 +106,103 @@ export default class WorkShopCreator extends BaseComponent {
         erroneous: false,
         errorCode: "",
       },
+      responsibles: [],
       image: null,
+      selectedResponsibleId: 0,
     });
+  };
+
+  createWorkShop = (e) => {
+    e.preventDefault();
+    let workshopDataValidationResult = this.validateWorkshopData();
+    if (!workshopDataValidationResult.isSuccess) return;
+    try {
+      this.sendCreateWorkShopPostRequest(async (res) => {
+        if (!res.isSuccess) alert("createWorkShopPostRequest unsuccessful");
+        else {
+          alert("createWorkShopPostRequest successful");
+          this.clearState();
+        }
+      });
+    } catch (error) {
+      alert(error.message);
+      this.clearState();
+    }
+  };
+
+  validateWorkshopData = () => {
+    let validationResult = this.context.Services.Validator.Validate({
+      schema: this.context.Services.Validator.Schemas.Workshop,
+      data: {
+        name: this.state.name.value,
+        category: this.state.category.value,
+        location: this.state.location.value,
+        applicationDeadline: this.state.applicationDeadline.value,
+        workshopDate: this.state.workshopDate.value,
+        content: this.state.content.value,
+      },
+    });
+    this.setWorkshopDataAfterValidationByErroneousState(
+      validationResult.errors,
+      ["responsibles", "image", "selectedResponsibleId"]
+    );
+    return validationResult;
+  };
+
+  setWorkshopDataAfterValidationByErroneousState = (
+    erroneousData,
+    notProcesseds
+  ) => {
+    for (const data in this.state) {
+      let dataIsErroneous = erroneousData.hasOwnProperty(data);
+      if (notProcesseds.includes(data)) continue;
+      else if (dataIsErroneous) {
+        this.setState({
+          [data]: {
+            value: "",
+            erroneous: true,
+            errorCode: erroneousData[data][0],
+          },
+        });
+      } else {
+        this.setState((state) => ({
+          [data]: {
+            ...state[data],
+            erroneous: false,
+            errorCode: "",
+          },
+        }));
+      }
+    }
+  };
+
+  sendCreateWorkShopPostRequest = (callback) => {
+    const formData = this.getCreateWorkShopPostRequestFormData();
+    this.context.Services.RequestSender.SendRequest(
+      Constants.HttpMethods.POST,
+      config.EndPoints["createWorkShop"],
+      callback,
+      formData,
+      null,
+      { "Content-Type": "multipart/form-data" }
+    );
+  };
+
+  getCreateWorkShopPostRequestFormData = () => {
+    const formData = new FormData();
+    if (this.state.image !== null)
+      formData.append("image", this.state.image, this.state.image.name);
+    formData.append("name", this.state.name.value);
+    formData.append("content", this.state.content.value);
+    formData.append("category", this.state.category.value);
+    formData.append(
+      "applicationDeadline",
+      this.state.applicationDeadline.value
+    );
+    formData.append("workshopDate", this.state.workshopDate.value);
+    formData.append("location", this.state.location.value);
+    // formData.append("responsibles", this.state.responsibles);
+    return formData;
   };
 
   componentDidUpdate(prevProps) {
@@ -117,7 +213,11 @@ export default class WorkShopCreator extends BaseComponent {
     let creationProcessStarting =
       this.props.selectedWorkshop._id === NEW_WORKSHOP_ID;
     if (creationProcessStarting) this.clearState();
-    else this.setStateByToBeUpdatedWorkshopValues();
+    else
+      this.setStateByToBeUpdatedWorkshopValues([
+        "image",
+        "selectedResponsibleId",
+      ]);
   }
 
   render() {
@@ -177,7 +277,11 @@ export default class WorkShopCreator extends BaseComponent {
                   type="datetime-local"
                   value={this.state.workshopDate.value}
                   onChange={this.updateFormValues}
-                  style={{ width: "100%" }}
+                  style={
+                    this.state.workshopDate.erroneous
+                      ? { width: "100%", borderBlockColor: "red" }
+                      : { width: "100%" }
+                  }
                 />
               </Col>
               <Col responsiveSystem={{ sm: 6, md: 3 }}>
@@ -189,7 +293,11 @@ export default class WorkShopCreator extends BaseComponent {
                   type="datetime-local"
                   value={this.state.applicationDeadline.value}
                   onChange={this.updateFormValues}
-                  style={{ width: "100%" }}
+                  style={
+                    this.state.applicationDeadline.erroneous
+                      ? { width: "100%", borderBlockColor: "red" }
+                      : { width: "100%" }
+                  }
                 />
               </Col>
               <Col responsiveSystem={{ sm: 12, md: 6 }}>
@@ -216,10 +324,33 @@ export default class WorkShopCreator extends BaseComponent {
                   multiple
                   class="form-control"
                   style={{ height: "58%" }}
-                ></select>
+                  onChange={(e) => {
+                    e.persist();
+                    this.setState({
+                      selectedResponsibleId: Number(e.target.value),
+                    });
+                  }}
+                >
+                  {this.state.responsibles.map((responsible) => {
+                    return (
+                      <option value={responsible.id}>{responsible.name}</option>
+                    );
+                  })}
+                </select>
                 <Row isCentered margins={{ t: 2 }}>
                   <Col>
-                    <button className="btn btn-danger float-right">
+                    <button
+                      className="btn btn-danger float-right"
+                      onClick={(e) => {
+                        this.setState((state) => ({
+                          ...state,
+                          responsibles: state.responsibles.filter(
+                            (responsible) =>
+                              responsible.id !== state.selectedResponsibleId
+                          ),
+                        }));
+                      }}
+                    >
                       Remove
                     </button>
                     <button
@@ -233,7 +364,19 @@ export default class WorkShopCreator extends BaseComponent {
                     </button>
                     <Modal
                       heading="New Responsible"
-                      content={<div>Hi !</div>}
+                      optionalButton={{ name: "Add", onClick: () => {} }}
+                      content={
+                        <ResponsibleForm
+                          addNewResponsible={(responsible) => {
+                            this.setState((state) => ({
+                              responsibles: [
+                                ...state.responsibles,
+                                responsible,
+                              ],
+                            }));
+                          }}
+                        />
+                      }
                     />
                   </Col>
                 </Row>
@@ -274,7 +417,7 @@ export default class WorkShopCreator extends BaseComponent {
               >
                 <BasicCommonButton
                   text={this.context.Dictionary?.Send}
-                  handleClick={this.sendPost}
+                  handleClick={this.createWorkShop}
                 />
               </Col>
             </Row>

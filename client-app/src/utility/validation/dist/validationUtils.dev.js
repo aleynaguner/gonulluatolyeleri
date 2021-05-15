@@ -64,6 +64,28 @@ var validatePassword = function validatePassword(val) {
   };
 };
 
+var validateDateStringIsValid = function validateDateStringIsValid(val) {
+  var errors = [];
+
+  if (validator.isEmpty(val)) {
+    errors.push(ErrorCodes.REQUIRED_VALUE);
+  }
+
+  if (!checkDateIsFutureDate(val)) {
+    errors.push(ErrorCodes.DATE_TIME_MUST_BE_FUTURE_DATE);
+  }
+
+  return {
+    isValid: errors.length <= 0,
+    errors: errors
+  };
+};
+
+var checkDateIsFutureDate = function checkDateIsFutureDate(dateAsString) {
+  var now = new Date().getTime();
+  return new Date(dateAsString).getTime() > now;
+};
+
 var validateContent = function validateContent(val) {
   var errors = [];
 
@@ -106,6 +128,7 @@ module.exports = {
   validateName: validateName,
   validateEmail: validateEmail,
   validatePassword: validatePassword,
+  validateDateStringIsValid: validateDateStringIsValid,
   validateContent: validateContent,
   validateByContext: validateByContext
 };
