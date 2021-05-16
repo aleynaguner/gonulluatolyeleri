@@ -8,12 +8,17 @@ import "../style/workshopcreator.css";
 import { Constants } from "../../utility/Utils";
 import config from "../../config.json";
 import ResponsibleForm from "./ResponsibleForm";
+import componentHelper from "../../utility/componentHelper";
 
 export const NEW_WORKSHOP_ID = "0";
 export default class WorkShopCreator extends BaseComponent {
   constructor(props) {
     super(props);
     this.imageRef = React.createRef();
+    this.updateFormValues =
+      componentHelper.FormManagement.createFromValuesUpdater(this);
+    this.setWorkshopDataAfterValidationByErroneousState =
+      componentHelper.FormManagement.createStateHandlerByErroneousState(this);
     this.state = {
       name: {
         value: "",
@@ -50,18 +55,6 @@ export default class WorkShopCreator extends BaseComponent {
       selectedResponsibleId: 0,
     };
   }
-
-  updateFormValues = (e) => {
-    let updatedFormValueName = e.target.name.toString();
-    let updateFormValue = e.target.value;
-    this.setState((state) => ({
-      ...state,
-      [updatedFormValueName]: {
-        ...state[updatedFormValueName],
-        value: updateFormValue,
-      },
-    }));
-  };
 
   setStateByToBeUpdatedWorkshopValues = (exceptions) => {
     this.setState((state) => {
@@ -147,33 +140,6 @@ export default class WorkShopCreator extends BaseComponent {
       ["responsibles", "image", "selectedResponsibleId"]
     );
     return validationResult;
-  };
-
-  setWorkshopDataAfterValidationByErroneousState = (
-    erroneousData,
-    notProcesseds
-  ) => {
-    for (const data in this.state) {
-      let dataIsErroneous = erroneousData.hasOwnProperty(data);
-      if (notProcesseds.includes(data)) continue;
-      else if (dataIsErroneous) {
-        this.setState({
-          [data]: {
-            value: "",
-            erroneous: true,
-            errorCode: erroneousData[data][0],
-          },
-        });
-      } else {
-        this.setState((state) => ({
-          [data]: {
-            ...state[data],
-            erroneous: false,
-            errorCode: "",
-          },
-        }));
-      }
-    }
   };
 
   sendCreateWorkShopPostRequest = (callback) => {

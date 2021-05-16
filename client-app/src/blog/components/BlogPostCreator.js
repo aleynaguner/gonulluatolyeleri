@@ -5,12 +5,16 @@ import { FormItem } from "../../contactus/components/FormItem";
 import { BasicCommonButton } from "../../components/BasicCommonButton";
 import { Constants } from "../../utility/Utils";
 import config from "../../config.json";
+import componentHelper from "../../utility/componentHelper";
 
 export default class BlogPostCreator extends BaseComponent {
   constructor(props) {
     super(props);
     this.imageRef = React.createRef();
-
+    this.updateFormValues =
+      componentHelper.FormManagement.createFromValuesUpdater(this);
+    this.setPostInfoAfterValidationByErroneousState =
+      componentHelper.FormManagement.createStateHandlerByErroneousState(this);
     this.state = {
       firstName: {
         value: "",
@@ -40,20 +44,6 @@ export default class BlogPostCreator extends BaseComponent {
       image: null,
     };
   }
-
-  updateFormValues = (e) => {
-    let updatedFormValueName = e.target.name.toString();
-    let updateFormValue = e.target.value.toString();
-    this.setState((state) => {
-      return {
-        ...state,
-        [updatedFormValueName]: {
-          ...state[updatedFormValueName],
-          value: updateFormValue,
-        },
-      };
-    });
-  };
 
   sendPost = (e) => {
     e.preventDefault();
@@ -87,34 +77,11 @@ export default class BlogPostCreator extends BaseComponent {
         content: this.state.content.value,
       },
     });
-    this.setPostInfoAfterValidationByErroneousState(validationResult.errors);
+    this.setPostInfoAfterValidationByErroneousState(validationResult.errors, [
+      "image",
+    ]);
 
     return validationResult;
-  };
-
-  setPostInfoAfterValidationByErroneousState = (erroneousData) => {
-    for (const data in this.state) {
-      let dataIsErroneous = erroneousData.hasOwnProperty(data);
-      if (dataIsErroneous) {
-        this.setState({
-          [data]: {
-            value: "",
-            erroneous: true,
-            errorCode: erroneousData[data][0],
-          },
-        });
-      } else {
-        this.setState((state) => {
-          return {
-            [data]: {
-              ...state[data],
-              erroneous: false,
-              errorCode: "",
-            },
-          };
-        });
-      }
-    }
   };
 
   sendCreateBlogPostRequest = (callback) => {
