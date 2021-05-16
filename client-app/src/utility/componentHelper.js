@@ -25,7 +25,7 @@ const createStateCleaner = (
   }.bind(componentReferrer);
 };
 
-const createStateHandlerByErroneousState = (componentReferrer) => {
+const createFormDataUpdaterByErroneousState = (componentReferrer) => {
   return function (erroneousData, notProcesseds) {
     for (const data in this.state) {
       if (notProcesseds.includes(data)) continue;
@@ -54,7 +54,7 @@ const createStateHandlerByErroneousState = (componentReferrer) => {
 
 const FormManagement = {
   createFromValuesUpdater: createFromValuesUpdater,
-  createStateHandlerByErroneousState: createStateHandlerByErroneousState,
+  createFormDataUpdaterByErroneousState: createFormDataUpdaterByErroneousState,
 };
 
 module.exports = { FormManagement };

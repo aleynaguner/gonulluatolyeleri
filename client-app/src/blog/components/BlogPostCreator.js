@@ -13,8 +13,8 @@ export default class BlogPostCreator extends BaseComponent {
     this.imageRef = React.createRef();
     this.updateFormValues =
       componentHelper.FormManagement.createFromValuesUpdater(this);
-    this.setPostInfoAfterValidationByErroneousState =
-      componentHelper.FormManagement.createStateHandlerByErroneousState(this);
+    this.updateFormDataByErroneousState =
+      componentHelper.FormManagement.createFormDataUpdaterByErroneousState(this);
     this.state = {
       firstName: {
         value: "",
@@ -77,9 +77,7 @@ export default class BlogPostCreator extends BaseComponent {
         content: this.state.content.value,
       },
     });
-    this.setPostInfoAfterValidationByErroneousState(validationResult.errors, [
-      "image",
-    ]);
+    this.updateFormDataByErroneousState(validationResult.errors, ["image"]);
 
     return validationResult;
   };

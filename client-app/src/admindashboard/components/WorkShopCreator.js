@@ -17,8 +17,10 @@ export default class WorkShopCreator extends BaseComponent {
     this.imageRef = React.createRef();
     this.updateFormValues =
       componentHelper.FormManagement.createFromValuesUpdater(this);
-    this.setWorkshopDataAfterValidationByErroneousState =
-      componentHelper.FormManagement.createStateHandlerByErroneousState(this);
+    this.updateFormDataByErroneousState =
+      componentHelper.FormManagement.createFormDataUpdaterByErroneousState(
+        this
+      );
     this.state = {
       name: {
         value: "",
@@ -135,10 +137,11 @@ export default class WorkShopCreator extends BaseComponent {
         content: this.state.content.value,
       },
     });
-    this.setWorkshopDataAfterValidationByErroneousState(
-      validationResult.errors,
-      ["responsibles", "image", "selectedResponsibleId"]
-    );
+    this.updateFormDataByErroneousState(validationResult.errors, [
+      "responsibles",
+      "image",
+      "selectedResponsibleId",
+    ]);
     return validationResult;
   };
 
