@@ -13,7 +13,8 @@
     "approveWaitingBlogPost": "/api/blogPost/approveWaitingBlogPost",
     "rejectWaitingBlogPost": "/api/blogPost/rejectWaitingBlogPost",
     "getAllWorkShops": "/api/workshop/getAllWorkShops",
-    "createWorkShop": "/api/workshop/createWorkShop"
+    "createWorkShop": "/api/workshop/createWorkShop",
+    "getWorkshopImageById": "/api/workshop/getImageById"
   },
   "ATUH_TOKEN_KEY_NAME": "authtoken",
   "CLIENT_INFO_API": "https://ipapi.co/json/",

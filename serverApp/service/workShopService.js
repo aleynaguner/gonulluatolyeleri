@@ -19,6 +19,12 @@ const prepareWorkShopToInsert = (workShop) => {
   workShop.viewCount = 0;
   workShop.participantCount = 0;
   workShop.comments = [];
+
+  let docId = workShop.imageInfo.id;
+  workShop.imageFileName = workShop.imageInfo.imageFileName;
+  delete workShop.imageInfo;
+
+  return docId;
 };
 class WorkShopService {
   constructor(workShopCollection) {
@@ -26,8 +32,8 @@ class WorkShopService {
   }
   createWorkShop = async (workShop) => {
     try {
-      prepareWorkShopToInsert(workShop);
-      await this.workShopCollection.insertOne(workShop, workShop.imageInfo.id);
+      let docId = prepareWorkShopToInsert(workShop);
+      await this.workShopCollection.insertOne(workShop, docId);
     } catch (error) {
       console.error(error);
       return utils.createProcessResult(false);
@@ -35,6 +41,10 @@ class WorkShopService {
     return utils.createProcessResult(true);
   };
   getAllWorkShops = async () => await this.workShopCollection.getAll();
+  getImageFileNameById = async (id) => {
+    let fileName = await this.workShopCollection.getImageFileNameById(id);
+    return fileName;
+  };
 }
 
 module.exports = (function () {

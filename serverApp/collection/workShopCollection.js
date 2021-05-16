@@ -25,6 +25,15 @@ class WorkShopCollection extends CollectionBase {
     }
     await this.collection.insertOne(doc);
   };
+
+  getImageFileNameById = async (id) => {
+    let workshopImageFileInfo = await this.collection.findOne(
+      { _id: new ObjectID(id) },
+      { projection: { imageFileName: 1 } }
+    );
+
+    return workshopImageFileInfo["imageFileName"];
+  };
 }
 
 module.exports = (function () {

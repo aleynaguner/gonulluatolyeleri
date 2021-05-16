@@ -2,8 +2,12 @@ import React, { Component } from "react";
 import { Row, Col } from "../../components/Grid";
 import { Link } from "react-router-dom";
 import "../style/workshop.css";
+import config from "../../config.json";
 
 export default class WorkShop extends Component {
+  createWorkshopImgSourceLinkById = () => {
+    return `${config.BASE_URL}${config.EndPoints["getWorkshopImageById"]}/${this.props.id}`;
+  };
   render() {
     return (
       <Col isCentered={true} margins={this.props.margins}>
