@@ -14,7 +14,8 @@ router.post(
   postImageUploader.single("image"),
   async (req, res) => {
     let processResult = await workShopService.createWorkShop(req.body);
-    // if processResult unsuccessfull delete created file
+    // TO-DO: imageInfo dan doc id si almak yerine file name update yapalım.
+    // Eğer processResult.isSuccessful değilse file ı silelim.
     res.status(200).send(processResult);
   }
 );

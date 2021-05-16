@@ -39,10 +39,6 @@ async function main() {
     router.use(express.static(path.join(__dirname, "../client-app/build")));
     router.use(express.static(config.fileStorePath));
     router.use(bodyParser());
-    router.use((req, res, next) => {
-      console.log(req);
-      next();
-    });
     router.use(cors());
     router.use(hostextension.authMiddleware);
     router.use(service.validationService.validationMiddleware);
@@ -59,10 +55,6 @@ async function main() {
         "/api/user/createUser": modelsValidator.createModel(
           `${model.modelValidatorModels.userModel.modelName}ForCreateUser`,
           model.modelValidatorModels.userModel.model
-        ),
-        "/api/workshop/createWorkShop": modelsValidator.createModel(
-          model.modelValidatorModels.workShopModel.modelName,
-          model.modelValidatorModels.workShopModel.model
         ),
       })
     );

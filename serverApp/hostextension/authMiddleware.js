@@ -11,15 +11,15 @@ const authMiddleware = async (request, response, next) => {
     !config.pathsToBeVerified.includes(request.path);
 
   if (pathToBeVerified) {
-    await next();
+    next();
     return;
   }
 
-  await jwt.verify(token, config.secretKey, async (error, decoded) => {
+  jwt.verify(token, config.secretKey, async (error, decoded) => {
     if (error) response.status(401).send();
     else {
       request.decode = decoded;
-      await next();
+      next();
     }
   });
 };

@@ -6,13 +6,15 @@ const Contants = require("../model/model").Contants;
 const prepareWorkShopToInsert = (workShop) => {
   workShop.applicationDeadline = new Date(workShop.applicationDeadline);
   workShop.workshopDate = new Date(workShop.workshopDate);
-  workShop.responsibles = workShop.responsibles.map((responsible) => {
-    let email = utils.hasDefaultValue(responsible.email.toString())
-      ? Contants.WorkShop.DefaultResponsibleMail
-      : responsible.email.toString();
-    let role = responsible.role.toUpperCase();
-    return new WorkShopResponsible(name, role, email);
-  });
+  workShop.responsibles = JSON.parse(workShop.responsibles).map(
+    (responsible) => {
+      let email = utils.hasDefaultValue(responsible.email.toString())
+        ? Contants.WorkShop.DefaultResponsibleMail
+        : responsible.email.toString();
+      let role = responsible.role.toUpperCase();
+      return new WorkShopResponsible(responsible.name, role, email);
+    }
+  );
   workShop.likeCount = 0;
   workShop.viewCount = 0;
   workShop.participantCount = 0;
@@ -25,7 +27,7 @@ class WorkShopService {
   createWorkShop = async (workShop) => {
     try {
       prepareWorkShopToInsert(workShop);
-      await this.workShopCollection.insertOne(workShop);
+      await this.workShopCollection.insertOne(workShop, workShop.imageInfo.id);
     } catch (error) {
       console.error(error);
       return utils.createProcessResult(false);

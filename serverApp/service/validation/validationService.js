@@ -13,7 +13,7 @@ const Schemas = {
 
 const validationMiddleware = async (request, response, next) => {
   let validationSchema = config.validationSchemasByEndPoints[request.path];
-  if (validationSchema === undefined) await next();
+  if (validationSchema === undefined) next();
   else {
     let validationResult = Validate({
       schema: validationSchema,
@@ -26,7 +26,7 @@ const validationMiddleware = async (request, response, next) => {
           utils.createProcessResult(false, validationResult.validationErrorCode)
         );
     } else {
-      await next();
+      next();
     }
   }
 };

@@ -170,7 +170,7 @@ export default class WorkShopCreator extends BaseComponent {
     );
     formData.append("workshopDate", this.state.workshopDate.value);
     formData.append("location", this.state.location.value);
-    // formData.append("responsibles", this.state.responsibles);
+    formData.append("responsibles", JSON.stringify(this.state.responsibles));
     return formData;
   };
 
