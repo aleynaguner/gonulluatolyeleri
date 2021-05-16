@@ -2,16 +2,13 @@ const createFromValuesUpdater = (componentReferrer) => {
   return function (e) {
     let updatedFormValueName = e.target.name.toString();
     let updateFormValue = e.target.value;
-    this.setState(
-      (state) => ({
-        ...state,
-        [updatedFormValueName]: {
-          ...state[updatedFormValueName],
-          value: updateFormValue,
-        },
-      }),
-      () => console.log(this.state)
-    );
+    this.setState((state) => ({
+      ...state,
+      [updatedFormValueName]: {
+        ...state[updatedFormValueName],
+        value: updateFormValue,
+      },
+    }));
   }.bind(componentReferrer);
 };
 
