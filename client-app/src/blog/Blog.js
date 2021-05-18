@@ -1,57 +1,24 @@
 import React from "react";
 import BaseComponent from "../utility/BaseComponent";
-import { Constants } from "../utility/Utils";
-import config from "../config.json";
 import { Container, Row, Col } from "../components/Grid";
 import Loading from "../components/Loading";
 import BlogPostCreator from "./components/BlogPostCreator";
 import BlogPostCard from "./components/BlogPostCard";
+import componentHelper from "../utility/componentHelper";
 
 export class Blog extends BaseComponent {
   constructor(props) {
     super(props);
+    this.loadBlogPosts = componentHelper.createListDataLoader({
+      componentReferrer: this,
+      listStatePropName: "blogPosts",
+      getDataEndpointKey: "getAllBlogPosts",
+    });
     this.state = {
       loading: true,
       blogPosts: [],
     };
   }
-
-  loadBlogPosts = async () => {
-    this.setState({
-      loading: true,
-    });
-
-    let allBlogPosts = await this.getAllBlogPosts();
-
-    this.setState(
-      {
-        loading: false,
-        blogPosts: allBlogPosts,
-      },
-      () => console.log("blogsLoaded", this.state.blogPosts)
-    );
-  };
-
-  getAllBlogPosts = async () => {
-    let getAllBlogPostsResponse = await this.sendAllBlogPostsRequest();
-    return getAllBlogPostsResponse.isSuccess
-      ? getAllBlogPostsResponse.responseData
-      : [];
-  };
-
-  sendAllBlogPostsRequest = async () => {
-    let response = {
-      isSuccess: false,
-    };
-    try {
-      response = await this.context.Services.RequestSender.AwaitableSendRequest(
-        Constants.HttpMethods.GET,
-        config.EndPoints["getAllBlogPosts"]
-      );
-    } catch (error) {}
-
-    return response;
-  };
 
   async componentDidMount() {
     await this.loadBlogPosts();

@@ -1,12 +1,6 @@
 import React from "react";
 import BaseComponent from "../../utility/BaseComponent";
 import { Container, Row, Col } from "../../components/Grid";
-import { CommonButton } from "../../components/CommonButton";
-import {
-  BasicCommonButton,
-  BasicCommonButtonColor,
-  BasicCommonButtonType,
-} from "../../components/BasicCommonButton";
 import ReadMoreButton from "./ReadMoreButton";
 
 export default class BlogPostCard extends BaseComponent {
@@ -43,13 +37,6 @@ export default class BlogPostCard extends BaseComponent {
                 marginLeft: "0.8em",
               }}
             >
-              {/* <BasicCommonButton
-                text={this.context.Dictionary?.ReadMore}
-                type={BasicCommonButtonType.ShadowOnHover}
-                color={BasicCommonButtonColor.Green}
-                
-                handleClick={(e) => {}}
-              /> */}
               <ReadMoreButton customStyle={{ marginRight: "1.5em" }} />
               <strong style={{ whiteSpace: "nowrap" }}>No Comment</strong>
             </div>

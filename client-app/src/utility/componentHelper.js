@@ -1,3 +1,6 @@
+const Constants = require("../utility/Utils").Constants;
+const config = require("../config.json");
+
 const createFromValuesUpdater = (componentReferrer) => {
   return function (e) {
     let updatedFormValueName = e.target.name.toString();
@@ -52,9 +55,35 @@ const createFormDataUpdaterByErroneousState = (componentReferrer) => {
   }.bind(componentReferrer);
 };
 
+const createListDataLoader = (context) => {
+  return async function () {
+    debugger;
+    this.setState({
+      loading: true,
+    });
+    let data;
+    let getResponse;
+    try {
+      getResponse =
+        await this.context.Services.RequestSender.AwaitableSendRequest(
+          Constants.HttpMethods.GET,
+          config.EndPoints[context.getDataEndpointKey]
+        );
+    } catch (error) {
+      getResponse.isSuccess = false;
+    } finally {
+      data = getResponse.isSuccess ? getResponse.responseData : [];
+    }
+    this.setState({
+      [context.listStatePropName]: data,
+      loading: false,
+    });
+  }.bind(context.componentReferrer);
+};
+
 const FormManagement = {
   createFromValuesUpdater: createFromValuesUpdater,
   createFormDataUpdaterByErroneousState: createFormDataUpdaterByErroneousState,
 };
 
-module.exports = { FormManagement };
+module.exports = { FormManagement, createListDataLoader };
