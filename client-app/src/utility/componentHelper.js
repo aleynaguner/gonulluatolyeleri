@@ -57,12 +57,11 @@ const createFormDataUpdaterByErroneousState = (componentReferrer) => {
 
 const createListDataLoader = (context) => {
   return async function () {
-    debugger;
     this.setState({
       loading: true,
     });
     let data;
-    let getResponse;
+    let getResponse = {};
     try {
       getResponse =
         await this.context.Services.RequestSender.AwaitableSendRequest(
@@ -70,8 +69,10 @@ const createListDataLoader = (context) => {
           config.EndPoints[context.getDataEndpointKey]
         );
     } catch (error) {
+      console.error("error", error);
       getResponse.isSuccess = false;
     } finally {
+      console.log(getResponse);
       data = getResponse.isSuccess ? getResponse.responseData : [];
     }
     this.setState({

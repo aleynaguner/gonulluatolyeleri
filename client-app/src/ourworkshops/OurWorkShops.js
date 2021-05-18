@@ -1,8 +1,24 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from "../components/Grid";
 import WorkShop from "./components/WorkShop";
+import componentHelper from "../utility/componentHelper";
 
 export class OurWorkShops extends Component {
+  constructor(props) {
+    super(props);
+    this.loadWorkshops = componentHelper.createListDataLoader({
+      componentReferrer: this,
+      listStatePropName: "workshops",
+      getDataEndpointKey: "getAllWorkShops",
+    });
+    this.state = {
+      loading: false,
+      workshops: [],
+    };
+  }
+  async componentDidMount() {
+    await this.loadWorkshops();
+  }
   render() {
     return (
       <Container>
