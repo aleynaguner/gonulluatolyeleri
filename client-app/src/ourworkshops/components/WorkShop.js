@@ -9,6 +9,7 @@ import "../style/workshop.css";
 class WorkShopContent extends BaseComponent {
   constructor(props) {
     super(props);
+    this.workshopImgSourceLink = `${config.BASE_URL}${config.EndPoints["getWorkshopImageById"]}/${this.props.content._id}`;
   }
   static propTypes = {
     match: PropTypes.object.isRequired,
@@ -16,11 +17,8 @@ class WorkShopContent extends BaseComponent {
     history: PropTypes.object.isRequired,
   };
 
-  createWorkshopImgSourceLinkById = () => {
-    return `${config.BASE_URL}${config.EndPoints["getWorkshopImageById"]}/${this.props.content._id}`;
-  };
-
   goDetail = (e) => {
+    e.preventDefault();
     this.incrementViewCount();
     this.props.history.push({
       pathname: `/ourworkshops/${this.props.content._id}`,
@@ -28,9 +26,7 @@ class WorkShopContent extends BaseComponent {
     });
   };
 
-  incrementViewCount = () => {
-    this.sendIncrementViewCountRequest();
-  };
+  incrementViewCount = () => this.sendIncrementViewCountRequest();
 
   sendIncrementViewCountRequest = () => {
     try {
@@ -48,7 +44,7 @@ class WorkShopContent extends BaseComponent {
           <Row>
             <Col id="workshopcard">
               <img
-                src={this.createWorkshopImgSourceLinkById()}
+                src={this.workshopImgSourceLink}
                 alt="Avatar"
                 class="topContentImage"
               />
