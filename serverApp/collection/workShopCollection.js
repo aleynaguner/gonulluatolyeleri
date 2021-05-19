@@ -34,6 +34,13 @@ class WorkShopCollection extends CollectionBase {
 
     return workshopImageFileInfo["imageFileName"];
   };
+
+  incrementViewCount = async (workshopId) => {
+    await this.collection.update(
+      { _id: new ObjectID(workshopId) },
+      { $inc: { viewCount: 1 } }
+    );
+  };
 }
 
 module.exports = (function () {

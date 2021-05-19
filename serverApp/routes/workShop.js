@@ -9,7 +9,7 @@ const workShopService =
 
 const workshopimagesbyidPath = path.join(
   config.fileStorePath,
-  "postimagesbyid"
+  "workshopimagesbyid"
 );
 const imageUploader =
   require("../hostextension/hostextension").imageUploader.createImageUploader({
@@ -44,6 +44,13 @@ router.get("/getImageById/:id", async (req, res) => {
       "x-sent": true,
     },
   });
+});
+
+router.put("/incrementViewCount/:id", async (req, res) => {
+  let processResult = await workShopService.incrementViewCount(
+    req.params.id.trim()
+  );
+  res.status(200).send(processResult);
 });
 
 module.exports = router;

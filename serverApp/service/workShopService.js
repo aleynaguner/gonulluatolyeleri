@@ -3,6 +3,9 @@ const utils = require("./utils");
 const WorkShopResponsible = require("../model/model").WorkShopResponsible;
 const Contants = require("../model/model").Contants;
 
+const logError = (methodName, error) =>
+  utils.logError("WorkShopService", methodName, error);
+
 const prepareWorkShopToInsert = (workShop) => {
   workShop.applicationDeadline = new Date(workShop.applicationDeadline);
   workShop.workshopDate = new Date(workShop.workshopDate);
@@ -21,11 +24,12 @@ const prepareWorkShopToInsert = (workShop) => {
   workShop.comments = [];
 
   let docId = workShop.imageInfo.id;
-  workShop.imageFileName = workShop.imageInfo.imageFileName;
+  workShop.imageFileName = workShop.imageInfo.fileName;
   delete workShop.imageInfo;
 
   return docId;
 };
+
 class WorkShopService {
   constructor(workShopCollection) {
     this.workShopCollection = workShopCollection;
@@ -40,10 +44,22 @@ class WorkShopService {
     }
     return utils.createProcessResult(true);
   };
+
   getAllWorkShops = async () => await this.workShopCollection.getAll();
+
   getImageFileNameById = async (id) => {
     let fileName = await this.workShopCollection.getImageFileNameById(id);
     return fileName;
+  };
+
+  incrementViewCount = async (workshopId) => {
+    try {
+      await this.workShopCollection.incrementViewCount(workshopId);
+    } catch (error) {
+      logError("incrementViewCount", error);
+      return utils.createProcessResult(false);
+    }
+    return utils.createProcessResult(true);
   };
 }
 

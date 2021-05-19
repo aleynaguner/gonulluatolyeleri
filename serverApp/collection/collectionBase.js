@@ -14,6 +14,13 @@ class CollectionBase {
     await this.collection.insertOne(doc);
   };
 
+  updateById = async (id, updatedFields) => {
+    await this.collection.updateOne(
+      { id: new ObjectID(id) },
+      { $set: updatedFields }
+    );
+  };
+
   getAll = async () => {
     let all = await this.collection.find({});
     return all.toArray();

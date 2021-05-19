@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Container, Row, Col } from "../../components/Grid";
+import { Container, Row } from "../../components/Grid";
+import { withRouter } from "react-router-dom";
 
-export default class WorkShopDetail extends Component {
+class WorkShopDetailContent extends Component {
   render() {
     return (
       <Container>
@@ -12,3 +13,9 @@ export default class WorkShopDetail extends Component {
     );
   }
 }
+
+const WorkShopDetail = withRouter((props) => (
+  <WorkShopDetailContent {...props} />
+));
+
+export default WorkShopDetail;

@@ -25,7 +25,6 @@ import WorkShopDetail from "./ourworkshops/components/WorkShopDetail";
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       Config: null,
     };

@@ -67,6 +67,10 @@ const createProcessResult = (
   };
 };
 
+const logError = (serviceName, methodName, error) => {
+  console.error(`Error occurred when ${serviceName}.${methodName}:`, error);
+};
+
 const HttpStatus = {
   OK: 200,
 };
@@ -79,6 +83,7 @@ module.exports = (function () {
     hasDefaultValue,
     testRegularExpression,
     createProcessResult,
+    logError: logError,
     HttpStatus,
   };
 })();

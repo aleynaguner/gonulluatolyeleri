@@ -69,7 +69,6 @@ const createListDataLoader = (context) => {
           config.EndPoints[context.getDataEndpointKey]
         );
     } catch (error) {
-      console.error("error", error);
       getResponse.isSuccess = false;
     } finally {
       console.log(getResponse);
