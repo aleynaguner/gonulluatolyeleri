@@ -22,6 +22,7 @@ export default class ResponsibleForm extends Component {
     });
   };
   addNewResponsible = (e) => {
+    console.log(this.state)
     this.props.addNewResponsible({ id: new Date().getTime(), ...this.state });
     this.setState({ name: "", email: "", role: "" });
   };
@@ -57,9 +58,9 @@ export default class ResponsibleForm extends Component {
               <select
                 id="role"
                 class="form-select"
-                aria-label="Default select example"
+                value={this.state.role}
               >
-                <option value="1">Organizer</option>
+                <option value="1" selected>Organizer</option>
                 <option value="2">Speaker</option>
               </select>
             </Col>

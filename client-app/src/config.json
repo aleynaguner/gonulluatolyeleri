@@ -91,6 +91,30 @@
     "MIN_LENGTH": {
       "TR": "Minimum uzuluk girilmeli !",
       "ENG": "Minimum uzuluk girilmeli !"
+    },
+    "DATE" : {
+      "TR": "Tarih: ${DYNAMIC}",
+      "ENG": "Date: ${DYNAMIC}"
+    },
+    "LOCATION" : {
+      "TR": "Yer: ${DYNAMIC}",
+      "ENG": "Location: ${DYNAMIC}"
+    },
+    "PARTICIPANTS_COUNT" : {
+      "TR": "Katılımcı: ${DYNAMIC}",
+      "ENG": "Participants: ${DYNAMIC}"
+    },
+    "WORKSHOP_SPEAKERS": {
+      "TR": "Konuşmacılar: ${DYNAMIC}",
+      "ENG": "Speakers: ${DYNAMIC}"
+    },
+    "WORKSHOP_ORGANIZERS" : {
+      "TR": "Atölye Sorumluları: ${DYNAMIC}",
+      "ENG": "Workshop Responsibles: ${DYNAMIC}"
+    },
+    "WORKSHOP_CONTENT" : {
+      "TR": "Atölye İçeriği: ${DYNAMIC}",
+      "ENG": "Workshop Content: ${DYNAMIC}"
     }
   }
 }

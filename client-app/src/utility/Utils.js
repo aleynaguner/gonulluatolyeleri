@@ -17,7 +17,7 @@ export const getDefaultValue = (type) => {
     case "boolean":
       return false;
     case "function":
-      return function () {};
+      return function () { };
     case "null":
       return null;
     case "number":
@@ -86,4 +86,8 @@ export const Constants = {
     User: "User",
     Admin: "Admin",
   },
+  WorkshopResponsibleRole: {
+    Organizer: 1,
+    Speaker: 2,
+  }
 };
