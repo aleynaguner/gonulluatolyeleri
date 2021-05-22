@@ -17,7 +17,7 @@ export const getDefaultValue = (type) => {
     case "boolean":
       return false;
     case "function":
-      return function () { };
+      return function () {};
     case "null":
       return null;
     case "number":
@@ -72,6 +72,20 @@ export const formatByDynamicValueIfExist = (completeString, dynamicVal) => {
   return completeString;
 };
 
+export const convertStringArrayToStringWithCommas = (stringArray) => {
+  let stringWithComma = "";
+  for (let ix = 0; ix < stringArray.length; ix++) {
+    stringWithComma += stringArray[ix];
+    if (ix !== stringArray.length - 1) stringArray += ", ";
+  }
+  return stringWithComma;
+};
+
+export const formatDateString = (dateString) => {
+  let date = new Date(dateString);
+  return `${date.getDay()}/${date.getMonth()}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
+};
+
 export const Constants = {
   HttpMethods: {
     GET: "GET",
@@ -89,5 +103,5 @@ export const Constants = {
   WorkshopResponsibleRole: {
     Organizer: 1,
     Speaker: 2,
-  }
+  },
 };

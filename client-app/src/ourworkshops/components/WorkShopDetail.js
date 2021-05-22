@@ -3,7 +3,12 @@ import { Container, Row, Col } from "../../components/Grid";
 import config from "../../config.json";
 import { withRouter } from "react-router-dom";
 import { CommonButton } from "../../components/CommonButton";
-import { formatByDynamicValueIfExist, Constants } from "../../utility/Utils"
+import {
+  formatByDynamicValueIfExist,
+  Constants,
+  convertStringArrayToStringWithCommas,
+  formatDateString,
+} from "../../utility/Utils";
 import BaseComponent from "../../utility/BaseComponent";
 
 class WorkShopDetailContent extends BaseComponent {
@@ -13,51 +18,101 @@ class WorkShopDetailContent extends BaseComponent {
   }
 
   checkSpeakerExist = () => {
-    return this.props.location.state.responsibles.some(responsible => responsible.role === Constants.WorkshopResponsibleRole.Speaker)
-  }
-
-  convertStringArrayToStringWithComma = (stringArray) => {
-    console.log(stringArray)
-    let stringWithComma = "";
-    for (let ix = 0; ix < stringArray.length; ix++) {
-      stringWithComma += stringArray[ix];
-      if (ix !== stringArray.length - 1)
-        stringArray += ", ";
-    }
-    return stringWithComma;
-  }
-
-  formatDate = () => {
-
-  }
+    return this.props.location.state.responsibles.some(
+      (responsible) =>
+        responsible.role === Constants.WorkshopResponsibleRole.Speaker
+    );
+  };
 
   render() {
-    const { name, workshopDate, location, participantCount, responsibles, content } = this.props.location.state;
-    console.log(this.props.location.state)
+    const {
+      name,
+      workshopDate,
+      location,
+      participantCount,
+      responsibles,
+      content,
+    } = this.props.location.state;
     return (
-      <Container>
-        <Row isCentered><p className="h3 font-weight-normal">{this.props.id}</p></Row>
-        <Row isCentered><p className="h3 font-weight-normal">{name}</p></Row>
+      <Container customStyle={{ marginTop: "7%" }}>
         <Row isCentered>
-          <Col responsiveSystem={{ sm: 12, md: 6 }} id="workshopcard">
-            <img
-              src={this.workshopImgSourceLink}
-              alt="Avatar"
-              class="topContentImage"
-            />
-            <CommonButton
-              text="Apply"
-              customStyle={{ width: "10em", height: "auto", float: "left" }}
-            />
+          <Col responsiveSystem={{ sm: 12, md: 1 }} />
+          <Col id="workshopcard" responsiveSystem={{ sm: 12, md: 5 }}>
+            <Row isCentered>
+              <div style={{ width: "70%", height: "auto" }}>
+                <img
+                  src={this.workshopImgSourceLink}
+                  alt="Avatar"
+                  class="topContentImage"
+                />
+                <CommonButton
+                  text="Apply"
+                  customStyle={{
+                    width: "10em",
+                    height: "auto",
+                    marginTop: "1em",
+                    float: "right",
+                  }}
+                />
+              </div>
+            </Row>
           </Col>
-          <Col responsiveSystem={{ sm: 12, md: 6 }}>
-            <p>{formatByDynamicValueIfExist(this.context.Dictionary["DATE"], workshopDate)}</p>
-            <p>{formatByDynamicValueIfExist(this.context.Dictionary["LOCATION"], location)}</p>
-            <p>{formatByDynamicValueIfExist(this.context.Dictionary["PARTICIPANTS_COUNT"], participantCount)}</p>
-            <p>{this.checkSpeakerExist() ? formatByDynamicValueIfExist(this.context.Dictionary["WORKSHOP_SPEAKERS"], this.convertStringArrayToStringWithComma(responsibles.filter(responsible => responsible.role === Constants.WorkshopResponsibleRole.Speaker))) : null}</p>
-            <p>{this.checkSpeakerExist() ? formatByDynamicValueIfExist(this.context.Dictionary["WORKSHOP_ORGANIZERS"], this.convertStringArrayToStringWithComma(responsibles.filter(responsible => responsible.role === Constants.WorkshopResponsibleRole.Organizer))) : null}</p>
-            <p>{formatByDynamicValueIfExist(this.context.Dictionary["WORKSHOP_CONTENT"], content)}</p>
+          <Col responsiveSystem={{ sm: 12, md: 5 }}>
+            <p>
+              {formatByDynamicValueIfExist(
+                this.context.Dictionary["DATE"],
+                formatDateString(workshopDate)
+              )}
+            </p>
+            <p>
+              {formatByDynamicValueIfExist(
+                this.context.Dictionary["LOCATION"],
+                location
+              )}
+            </p>
+            <p>
+              {formatByDynamicValueIfExist(
+                this.context.Dictionary["PARTICIPANTS_COUNT"],
+                participantCount
+              )}
+            </p>
+            <p>
+              {this.checkSpeakerExist()
+                ? formatByDynamicValueIfExist(
+                    this.context.Dictionary["WORKSHOP_SPEAKERS"],
+                    convertStringArrayToStringWithCommas(
+                      responsibles.filter(
+                        (responsible) =>
+                          responsible.role ===
+                          Constants.WorkshopResponsibleRole.Speaker
+                      )
+                    )
+                  )
+                : null}
+            </p>
+            <p>
+              {this.checkSpeakerExist()
+                ? formatByDynamicValueIfExist(
+                    this.context.Dictionary["WORKSHOP_ORGANIZERS"],
+                    convertStringArrayToStringWithCommas(
+                      responsibles.filter(
+                        (responsible) =>
+                          responsible.role ===
+                          Constants.WorkshopResponsibleRole.Organizer
+                      )
+                    )
+                  )
+                : null}
+            </p>
+            <br />
+            <p>
+              {formatByDynamicValueIfExist(
+                this.context.Dictionary["WORKSHOP_CONTENT"],
+                content
+              )}
+            </p>
           </Col>
+          <Col responsiveSystem={{ sm: 12, md: 1 }} />
         </Row>
       </Container>
     );
