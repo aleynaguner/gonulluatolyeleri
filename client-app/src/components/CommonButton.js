@@ -1,12 +1,10 @@
-import React from "react";
+import React, { Component } from "react";
 import "./style/volunteerButton.css";
-import { Component } from "react";
 
 const defaultStyles = {
   width: "100%",
   height: "auto",
 };
-
 export class CommonButton extends Component {
   constructor(props) {
     super(props);

@@ -1,6 +1,5 @@
 .bubbly-button {
   display: inline-block;
-  font-size: 1em;
   padding: 1em 2em;
   -webkit-appearance: none;
   appearance: none;
@@ -19,10 +18,9 @@
 .bubbly-button:before,
 .bubbly-button:after {
   position: absolute;
-  content: "";
   display: block;
-  width: 140%;
-  height: 100%;
+  width: 100%;
+  height: auto;
   left: -20%;
   z-index: -1000;
   transition: all ease-in-out 0.5s;
