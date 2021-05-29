@@ -15,6 +15,7 @@ class WorkShopDetailContent extends BaseComponent {
   constructor(props) {
     super(props);
     this.workshopImgSourceLink = `${config.BASE_URL}${config.EndPoints["getWorkshopImageById"]}/${this.props.id}`;
+    this.detailInfo = this.props.location.state;
   }
 
   checkSpeakerExist = () => {
@@ -25,92 +26,6 @@ class WorkShopDetailContent extends BaseComponent {
   };
 
   render() {
-    const {
-      name,
-      workshopDate,
-      location,
-      participantCount,
-      responsibles,
-      content,
-    } = this.props.location.state;
-    //#region
-    // return (
-    //   <div className="container-fluid">
-    //     <div className="row">
-    //       <div className="col-sm-12 col-md-12 col-lg-6">
-    //         <div style={{ display: "flex", justifyContent: "flex-end" }}>
-    //           <img src={this.workshopImgSourceLink} style={{ width: "70%" }} />
-    //         </div>
-    //         <br />
-    //         <CommonButton
-    //           text="Apply"
-    //           customStyle={{
-    //             width: "15%",
-    //             height: "auto",
-    //             marginTop: "1em",
-    //             float: "right",
-    //           }}
-    //         />
-    //       </div>
-    //       <div className="col-sm-12 col-md-12 col-lg-6">
-    //         <p>
-    //           {formatByDynamicValueIfExist(
-    //             this.context.Dictionary["DATE"],
-    //             formatDateString(workshopDate)
-    //           )}
-    //         </p>
-    //         <p>
-    //           {formatByDynamicValueIfExist(
-    //             this.context.Dictionary["LOCATION"],
-    //             location
-    //           )}
-    //         </p>
-    //         <p>
-    //           {formatByDynamicValueIfExist(
-    //             this.context.Dictionary["PARTICIPANTS_COUNT"],
-    //             participantCount
-    //           )}
-    //         </p>
-    //         <p>
-    //           {this.checkSpeakerExist()
-    //             ? formatByDynamicValueIfExist(
-    //                 this.context.Dictionary["WORKSHOP_SPEAKERS"],
-    //                 convertStringArrayToStringWithCommas(
-    //                   responsibles.filter(
-    //                     (responsible) =>
-    //                       responsible.role ===
-    //                       Constants.WorkshopResponsibleRole.Speaker
-    //                   )
-    //                 )
-    //               )
-    //             : null}
-    //         </p>
-    //         <p>
-    //           {this.checkSpeakerExist()
-    //             ? formatByDynamicValueIfExist(
-    //                 this.context.Dictionary["WORKSHOP_ORGANIZERS"],
-    //                 convertStringArrayToStringWithCommas(
-    //                   responsibles.filter(
-    //                     (responsible) =>
-    //                       responsible.role ===
-    //                       Constants.WorkshopResponsibleRole.Organizer
-    //                   )
-    //                 )
-    //               )
-    //             : null}
-    //         </p>
-    //         <br />
-    //         <p>
-    //           {formatByDynamicValueIfExist(
-    //             this.context.Dictionary["WORKSHOP_CONTENT"],
-    //             content
-    //           )}
-    //         </p>
-    //       </div>
-    //     </div>
-    //   </div>
-    // );
-    //#endregion
     return (
       <Grid fluid>
         <br />
@@ -143,19 +58,19 @@ class WorkShopDetailContent extends BaseComponent {
             <p>
               {formatByDynamicValueIfExist(
                 this.context.Dictionary["DATE"],
-                formatDateString(workshopDate)
+                formatDateString(this.detailInfo.workshopDate)
               )}
             </p>
             <p>
               {formatByDynamicValueIfExist(
                 this.context.Dictionary["LOCATION"],
-                location
+                this.detailInfo.location
               )}
             </p>
             <p>
               {formatByDynamicValueIfExist(
                 this.context.Dictionary["PARTICIPANTS_COUNT"],
-                participantCount
+                this.detailInfo.participantCount
               )}
             </p>
             <p>
@@ -163,7 +78,7 @@ class WorkShopDetailContent extends BaseComponent {
                 ? formatByDynamicValueIfExist(
                     this.context.Dictionary["WORKSHOP_SPEAKERS"],
                     convertStringArrayToStringWithCommas(
-                      responsibles.filter(
+                      this.detailInfo.responsibles.filter(
                         (responsible) =>
                           responsible.role ===
                           Constants.WorkshopResponsibleRole.Speaker
@@ -177,7 +92,7 @@ class WorkShopDetailContent extends BaseComponent {
                 ? formatByDynamicValueIfExist(
                     this.context.Dictionary["WORKSHOP_ORGANIZERS"],
                     convertStringArrayToStringWithCommas(
-                      responsibles.filter(
+                      this.detailInfo.responsibles.filter(
                         (responsible) =>
                           responsible.role ===
                           Constants.WorkshopResponsibleRole.Organizer
@@ -190,7 +105,7 @@ class WorkShopDetailContent extends BaseComponent {
             <p>
               {formatByDynamicValueIfExist(
                 this.context.Dictionary["WORKSHOP_CONTENT"],
-                content
+                this.detailInfo.content
               )}
             </p>
           </Col>
