@@ -1,7 +1,7 @@
 console.log("userService module reading...");
 
 const bcrypt = require("bcrypt");
-const utils = require("./utils");
+const utils = require("../utilities/utils");
 
 class UserService {
   constructor(userCollection) {

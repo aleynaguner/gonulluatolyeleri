@@ -19,7 +19,7 @@ class WorkShopDetailContent extends BaseComponent {
   }
 
   checkSpeakerExist = () => {
-    return this.props.location.state.responsibles.some(
+    return this.detailInfo.responsibles.some(
       (responsible) =>
         responsible.role === Constants.WorkshopResponsibleRole.Speaker
     );

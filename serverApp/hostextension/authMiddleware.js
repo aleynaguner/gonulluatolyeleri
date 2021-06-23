@@ -2,7 +2,7 @@ console.log("middlewareExtension module reading...");
 
 const jwt = require("jsonwebtoken");
 const config = require("../config");
-const utils = require("../service/utils");
+const utils = require("../utilities/utils");
 
 const authMiddleware = async (request, response, next) => {
   const token = getAuthTokenFromRequest(request);

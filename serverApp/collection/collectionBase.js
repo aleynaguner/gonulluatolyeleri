@@ -1,5 +1,4 @@
 const ObjectID = require("mongodb").ObjectID;
-
 class CollectionBase {
   collection = undefined;
 

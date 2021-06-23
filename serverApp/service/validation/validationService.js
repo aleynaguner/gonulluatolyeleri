@@ -1,7 +1,7 @@
 const config = require("../../config");
 const validationUtils = require("./validationUtils");
 const workshopValidator = require("./validators/workshopValidator");
-const utils = require("../utils");
+const utils = require("../../utilities/utils");
 
 const validators = {
   WorkshopValidator: workshopValidator,

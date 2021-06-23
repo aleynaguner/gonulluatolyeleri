@@ -1,5 +1,5 @@
 console.log("workShopService module reading...");
-const utils = require("./utils");
+const utils = require("../utilities/utils");
 const WorkShopResponsible = require("../model/model").WorkShopResponsible;
 const Contants = require("../model/model").Contants;
 
@@ -60,6 +60,11 @@ class WorkShopService {
       return utils.createProcessResult(false);
     }
     return utils.createProcessResult(true);
+  };
+
+  deleteWorkshopById = async (id) => {
+    let deleteWorkshopByIdResult = await this.workShopCollection.deleteById(id);
+    return deleteWorkshopByIdResult;
   };
 }
 

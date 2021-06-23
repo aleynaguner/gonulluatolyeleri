@@ -2,7 +2,7 @@ console.log("service module reading...");
 
 const config = require("../config");
 const collection = require("../collection/collection");
-const utils = require("./utils");
+const utils = require("../utilities/utils");
 
 const mongoDBService = require("./mongoDBService");
 async function createCollections() {

@@ -39,7 +39,7 @@ class WorkShopContent extends BaseComponent {
 
   render() {
     return (
-      <Col isCentered={true} margins={this.props.margins}>
+      <Col isCentered={true} margins={this.props.margins} style={{minWidth: "30%"}}>
         <a onClick={this.goDetail}>
           <Row>
             <Col id="workshopcard">

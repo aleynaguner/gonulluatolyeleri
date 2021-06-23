@@ -15,7 +15,8 @@
     "getAllWorkShops": "/api/workshop/getAllWorkShops",
     "createWorkShop": "/api/workshop/createWorkShop",
     "getWorkshopImageById": "/api/workshop/getImageById",
-    "incrementViewCount": "/api/workshop/incrementViewCount"
+    "incrementViewCount": "/api/workshop/incrementViewCount",
+    "deleteWorkshopById": "/api/workshop/deleteWorkshopById"
   },
   "ATUH_TOKEN_KEY_NAME": "authtoken",
   "CLIENT_INFO_API": "https://ipapi.co/json/",

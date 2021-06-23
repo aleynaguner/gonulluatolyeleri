@@ -11,7 +11,7 @@ const model = require("./model/model");
 const _service = require("./service/service");
 
 const hostextension = require("./hostextension/hostextension");
-const utils = require("./service/utils");
+const utils = require("./utilities/utils");
 //#endregion
 
 async function main() {

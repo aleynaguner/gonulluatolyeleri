@@ -107,7 +107,7 @@ export default class WorkShopCreator extends BaseComponent {
     });
   };
 
-  createWorkShop = (e) => {
+  createWorkShop = async (e) => {
     e.preventDefault();
     let workshopDataValidationResult = this.validateWorkshopData();
     if (!workshopDataValidationResult.isSuccess) return;
@@ -122,6 +122,8 @@ export default class WorkShopCreator extends BaseComponent {
     } catch (error) {
       alert(error.message);
       this.clearState();
+    } finally {
+      await this.props.onWorkshopCreated();
     }
   };
 

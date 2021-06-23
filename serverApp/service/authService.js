@@ -1,6 +1,6 @@
 console.log("authService module reading...");
 
-const utils = require("./utils");
+const utils = require("../utilities/utils");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 

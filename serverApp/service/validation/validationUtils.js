@@ -1,5 +1,5 @@
 const validator = require("validator");
-const utils = require("../utils");
+const utils = require("../../utilities/utils");
 const validationErrorCodes = require("./validationErrorCodes");
 
 const createValidationResult = (

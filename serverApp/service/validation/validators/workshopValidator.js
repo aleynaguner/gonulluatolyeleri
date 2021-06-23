@@ -1,6 +1,6 @@
 const validator = require("validator");
 const validationUtils = require("../validationUtils");
-const utils = require("../../utils");
+const utils = require("../../../utilities/utils");
 const validationErrorCodes = require("../validationErrorCodes");
 const modelConstants = require("../../../model/model").Contants.WorkShop;
 

@@ -1,7 +1,7 @@
 console.log("blogPostService module reading...");
 const documentConstants = require("../collection/documentsConstants").blogPost;
 
-const utils = require("./utils");
+const utils = require("../utilities/utils");
 
 class BlogPostService {
   constructor(blogPostCollection) {

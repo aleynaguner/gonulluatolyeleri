@@ -4,15 +4,20 @@ import { Container, Row, Col } from "../../components/Grid";
 import WorkShopCreator, { NEW_WORKSHOP_ID } from "./WorkShopCreator";
 import Loading from "../../components/Loading";
 import config from "../../config.json";
-import { Constants } from "../../utility/Utils";
+import { Constants, hasDefaultValue } from "../../utility/Utils";
+
+const NEW_WORKSHOP = { 
+  _id: NEW_WORKSHOP_ID, 
+  name: "Create New Workshop" 
+};
 
 export default class WorkShopManagement extends BaseComponent {
   constructor(props) {
     super(props);
     this.state = {
       loading: true,
-      workShops: [{ _id: NEW_WORKSHOP_ID, name: "Create New Workshop" }],
-      selectedWorkShop: { _id: NEW_WORKSHOP_ID },
+      workShops: [NEW_WORKSHOP],
+      selectedWorkShop: NEW_WORKSHOP,
     };
   }
 
@@ -27,7 +32,8 @@ export default class WorkShopManagement extends BaseComponent {
       this.setState((state) => {
         return {
           loading: false,
-          workShops: [...state.workShops, ...allWorkshops],
+          selectedWorkShop: NEW_WORKSHOP,
+          workShops: [NEW_WORKSHOP, ...allWorkshops],
         };
       });
     }
@@ -53,12 +59,39 @@ export default class WorkShopManagement extends BaseComponent {
           (workShop) => workShop._id === e.target.id
         )[0];
         return { selectedWorkShop: selected };
-      },
-      () => console.log(this.state)
+      }
     );
   };
 
-  deleteWorkShop = (e) => console.log("deleteWorkShop");
+  onWorkshopCreated = async () => {
+    // TO-DO: çalışmıyor check et
+    await this.loadWorkshops();
+  }
+
+  deleteWorkShop = (e) => {
+    if (window.confirm("Are you sure ?")) {
+      let toBeDeletedWorkshopId = this.state.selectedWorkShop._id;
+      if (hasDefaultValue(toBeDeletedWorkshopId)) return;
+      
+      this.sendDeleteWorkshopByIdRequest(toBeDeletedWorkshopId, async (res) => {
+        // will be changed
+        if (!res.isSuccess) alert("deleteWorkshopById unsuccessful");
+        else {
+          alert("deleteUserById successful");
+          await this.loadWorkshops();
+        }
+      });
+    }
+  }
+
+  sendDeleteWorkshopByIdRequest = (id, callback) => {
+    this.context.Services.RequestSender.SendRequest(
+      Constants.HttpMethods.DELETE,
+      `${config.EndPoints["deleteWorkshopById"]}/${id}`,
+      callback,
+      this.context.AuthorityInfo.Token
+    );
+  }
 
   async componentDidMount() {
     await this.loadWorkshops();
@@ -119,7 +152,9 @@ export default class WorkShopManagement extends BaseComponent {
             </Row>
           </Col>
           <Col responsiveSystem={{ sm: 12, md: 7 }}>
-            <WorkShopCreator selectedWorkshop={this.state.selectedWorkShop} />
+            <WorkShopCreator 
+              selectedWorkshop={this.state.selectedWorkShop} 
+              onWorkshopCreated={this.onWorkshopCreated} />
           </Col>
         </Row>
       </Container>

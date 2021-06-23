@@ -27,6 +27,10 @@ router.post(
   }
 );
 
+router.put("/updateWorkshop/:id", async (req, res) => {
+  
+});
+
 router.get("/getAllWorkShops", async (req, res) => {
   let allWorkShops = await workShopService.getAllWorkShops();
   res.status(200).send(allWorkShops);
@@ -51,6 +55,12 @@ router.put("/incrementViewCount/:id", async (req, res) => {
     req.params.id.trim()
   );
   res.status(200).send(processResult);
+});
+
+router.delete("/deleteWorkshopById/:id", async (req, res) => {
+  let toBeDeletedWorkshopId = req.params["id"];
+  let deleteResult = await workShopService.deleteWorkshopById(toBeDeletedWorkshopId);
+  res.status(200).send(deleteResult);
 });
 
 module.exports = router;
