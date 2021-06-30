@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col } from "../../components/Grid";
+import { Grid, Row, Col } from "react-flexbox-grid";
 import config from "../../config.json";
 import { withRouter } from "react-router-dom";
 import BaseComponent from "../../utility/BaseComponent";
@@ -39,7 +39,7 @@ class WorkShopContent extends BaseComponent {
 
   render() {
     return (
-      <Col isCentered={true} margins={this.props.margins} style={{minWidth: "30%"}}>
+      <div style={{ height: "100%" }}>
         <a onClick={this.goDetail}>
           <Row>
             <Col id="workshopcard">
@@ -52,8 +52,8 @@ class WorkShopContent extends BaseComponent {
             </Col>
           </Row>
         </a>
-        <Row margins={{ t: 2 }} pushToRight={true}>
-          <div className="ml-auto">
+        <Row>
+          <Col bottom="xs" className="ml-auto">
             <i class="fa fa-heart" aria-hidden="true" />
             <span style={{ textAlign: "center" }}>
               {this.props.content.likeCount}
@@ -62,9 +62,9 @@ class WorkShopContent extends BaseComponent {
             <span style={{ textAlign: "center" }}>
               {this.props.content.viewCount}
             </span>
-          </div>
+          </Col>
         </Row>
-      </Col>
+      </div>
     );
   }
 }

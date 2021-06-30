@@ -1,7 +1,8 @@
 import React from "react";
-import { Container, Row, Col } from "../components/Grid";
+import { Grid, Row, Col } from "react-flexbox-grid";
 import WorkShop from "./components/WorkShop";
 import BaseComponent from "../utility/BaseComponent";
+import "./style/ourworkshops.css";
 
 export class OurWorkShops extends BaseComponent {
   constructor(props) {
@@ -21,14 +22,23 @@ export class OurWorkShops extends BaseComponent {
   }
   render() {
     return (
-      <Container>
-        <Row isCentered={true}>
-          <p className="h3 font-weight-normal">Atölyelerimiz</p>
+      <Grid fluid>
+        <Row center="xs">
+          <Col>
+            <p className="h3 font-weight-normal">Atölyelerimiz</p>
+          </Col>
         </Row>
-        <Row margins={{ l: 1, r: 1, t: 1, b: 1 }}>
+        <Row className="workshops-row" start="xs">
           {this.state.workshops.map((workshop) => {
             return (
-              <Col responsiveSystem={{ sm: 12, md: 3, lg: 3, xl: 3 }}>
+              <Col
+                className="workshop-card"
+                xs={12}
+                sm={5}
+                md={5}
+                lg={2.5}
+                xl={2.5}
+              >
                 <WorkShop
                   key={workshop._id}
                   id={workshop._id}
@@ -39,7 +49,7 @@ export class OurWorkShops extends BaseComponent {
             );
           })}
         </Row>
-      </Container>
+      </Grid>
     );
   }
 }
