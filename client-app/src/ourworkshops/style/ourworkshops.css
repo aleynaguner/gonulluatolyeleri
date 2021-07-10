@@ -1,9 +1,3 @@
-.workshops-row {
-  min-height: 1%;
-  max-height: 1%;
-}
-
 .workshop-card {
-  margin-left: 2rem;
-  margin-right: 2rem;
+  margin: 1rem;
 }

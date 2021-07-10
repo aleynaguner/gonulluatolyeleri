@@ -39,7 +39,7 @@ class WorkShopContent extends BaseComponent {
 
   render() {
     return (
-      <div style={{ height: "100%" }}>
+      <Row center="xs">
         <a onClick={this.goDetail}>
           <Row>
             <Col id="workshopcard">
@@ -52,8 +52,8 @@ class WorkShopContent extends BaseComponent {
             </Col>
           </Row>
         </a>
-        <Row>
-          <Col bottom="xs" className="ml-auto">
+        <Row className="workshopInfo">
+          <Col className="ml-auto">
             <i class="fa fa-heart" aria-hidden="true" />
             <span style={{ textAlign: "center" }}>
               {this.props.content.likeCount}
@@ -64,7 +64,7 @@ class WorkShopContent extends BaseComponent {
             </span>
           </Col>
         </Row>
-      </div>
+      </Row>
     );
   }
 }
