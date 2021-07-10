@@ -10,6 +10,24 @@
   object-fit: cover;
 }
 
+@media screen and (max-width: 400px) {
+  * {
+    overflow-y: hidden !important;;
+  }
+
+  .topContentImage {
+    width: 300px;
+    height: 300px;
+  }
+  .overlay {
+    width: 300px !important;
+  }
+
+  .workshopInfo {
+    width: 300px !important;
+  }
+}
+
 /* The overlay effect - lays on top of the container and over the image */
 .overlay {
   position: absolute;
