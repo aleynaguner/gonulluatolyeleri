@@ -36,7 +36,12 @@ class WorkShopDetailContent extends BaseComponent {
               <Col xs={12} sm={12} md={12} lg={8}>
                 <img
                   src={this.workshopImgSourceLink}
-                  style={{ minWidth: "100%", maxWidth: "100%" }}
+                  style={{
+                    float: "right",
+                    width: "400px",
+                    height: "400px",
+                    objectFit: "cover",
+                  }}
                 />
               </Col>
             </Row>

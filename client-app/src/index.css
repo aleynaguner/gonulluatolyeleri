@@ -1,4 +1,16 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+}
+htm {
+    width: 100%;
+}
+
 body{
+
+    width: 100%;
     margin-top: 110px;
     background-color: #F7F7F7;
     overflow-x: hidden;

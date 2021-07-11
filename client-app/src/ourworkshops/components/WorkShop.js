@@ -39,20 +39,16 @@ class WorkShopContent extends BaseComponent {
 
   render() {
     return (
-      <Row center="xs">
-        <a onClick={this.goDetail}>
-          <Row>
-            <Col id="workshopcard">
-              <img
-                src={this.workshopImgSourceLink}
-                alt="Avatar"
-                class="topContentImage"
-              />
-              <div className="overlay">{this.props.content.name}</div>
-            </Col>
-          </Row>
-        </a>
-        <Row className="workshopInfo">
+      <>
+        <div className="workshopcard" onClick={this.goDetail}>
+          <img
+            src={this.workshopImgSourceLink}
+            alt="Avatar"
+            class="topContentImage"
+          />
+          <div className="overlay">{this.props.content.name}</div>
+        </div>
+        {/* <Row className="workshopInfo">
           <Col className="ml-auto">
             <i class="fa fa-heart" aria-hidden="true" />
             <span style={{ textAlign: "center" }}>
@@ -63,8 +59,8 @@ class WorkShopContent extends BaseComponent {
               {this.props.content.viewCount}
             </span>
           </Col>
-        </Row>
-      </Row>
+        </Row> */}
+      </>
     );
   }
 }

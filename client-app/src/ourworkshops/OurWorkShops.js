@@ -22,26 +22,26 @@ export class OurWorkShops extends BaseComponent {
   }
   render() {
     return (
-      <Grid fluid>
-        <Row center="xs">
-          <Col>
+      <div class="container-fluid">
+        <div className="row justify-content-center">
+          <div className="mx-auto">
             <p className="h3 font-weight-normal">Atölyelerimiz</p>
-          </Col>
-        </Row>
-        <Row center="xs">
+          </div>
+        </div>
+        <div className="row">
           {this.state.workshops.map((workshop) => {
             return (
-              <Col className="workshop-card" xs={12} sm={12} md={2.5} lg={2.5} xl={2.5}>
+              <div className="col-xl-3 col-lg-6 col-md-12 col-sm-12 mb-3">
                 <WorkShop
                   key={workshop._id}
                   id={workshop._id}
                   content={workshop}
                 />
-              </Col>
+              </div>
             );
           })}
-        </Row>
-      </Grid>
+        </div>
+      </div>
     );
   }
 }
