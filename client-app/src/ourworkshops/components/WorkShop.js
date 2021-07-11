@@ -39,28 +39,32 @@ class WorkShopContent extends BaseComponent {
 
   render() {
     return (
-      <>
-        <div className="workshopcard" onClick={this.goDetail}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+        }}
+      >
+        <div className="content-card" onClick={this.goDetail}>
           <img
+            class="content-image"
             src={this.workshopImgSourceLink}
             alt="Avatar"
-            class="topContentImage"
           />
-          <div className="overlay">{this.props.content.name}</div>
+          <div className="content-image-overlay">{this.props.content.name}</div>
         </div>
-        {/* <Row className="workshopInfo">
-          <Col className="ml-auto">
-            <i class="fa fa-heart" aria-hidden="true" />
-            <span style={{ textAlign: "center" }}>
-              {this.props.content.likeCount}
-            </span>
-            <i class="fa fa-eye" aria-hidden="true" />
-            <span style={{ textAlign: "center" }}>
-              {this.props.content.viewCount}
-            </span>
-          </Col>
-        </Row> */}
-      </>
+        <div className="statistic-info">
+          <i class="fa fa-heart" aria-hidden="true" />
+          <span style={{ textAlign: "center" }}>
+            {this.props.content.likeCount}
+          </span>
+          <i class="fa fa-eye" aria-hidden="true" />
+          <span style={{ textAlign: "center" }}>
+            {this.props.content.viewCount}
+          </span>
+        </div>
+      </div>
     );
   }
 }
