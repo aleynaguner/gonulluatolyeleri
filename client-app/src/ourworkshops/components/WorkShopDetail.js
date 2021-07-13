@@ -77,42 +77,38 @@ class WorkShopDetailContent extends BaseComponent {
                 this.detailInfo.participantCount
               )}
             </p>
-            <div style={{ height: "40vh", overflow: "auto" }}>
-              <p>
-                {this.checkSpeakerExist()
-                  ? formatByDynamicValueIfExist(
-                      this.context.Dictionary["WORKSHOP_SPEAKERS"],
-                      convertStringArrayToStringWithCommas(
-                        this.detailInfo.responsibles.filter(
-                          (responsible) =>
-                            responsible.role ===
-                            Constants.WorkshopResponsibleRole.Speaker
-                        )
+            <p>
+              {this.checkSpeakerExist()
+                ? formatByDynamicValueIfExist(
+                    this.context.Dictionary["WORKSHOP_SPEAKERS"],
+                    convertStringArrayToStringWithCommas(
+                      this.detailInfo.responsibles.filter(
+                        (responsible) =>
+                          responsible.role ===
+                          Constants.WorkshopResponsibleRole.Speaker
                       )
                     )
-                  : null}
-              </p>
-              <p>
-                {this.checkSpeakerExist()
-                  ? formatByDynamicValueIfExist(
-                      this.context.Dictionary["WORKSHOP_ORGANIZERS"],
-                      convertStringArrayToStringWithCommas(
-                        this.detailInfo.responsibles.filter(
-                          (responsible) =>
-                            responsible.role ===
-                            Constants.WorkshopResponsibleRole.Organizer
-                        )
+                  )
+                : null}
+            </p>
+            <p>
+              {this.checkSpeakerExist()
+                ? formatByDynamicValueIfExist(
+                    this.context.Dictionary["WORKSHOP_ORGANIZERS"],
+                    convertStringArrayToStringWithCommas(
+                      this.detailInfo.responsibles.filter(
+                        (responsible) =>
+                          responsible.role ===
+                          Constants.WorkshopResponsibleRole.Organizer
                       )
                     )
-                  : null}
-              </p>
-              <br />
-              <p>
-                {formatByDynamicValueIfExist(
-                  this.context.Dictionary["WORKSHOP_CONTENT"],
-                  this.detailInfo.content
-                )}
-              </p>
+                  )
+                : null}
+            </p>
+            <br />
+            <p>{this.context.Dictionary["WORKSHOP_CONTENT"]}</p>
+            <div style={{ height: "40vh", overflow: "auto", width: "100%" }}>
+              <p>{this.detailInfo.content}</p>
             </div>
           </div>
         </div>

@@ -114,8 +114,8 @@
       "ENG": "Workshop Responsibles: ${DYNAMIC}"
     },
     "WORKSHOP_CONTENT" : {
-      "TR": "Atölye İçeriği: ${DYNAMIC}",
-      "ENG": "Workshop Content: ${DYNAMIC}"
+      "TR": "Atölye İçeriği:",
+      "ENG": "Workshop Content:"
     }
   }
 }
