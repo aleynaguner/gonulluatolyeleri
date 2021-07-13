@@ -27,26 +27,25 @@ class WorkShopDetailContent extends BaseComponent {
 
   render() {
     return (
-      <Grid fluid>
+      <div className="container-fluid">
         <br />
-        <Row center>
-          <Col xs={12} sm={12} md={12} lg={6}>
-            <Row>
-              <Col xs={12} sm={12} md={12} lg={4} />
-              <Col xs={12} sm={12} md={12} lg={8}>
+        <div className="row justify-content-center">
+          <div className="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-xs-12">
+            <div className="row">
+              <div className="col-8 col-md-12 col-sm-12 col-xs-12">
                 <img
                   src={this.workshopImgSourceLink}
                   style={{
                     float: "right",
-                    width: "400px",
-                    height: "400px",
+                    width: "450px",
+                    height: "450px",
                     objectFit: "cover",
                   }}
                 />
-              </Col>
-            </Row>
-            <Row end="xs">
-              <Col xs={12} sm={12} md={12} lg={12}>
+              </div>
+            </div>
+            <div className="row justify-content-end">
+              <div className="col-12">
                 <CommonButton
                   text="Apply"
                   customStyle={{
@@ -56,10 +55,10 @@ class WorkShopDetailContent extends BaseComponent {
                     float: "right",
                   }}
                 />
-              </Col>
-            </Row>
-          </Col>
-          <Col xs={12} sm={12} md={12} lg={5}>
+              </div>
+            </div>
+          </div>
+          <div className="col-xl-5 col-lg- col-md-12 col-sm-12 col-xs-12">
             <p>
               {formatByDynamicValueIfExist(
                 this.context.Dictionary["DATE"],
@@ -78,44 +77,46 @@ class WorkShopDetailContent extends BaseComponent {
                 this.detailInfo.participantCount
               )}
             </p>
-            <p>
-              {this.checkSpeakerExist()
-                ? formatByDynamicValueIfExist(
-                    this.context.Dictionary["WORKSHOP_SPEAKERS"],
-                    convertStringArrayToStringWithCommas(
-                      this.detailInfo.responsibles.filter(
-                        (responsible) =>
-                          responsible.role ===
-                          Constants.WorkshopResponsibleRole.Speaker
+            <div style={{ height: "40vh", overflow: "auto" }}>
+              <p>
+                {this.checkSpeakerExist()
+                  ? formatByDynamicValueIfExist(
+                      this.context.Dictionary["WORKSHOP_SPEAKERS"],
+                      convertStringArrayToStringWithCommas(
+                        this.detailInfo.responsibles.filter(
+                          (responsible) =>
+                            responsible.role ===
+                            Constants.WorkshopResponsibleRole.Speaker
+                        )
                       )
                     )
-                  )
-                : null}
-            </p>
-            <p>
-              {this.checkSpeakerExist()
-                ? formatByDynamicValueIfExist(
-                    this.context.Dictionary["WORKSHOP_ORGANIZERS"],
-                    convertStringArrayToStringWithCommas(
-                      this.detailInfo.responsibles.filter(
-                        (responsible) =>
-                          responsible.role ===
-                          Constants.WorkshopResponsibleRole.Organizer
+                  : null}
+              </p>
+              <p>
+                {this.checkSpeakerExist()
+                  ? formatByDynamicValueIfExist(
+                      this.context.Dictionary["WORKSHOP_ORGANIZERS"],
+                      convertStringArrayToStringWithCommas(
+                        this.detailInfo.responsibles.filter(
+                          (responsible) =>
+                            responsible.role ===
+                            Constants.WorkshopResponsibleRole.Organizer
+                        )
                       )
                     )
-                  )
-                : null}
-            </p>
-            <br />
-            <p>
-              {formatByDynamicValueIfExist(
-                this.context.Dictionary["WORKSHOP_CONTENT"],
-                this.detailInfo.content
-              )}
-            </p>
-          </Col>
-        </Row>
-      </Grid>
+                  : null}
+              </p>
+              <br />
+              <p>
+                {formatByDynamicValueIfExist(
+                  this.context.Dictionary["WORKSHOP_CONTENT"],
+                  this.detailInfo.content
+                )}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     );
   }
 }

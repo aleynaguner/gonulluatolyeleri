@@ -1,5 +1,4 @@
 import React from "react";
-import { Grid, Row, Col } from "react-flexbox-grid";
 import config from "../../config.json";
 import { withRouter } from "react-router-dom";
 import BaseComponent from "../../utility/BaseComponent";
