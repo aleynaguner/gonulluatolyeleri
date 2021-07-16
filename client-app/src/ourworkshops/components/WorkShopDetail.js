@@ -9,7 +9,7 @@ import {
   formatDateString,
 } from "../../utility/Utils";
 import BaseComponent from "../../utility/BaseComponent";
-import { Grid, Row, Col } from "react-flexbox-grid";
+import "../style/workshopdetail.css";
 
 class WorkShopDetailContent extends BaseComponent {
   constructor(props) {
@@ -30,31 +30,15 @@ class WorkShopDetailContent extends BaseComponent {
       <div className="container-fluid">
         <br />
         <div className="row justify-content-center">
-          <div className="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-xs-12">
-            <div className="row">
-              <div className="col-8 col-md-12 col-sm-12 col-xs-12">
-                <img
-                  src={this.workshopImgSourceLink}
-                  style={{
-                    float: "right",
-                    width: "450px",
-                    height: "450px",
-                    objectFit: "cover",
-                  }}
-                />
+          <div className="col-xl-5 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div className="row d-flex justify-content-end">
+              <div className="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                <img id="workshop-img" src={this.workshopImgSourceLink} />
               </div>
             </div>
             <div className="row justify-content-end">
-              <div className="col-12">
-                <CommonButton
-                  text="Apply"
-                  customStyle={{
-                    width: "15%",
-                    height: "auto",
-                    marginTop: "1em",
-                    float: "right",
-                  }}
-                />
+              <div className="col-3" style={{}}>
+                <CommonButton text="Apply" />
               </div>
             </div>
           </div>

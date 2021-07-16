@@ -1,5 +1,7 @@
 .bubbly-button {
   display: inline-block;
+  width: 100%;
+  height: auto;
   padding: 1em 2em;
   -webkit-appearance: none;
   appearance: none;
@@ -11,6 +13,7 @@
   position: relative;
   transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
   box-shadow: 0 2px 25px rgba(128, 192, 140, 1);
+  text-align: center;
 }
 .bubbly-button:focus {
   outline: 0;
