@@ -4,6 +4,7 @@ import { Navbar } from "./components/Navbar";
 import { WhatWeDone } from "./components/WhatWeDone";
 import { ContactUsContent } from "../contactus/components/ContactUsContent";
 import { Row, Container } from "../components/Grid";
+import "./style/home.css";
 
 export class Home extends Component {
   render() {
@@ -14,11 +15,8 @@ export class Home extends Component {
             <Row isCentered={true}>
               <Navbar />
             </Row>
-            <Row isCentered={true} margins={{ t: 5 }}>
-              <VolunteerButton
-                willBeBubbled={true}
-                customStyle={{ width: "25%" }}
-              />
+            <Row id="volunteer-button-row" isCentered={true} margins={{ t: 5 }}>
+              <VolunteerButton id="volunteer-button" willBeBubbled={true} />
             </Row>
           </Container>
         </Row>

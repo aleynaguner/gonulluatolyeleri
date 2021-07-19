@@ -1,0 +1,47 @@
+/* other devices */
+@media screen and (max-width: 400px) {
+  #volunteer-button-row {
+    height: 15% !important;
+  }
+  #volunteer-button {
+    width: 50% !important;
+  }
+}
+/* extra-small */
+@media screen and (max-width: 576px) {
+  #volunteer-button-row {
+    height: 15% !important;
+  }
+  #volunteer-button {
+    width: 10%;
+  }
+}
+/* small */
+@media screen and (max-width: 768px) {
+  #volunteer-button-row {
+    height: 8% !important;
+  }
+  #volunteer-button {
+    width: 40% !important;
+  }
+}
+/* medium */
+@media screen and (max-width: 992px) {
+}
+/* large */
+@media screen and (max-width: 1200px) {
+}
+/* extra large */
+@media screen and (max-width: 1400px) {
+}
+/* big */
+@media screen and (max-width: 1600px) {
+}
+
+#volunteer-button-row {
+  height: 5%;
+}
+
+#volunteer-button {
+  width: 25%;
+}

@@ -37,6 +37,22 @@ export default class VolunteerButton extends BaseComponent {
   };
 
   render() {
+    if (this.props.id) {
+      return (
+        <button
+          id={this.props.id}
+          className={this.state.buttonClassName}
+          onClick={(e) => this.handleClick(e, this.props.willBeBubbled)}
+          style={
+            this.props.customStyle !== undefined
+              ? { ...this.props.customStyle }
+              : {}
+          }
+        >
+          {this.context.Dictionary?.VolunteerButton_Text}
+        </button>
+      );
+    }
     return (
       <button
         className={this.state.buttonClassName}

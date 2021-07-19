@@ -61,6 +61,21 @@ export class Row extends Component {
   };
 
   render() {
+    if (this.props.id) {
+      return (
+        <div
+          id={this.props.id}
+          className={this.className}
+          style={
+            this.props.customStyle !== undefined
+              ? { ...this.props.customStyle, ...this.style }
+              : this.style
+          }
+        >
+          {this.props.children}
+        </div>
+      );
+    }
     return (
       <div
         className={this.className}
