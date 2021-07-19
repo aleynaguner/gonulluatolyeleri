@@ -21,7 +21,7 @@ export default class Header extends BaseComponent {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
+          <div className="collapse navbar-collapse" style={{ height: "8vh" }}>
             <div className="navbar-nav mr-auto headerLink">
               <HeaderLink to="/home">
                 {this.context.Dictionary?.HomePage_Name}
@@ -48,7 +48,7 @@ export default class Header extends BaseComponent {
               <a href="#" className="fa fa-lg fa-youtube"></a>
               <a href="#" className="fa fa-lg fa-instagram"></a>
             </div>
-            <div className="navbar-nav d-none d-lg-block d-xl-block">
+            <div style={{ minWidth: "50px", width: "10%", height: "50%" }}>
               <VolunteerButton willBeBubbled={false} />
             </div>
           </div>

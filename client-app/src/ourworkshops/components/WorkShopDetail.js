@@ -36,12 +36,15 @@ class WorkShopDetailContent extends BaseComponent {
                 <img id="workshop-img" src={this.workshopImgSourceLink} />
               </div>
             </div>
-            <div className="row justify-content-end mt-2 mb-5">
+            <div
+              className="row justify-content-end mt-2 mb-5"
+              style={{ height: "9%" }}
+            >
               <div
                 className="ml-auto mr-3"
                 style={{ minWidth: "100px", width: "20%" }}
               >
-                <CommonButton text="Apply" />
+                <CommonButton text="Apply" handleClick={() => {}} />
               </div>
             </div>
           </div>
