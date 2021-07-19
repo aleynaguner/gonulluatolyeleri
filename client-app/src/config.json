@@ -93,15 +93,15 @@
       "TR": "Minimum uzuluk girilmeli !",
       "ENG": "Minimum uzuluk girilmeli !"
     },
-    "DATE" : {
+    "DATE": {
       "TR": "Tarih: ${DYNAMIC}",
       "ENG": "Date: ${DYNAMIC}"
     },
-    "LOCATION" : {
+    "LOCATION": {
       "TR": "Yer: ${DYNAMIC}",
       "ENG": "Location: ${DYNAMIC}"
     },
-    "PARTICIPANTS_COUNT" : {
+    "PARTICIPANTS_COUNT": {
       "TR": "Katılımcı: ${DYNAMIC}",
       "ENG": "Participants: ${DYNAMIC}"
     },
@@ -109,13 +109,17 @@
       "TR": "Konuşmacılar: ${DYNAMIC}",
       "ENG": "Speakers: ${DYNAMIC}"
     },
-    "WORKSHOP_ORGANIZERS" : {
+    "WORKSHOP_ORGANIZERS": {
       "TR": "Atölye Sorumluları: ${DYNAMIC}",
       "ENG": "Workshop Responsibles: ${DYNAMIC}"
     },
-    "WORKSHOP_CONTENT" : {
+    "WORKSHOP_CONTENT": {
       "TR": "Atölye İçeriği:",
       "ENG": "Workshop Content:"
+    },
+    "ADMIN_PANEL_PC_CONSTRAINT_MESSAGE": {
+      "TR": "Admin paneline sadece bilgisayardan giriş yapabilirsiniz !",
+      "ENG": "You can login to the admin panel only from the computer!"
     }
   }
 }

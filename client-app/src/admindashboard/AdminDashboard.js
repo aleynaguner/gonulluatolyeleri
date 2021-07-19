@@ -11,6 +11,7 @@ import { GetAppConfigurationAsPromise } from "../utility/AppConfig";
 import config from "../config.json";
 
 const authTokenKeyName = "authtoken";
+const COMPUTER_SCREEN_MIN_WIDTH = 1224;
 
 export default class AdminDashboard extends BaseComponent {
   constructor(props) {
@@ -43,44 +44,57 @@ export default class AdminDashboard extends BaseComponent {
   };
 
   getToken = () => {
-    const userToken = JSON.parse(
-      sessionStorage.getItem(config.ATUH_TOKEN_KEY_NAME)
-    );
-    return userToken;
+    return JSON.parse(sessionStorage.getItem(config.ATUH_TOKEN_KEY_NAME));
   };
 
   render() {
-    let userToken = this.getToken();
+    let clienIsNotPc = window.innerWidth < COMPUTER_SCREEN_MIN_WIDTH;
 
-    if (hasDefaultValue(userToken)) {
-      return <Login setToken={this.setToken} />;
-    } else {
+    if (clienIsNotPc) {
       return (
-        <Sidebar
-          heading="Admin Dashboard"
-          links={[
-            {
-              text: "Blog Post Approval",
-              onClick: () =>
-                this.setState({
-                  currentAdminContent: <BlogPostConfirmation />,
-                }),
-            },
-            {
-              text: "Admin User Management",
-              onClick: () =>
-                this.setState({ currentAdminContent: <AdminUserManagement /> }),
-            },
-            {
-              text: "Work Shop Management",
-              onClick: () =>
-                this.setState({ currentAdminContent: <WorkShopManagement /> }),
-            },
-          ]}
-        >
-          <Container>{this.state.currentAdminContent}</Container>
-        </Sidebar>
+        <div className="d-flex justify-content-center mt-5">
+          <h6>
+            {this.context?.Dictionary["ADMIN_PANEL_PC_CONSTRAINT_MESSAGE"]}
+          </h6>
+        </div>
       );
+    } else {
+      let userToken = this.getToken();
+
+      if (hasDefaultValue(userToken)) {
+        return <Login setToken={this.setToken} />;
+      } else {
+        return (
+          <Sidebar
+            heading="Admin Dashboard"
+            links={[
+              {
+                text: "Blog Post Approval",
+                onClick: () =>
+                  this.setState({
+                    currentAdminContent: <BlogPostConfirmation />,
+                  }),
+              },
+              {
+                text: "Admin User Management",
+                onClick: () =>
+                  this.setState({
+                    currentAdminContent: <AdminUserManagement />,
+                  }),
+              },
+              {
+                text: "Work Shop Management",
+                onClick: () =>
+                  this.setState({
+                    currentAdminContent: <WorkShopManagement />,
+                  }),
+              },
+            ]}
+          >
+            <Container>{this.state.currentAdminContent}</Container>
+          </Sidebar>
+        );
+      }
     }
   }
 }

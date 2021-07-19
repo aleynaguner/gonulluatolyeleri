@@ -1,10 +1,10 @@
 /* other devices */
 @media screen and (max-width: 400px) {
   #volunteer-button-row {
-    height: 15% !important;
+    height: 20% !important;
   }
   #volunteer-button {
-    width: 50% !important;
+    width: 70% !important;
   }
 }
 /* extra-small */
@@ -13,16 +13,16 @@
     height: 15% !important;
   }
   #volunteer-button {
-    width: 10%;
+    width: 10% !important;
   }
 }
 /* small */
 @media screen and (max-width: 768px) {
   #volunteer-button-row {
-    height: 8% !important;
+    height: 9% !important;
   }
   #volunteer-button {
-    width: 40% !important;
+    width: 60% !important;
   }
 }
 /* medium */

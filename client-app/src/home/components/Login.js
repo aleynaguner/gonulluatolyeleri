@@ -85,12 +85,16 @@ export default function Login({ setToken }) {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <CommonButton
-              text="Log In"
-              customStyle={{ width: "10em", height: "auto", float: "right" }}
-              handleClick={handleSubmit}
-            />
           </form>
+          <div
+            style={{
+              float: "right",
+              width: "25%",
+              height: "4vh",
+            }}
+          >
+            <CommonButton text="Log In" handleClick={handleSubmit} />
+          </div>
         </Col>
       </Row>
     </Container>
