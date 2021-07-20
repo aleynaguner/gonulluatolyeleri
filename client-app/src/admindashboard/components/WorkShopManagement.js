@@ -98,6 +98,7 @@ export default class WorkShopManagement extends BaseComponent {
   }
 
   render() {
+    console.log(this.state)
     if (this.state.loading) {
       return <Loading />;
     }

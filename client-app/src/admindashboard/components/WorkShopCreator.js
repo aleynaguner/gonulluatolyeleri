@@ -107,15 +107,15 @@ export default class WorkShopCreator extends BaseComponent {
     });
   };
 
-  createWorkShop = async (e) => {
+  saveWorkShop = async (e) => {
     e.preventDefault();
     let workshopDataValidationResult = this.validateWorkshopData();
     if (!workshopDataValidationResult.isSuccess) return;
     try {
-      this.sendCreateWorkShopPostRequest(async (res) => {
-        if (!res.isSuccess) alert("createWorkShopPostRequest unsuccessful");
+      this.sendSaveWorkShopRequest(async (res) => {
+        if (!res.isSuccess) alert("sendSaveWorkShopPostRequest unsuccessful");
         else {
-          alert("createWorkShopPostRequest successful");
+          alert("sendSaveWorkShopPostRequest successful");
           this.clearState();
         }
       });
@@ -147,11 +147,11 @@ export default class WorkShopCreator extends BaseComponent {
     return validationResult;
   };
 
-  sendCreateWorkShopPostRequest = (callback) => {
-    const formData = this.getCreateWorkShopPostRequestFormData();
+  sendSaveWorkShopRequest = (callback) => {
+    const formData = this.getSaveWorkShopRequestFormData();
     this.context.Services.RequestSender.SendRequest(
-      Constants.HttpMethods.POST,
-      config.EndPoints["createWorkShop"],
+      this.getHttpMethodBySaveType(),
+      this.getEndpointBySaveType(),
       callback,
       formData,
       null,
@@ -159,7 +159,7 @@ export default class WorkShopCreator extends BaseComponent {
     );
   };
 
-  getCreateWorkShopPostRequestFormData = () => {
+  getSaveWorkShopRequestFormData = () => {
     const formData = new FormData();
     if (this.state.image !== null)
       formData.append("image", this.state.image, this.state.image.name);
@@ -174,6 +174,20 @@ export default class WorkShopCreator extends BaseComponent {
     formData.append("location", this.state.location.value);
     formData.append("responsibles", JSON.stringify(this.state.responsibles));
     return formData;
+  };
+
+  getHttpMethodBySaveType = () => {
+    let saveTypeIsUpdate = this.props.selectedWorkshop._id !== 0;
+    return saveTypeIsUpdate
+      ? Constants.HttpMethods.PUT
+      : Constants.HttpMethods.POST;
+  };
+
+  getEndpointBySaveType = () => {
+    let saveTypeIsUpdate = this.props.selectedWorkshop._id !== 0;
+    return saveTypeIsUpdate
+      ? config.EndPoints["updateWorkShop"]
+      : config.EndPoints["createWorkShop"];
   };
 
   componentDidUpdate(prevProps) {
@@ -388,7 +402,7 @@ export default class WorkShopCreator extends BaseComponent {
               >
                 <BasicCommonButton
                   text={this.context.Dictionary?.Send}
-                  handleClick={this.createWorkShop}
+                  handleClick={this.saveWorkShop}
                 />
               </Col>
             </Row>

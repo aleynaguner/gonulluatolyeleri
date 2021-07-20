@@ -14,6 +14,7 @@
     "rejectWaitingBlogPost": "/api/blogPost/rejectWaitingBlogPost",
     "getAllWorkShops": "/api/workshop/getAllWorkShops",
     "createWorkShop": "/api/workshop/createWorkShop",
+    "updateWorkShop": "/api/workshop/updateWorkShop",
     "getWorkshopImageById": "/api/workshop/getImageById",
     "incrementViewCount": "/api/workshop/incrementViewCount",
     "deleteWorkshopById": "/api/workshop/deleteWorkshopById"
