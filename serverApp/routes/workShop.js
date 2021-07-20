@@ -27,9 +27,17 @@ router.post(
   }
 );
 
-router.put("/updateWorkshop/:id", async (req, res) => {
-  
-});
+router.put(
+  "/updateWorkShop/:id",
+  imageUploader.single("image"),
+  async (req, res) => {
+    let processResult = await workShopService.updateWorkShop({
+      ...req.body,
+      id: req.params.id.trim(),
+    });
+    res.status(200).send(processResult);
+  }
+);
 
 router.get("/getAllWorkShops", async (req, res) => {
   let allWorkShops = await workShopService.getAllWorkShops();
@@ -59,7 +67,9 @@ router.put("/incrementViewCount/:id", async (req, res) => {
 
 router.delete("/deleteWorkshopById/:id", async (req, res) => {
   let toBeDeletedWorkshopId = req.params["id"];
-  let deleteResult = await workShopService.deleteWorkshopById(toBeDeletedWorkshopId);
+  let deleteResult = await workShopService.deleteWorkshopById(
+    toBeDeletedWorkshopId
+  );
   res.status(200).send(deleteResult);
 });
 

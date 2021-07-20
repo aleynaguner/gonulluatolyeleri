@@ -11,7 +11,13 @@ const getImageStore = (storeName) => {
       cb(null, path.join(config.fileStorePath, storeName));
     },
     filename: function (req, file, cb) {
-      let imageId = new ObjectID().toHexString();
+      // TO-DO: Eğer update işlemi yapılıyorsa client tan id geliyor
+      // yinede bu yapı sağlıklı değil imageUploader request body e doc id yi yazmamalı
+      // bu middleware in önüne saveContextCreator gibi bi middleware eklemek gerek ve orda id oluşturulmalı
+      let imageId =
+        req.params.id.trim() !== undefined && req.params.id.trim() !== 0
+          ? req.params.id.trim()
+          : new ObjectID().toHexString();
       let imageFormat = getImageFormat(file);
       let imageFullName = `${imageId}.${imageFormat}`;
 

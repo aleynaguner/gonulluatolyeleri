@@ -109,8 +109,10 @@ export default class WorkShopCreator extends BaseComponent {
 
   saveWorkShop = async (e) => {
     e.preventDefault();
+
     let workshopDataValidationResult = this.validateWorkshopData();
     if (!workshopDataValidationResult.isSuccess) return;
+
     try {
       this.sendSaveWorkShopRequest(async (res) => {
         if (!res.isSuccess) alert("sendSaveWorkShopPostRequest unsuccessful");
@@ -186,7 +188,7 @@ export default class WorkShopCreator extends BaseComponent {
   getEndpointBySaveType = () => {
     let saveTypeIsUpdate = this.props.selectedWorkshop._id !== 0;
     return saveTypeIsUpdate
-      ? config.EndPoints["updateWorkShop"]
+      ? `${config.EndPoints["updateWorkShop"]}/${this.props.selectedWorkshop._id}`
       : config.EndPoints["createWorkShop"];
   };
 

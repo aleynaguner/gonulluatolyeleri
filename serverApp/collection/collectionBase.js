@@ -15,7 +15,7 @@ class CollectionBase {
 
   updateById = async (id, updatedFields) => {
     await this.collection.updateOne(
-      { id: new ObjectID(id) },
+      { _id: new ObjectID(id) },
       { $set: updatedFields }
     );
   };
