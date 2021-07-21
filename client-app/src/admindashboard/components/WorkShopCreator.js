@@ -152,8 +152,8 @@ export default class WorkShopCreator extends BaseComponent {
   sendSaveWorkShopRequest = (callback) => {
     const formData = this.getSaveWorkShopRequestFormData();
     this.context.Services.RequestSender.SendRequest(
-      this.getHttpMethodBySaveType(),
-      this.getEndpointBySaveType(),
+      this.getSaveHttpMethodBySaveType(),
+      this.getSaveEndpointBySaveType(),
       callback,
       formData,
       null,
@@ -178,14 +178,14 @@ export default class WorkShopCreator extends BaseComponent {
     return formData;
   };
 
-  getHttpMethodBySaveType = () => {
+  getSaveHttpMethodBySaveType = () => {
     let saveTypeIsUpdate = this.props.selectedWorkshop._id !== 0;
     return saveTypeIsUpdate
       ? Constants.HttpMethods.PUT
       : Constants.HttpMethods.POST;
   };
 
-  getEndpointBySaveType = () => {
+  getSaveEndpointBySaveType = () => {
     let saveTypeIsUpdate = this.props.selectedWorkshop._id !== 0;
     return saveTypeIsUpdate
       ? `${config.EndPoints["updateWorkShop"]}/${this.props.selectedWorkshop._id}`

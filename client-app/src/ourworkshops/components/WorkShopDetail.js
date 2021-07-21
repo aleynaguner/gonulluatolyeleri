@@ -97,8 +97,8 @@ class WorkShopDetailContent extends BaseComponent {
             </p>
             <br />
             <p>{this.context.Dictionary["WORKSHOP_CONTENT"]}</p>
-            <div style={{ height: "40vh", overflow: "auto", width: "100%" }}>
-              <p>{this.detailInfo.content}</p>
+            <div style={{ height: "40vh", overflow: "auto" }}>
+              <p style={{ wordWrap: "break-word" }}>{this.detailInfo.content}</p>
             </div>
           </div>
         </div>
