@@ -83,6 +83,11 @@ export default function Login({ setToken }) {
                 className="form-control"
                 placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    handleSubmit(e);
+                  }
+                }}
               />
             </div>
           </form>

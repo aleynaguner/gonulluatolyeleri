@@ -25,10 +25,7 @@ export default class AdminDashboard extends BaseComponent {
   setToken = (userToken) => {
     if (hasDefaultValue(userToken)) return;
 
-    sessionStorage.setItem(
-      config.ATUH_TOKEN_KEY_NAME,
-      JSON.stringify(userToken)
-    );
+    localStorage.setItem(config.ATUH_TOKEN_KEY_NAME, JSON.stringify(userToken));
 
     this.setState({ loggedIn: true }, () => {
       GetAppConfigurationAsPromise({
@@ -44,7 +41,7 @@ export default class AdminDashboard extends BaseComponent {
   };
 
   getToken = () => {
-    return JSON.parse(sessionStorage.getItem(config.ATUH_TOKEN_KEY_NAME));
+    return JSON.parse(localStorage.getItem(config.ATUH_TOKEN_KEY_NAME));
   };
 
   render() {
