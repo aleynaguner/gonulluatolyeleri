@@ -52,10 +52,31 @@ a {
   transition: all 0.3s ease !important;
 }
 
-.nav-link.a:active{
+.nav-link.a:active {
   color: #ffffff !important;
   background-color: #80c08c !important ;
   box-shadow: 0 2px 25px rgba(128, 192, 140, 1);
   border-radius: 4px;
   transition: all 0.3s ease !important;
+}
+
+#volunteer-button-wrapper {
+  width: 12%;
+  height: 65%;
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  #volunteer-button-wrapper {
+    width: 13%;
+    height: 60%;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  #volunteer-button-wrapper {
+    width: 12%;
+    height: 60%;
+  }
 }

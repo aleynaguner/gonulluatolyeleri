@@ -48,7 +48,7 @@ export default class Header extends BaseComponent {
               <a href="#" className="fa fa-lg fa-youtube"></a>
               <a href="#" className="fa fa-lg fa-instagram"></a>
             </div>
-            <div style={{ minWidth: "50px", width: "10%", height: "50%" }}>
+            <div id="volunteer-button-wrapper" style={{ minWidth: "50px" }}>
               <VolunteerButton willBeBubbled={false} />
             </div>
           </div>
