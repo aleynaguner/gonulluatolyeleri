@@ -15,7 +15,7 @@ const getImageStore = (storeName) => {
       // yinede bu yapı sağlıklı değil imageUploader request body e doc id yi yazmamalı
       // bu middleware in önüne saveContextCreator gibi bi middleware eklemek gerek ve orda id oluşturulmalı
       let imageId =
-        req.params.id.trim() !== undefined && req.params.id.trim() !== 0
+        req.params.id !== undefined && req.params.id !== 0
           ? req.params.id.trim()
           : new ObjectID().toHexString();
       let imageFormat = getImageFormat(file);

@@ -59,7 +59,9 @@ export class ContactForm extends BaseComponent {
       data: this.state.formData,
     });
 
-    this.setState({ inputsWithError: validationResult.errors });
+    this.setState({
+      inputsWithError: validationResult.errors,
+    });
 
     if (validationResult.isSuccess) {
       let response = await this.sendEmail();
@@ -69,7 +71,9 @@ export class ContactForm extends BaseComponent {
   };
 
   sendEmail = async () => {
-    this.setState({ loading: true });
+    this.setState({
+      loading: true,
+    });
 
     let response = await this.context.Services.RequestSender.SendRequest(
       "post",
@@ -77,7 +81,9 @@ export class ContactForm extends BaseComponent {
       this.state.formData
     );
 
-    this.setState({ loading: false });
+    this.setState({
+      loading: false,
+    });
 
     return response;
   };
@@ -92,7 +98,12 @@ export class ContactForm extends BaseComponent {
 
   executeAfterSuccessfulSendEmail = () => {
     this.setState({
-      formData: { name: "", email: "", topic: "", message: "" },
+      formData: {
+        name: "",
+        email: "",
+        topic: "",
+        message: "",
+      },
       sendEmailSuccessful: true,
       showSendEmailMessage: true,
     });
@@ -130,8 +141,9 @@ export class ContactForm extends BaseComponent {
     return (
       <Row isCentered={true}>
         <div className={className} role="alert">
-          {message}
-        </div>
+          {" "}
+          {message}{" "}
+        </div>{" "}
       </Row>
     );
   };
@@ -145,19 +157,22 @@ export class ContactForm extends BaseComponent {
     return (
       <React.Fragment>
         <Container>
+          {" "}
           {this.state.loading && (
             <Col>
               <Loading />
             </Col>
-          )}
+          )}{" "}
           {!this.state.loading &&
             this.state.showSendEmailMessage &&
-            this.createSendEmailResponseMessage(this.state.sendEmailSuccessful)}
+            this.createSendEmailResponseMessage(
+              this.state.sendEmailSuccessful
+            )}{" "}
           <fieldset disabled={this.state.loading}>
             <form>
-              <div className="row m-4">
-                <div className="col-md-2"></div>
-                <div className="col-md-4">
+              <div className="row justify-content-center m-2">
+                <div className="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  {" "}
                   {this.formInputs.map((item, i) => (
                     <FormItem
                       key={i}
@@ -169,9 +184,9 @@ export class ContactForm extends BaseComponent {
                       value={this.state.formData[item.name]}
                       onChange={this.updateFormValues}
                     />
-                  ))}
-                </div>
-                <div className="col-md-4">
+                  ))}{" "}
+                </div>{" "}
+                <div className="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-xs-12">
                   <FormItem
                     name="message"
                     itemType="textarea"
@@ -180,23 +195,29 @@ export class ContactForm extends BaseComponent {
                     errorCode={this.getErrorCode("message")}
                     value={this.state.formData["message"]}
                     onChange={this.updateFormValues}
-                    customAttributes={{ id: "messageTextArea", rows: "5" }}
-                  />
+                    customAttributes={{
+                      id: "messageTextArea",
+                      rows: "5",
+                    }}
+                  />{" "}
                   <div
-                    className="col-4 float-right"
-                    style={{ marginRight: "-0.80em" }}
+                    style={{
+                      display: "flex",
+                      width: "25%",
+                      float: "right",
+                      height: "15%",
+                    }}
                   >
                     <BasicCommonButton
                       text={this.context.Dictionary?.Send}
                       handleClick={this.handleSubmit}
-                    />
-                  </div>
-                </div>
-                <div className="col-md-2"></div>
-              </div>
-            </form>
-          </fieldset>
-        </Container>
+                    />{" "}
+                  </div>{" "}
+                </div>{" "}
+              </div>{" "}
+            </form>{" "}
+          </fieldset>{" "}
+        </Container>{" "}
       </React.Fragment>
     );
   }

@@ -30,15 +30,15 @@ export class Blog extends BaseComponent {
     }
 
     return (
-      <Container>
-        <Row>
-          <Col isCentered={true} margins={{ b: 5 }}>
+      <div className="container-fluid">
+        <div className="row mt-3 mb-3">
+          <div className="col">
             <h2 style={{ textAlign: "center" }}>
               {this.context.Dictionary?.Blogs}
             </h2>
-          </Col>
-        </Row>
-        <Row margins={{ l: 3, r: 3, b: 5 }}>
+          </div>
+        </div>
+        <div className="row">
           {this.state.blogPosts.map((post) => (
             <BlogPostCard
               postInfo={post}
@@ -46,13 +46,13 @@ export class Blog extends BaseComponent {
               // margins={{ l: 2, r: 2, b: 3 }}
             />
           ))}
-        </Row>
-        <Row>
-          <Col>
+        </div>
+        <div className="row mt-5">
+          <div className="col">
             <BlogPostCreator />
-          </Col>
-        </Row>
-      </Container>
+          </div>
+        </div>
+      </div>
     );
   }
 }

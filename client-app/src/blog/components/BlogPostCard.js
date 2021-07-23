@@ -1,34 +1,33 @@
 import React from "react";
 import BaseComponent from "../../utility/BaseComponent";
-import { Container, Row, Col } from "../../components/Grid";
 import ReadMoreButton from "./ReadMoreButton";
+import "../style/blogpostcard.css";
+
+const prepareContent = (content) => {
+  if (content.length >= 500) {
+    return `${content?.substring(0, 500)}...`;
+  } else {
+    content += `...${" ".repeat(500 - content.length)}`;
+    return content;
+  }
+};
 
 export default class BlogPostCard extends BaseComponent {
   render() {
     return (
-      <Col
-        responsiveSystem={this.props.responsiveSystem}
-        margins={this.props.margins}
-      >
-        <Container
-          customStyle={{
-            padding: "2em",
-            backgroundColor: "#F7F7F7",
-            borderStyle: "outset",
-            borderRadius: "1em",
-          }}
-        >
-          <Row margins={{ b: 2 }}>
-            <Col>
+      <div className="col-6">
+        <div id="card-container" className="container">
+          <div className="row">
+            <div className="col">
               <h3>{this.props.postInfo.header}</h3>
-            </Col>
-          </Row>
-          <Row margins={{ b: 2 }}>
-            <Col>
-              <p>{`${this.props.postInfo.content?.substring(0, 500)}...`}</p>
-            </Col>
-          </Row>
-          <Row>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col">
+              <p>{prepareContent(this.props.postInfo.content)}</p>
+            </div>
+          </div>
+          <div className="row">
             <div
               style={{
                 display: "flex",
@@ -51,9 +50,9 @@ export default class BlogPostCard extends BaseComponent {
               <a href="#" className="fa fa-lg fa-twitter"></a>
               <a href="#" className="fa fa-lg fa-instagram"></a>
             </div>
-          </Row>
-        </Container>
-      </Col>
+          </div>
+        </div>
+      </div>
     );
   }
 }

@@ -7,8 +7,12 @@ export class ContactUsContent extends Component {
     return (
       <React.Fragment>
         <div className="container-fluid">
-          <ContactForm />
-          <Map />
+          <div className="row mb-4">
+            <ContactForm />
+          </div>
+          <div className="row">
+            <Map />
+          </div>
         </div>
       </React.Fragment>
     );
