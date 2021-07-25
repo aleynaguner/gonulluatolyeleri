@@ -4,10 +4,10 @@ import ReadMoreButton from "./ReadMoreButton";
 import "../style/blogpostcard.css";
 
 const prepareContent = (content) => {
-  if (content.length >= 500) {
-    return `${content?.substring(0, 500)}...`;
+  if (content.length >= 300) {
+    return `${content?.substring(0, 300)}...`;
   } else {
-    content += `...${" ".repeat(500 - content.length)}`;
+    content += `...${" ".repeat(300 - content.length)}`;
     return content;
   }
 };
@@ -15,7 +15,7 @@ const prepareContent = (content) => {
 export default class BlogPostCard extends BaseComponent {
   render() {
     return (
-      <div className="col-6">
+      <div className="col-6 mt-3">
         <div id="card-container" className="container">
           <div className="row">
             <div className="col">
@@ -24,7 +24,9 @@ export default class BlogPostCard extends BaseComponent {
           </div>
           <div className="row">
             <div className="col">
-              <p>{prepareContent(this.props.postInfo.content)}</p>
+              <p style={{ wordWrap: "break-word", fontSize: "100%" }}>
+                {prepareContent(this.props.postInfo.content)}
+              </p>
             </div>
           </div>
           <div className="row">
