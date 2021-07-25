@@ -4,8 +4,10 @@ import Loading from "../components/Loading";
 import BlogPostCreator from "./components/BlogPostCreator";
 import BlogPostCard from "./components/BlogPostCard";
 import componentHelper from "../utility/componentHelper";
+import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
 
-export class Blog extends BaseComponent {
+class BlogContent extends BaseComponent {
   constructor(props) {
     super(props);
     this.loadBlogPosts = componentHelper.createListDataLoader({
@@ -18,6 +20,19 @@ export class Blog extends BaseComponent {
       blogPosts: [],
     };
   }
+
+  static propTypes = {
+    match: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
+  };
+
+  goToDetail = (postInfo) => {
+    this.props.history.push({
+      pathname: `/blog/${postInfo._id}`,
+      state: postInfo,
+    });
+  };
 
   async componentDidMount() {
     await this.loadBlogPosts();
@@ -39,7 +54,7 @@ export class Blog extends BaseComponent {
         </div>
         <div className="row">
           {this.state.blogPosts.map((post) => (
-            <BlogPostCard postInfo={post} />
+            <BlogPostCard postInfo={post} goToDetail={this.goToDetail} />
           ))}
         </div>
         <div className="row mt-5">
@@ -51,3 +66,7 @@ export class Blog extends BaseComponent {
     );
   }
 }
+
+const Blog = withRouter((props) => <BlogContent {...props} />);
+
+export default Blog;

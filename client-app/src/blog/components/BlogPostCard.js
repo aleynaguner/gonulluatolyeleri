@@ -38,7 +38,13 @@ export default class BlogPostCard extends BaseComponent {
                 marginLeft: "0.8em",
               }}
             >
-              <ReadMoreButton customStyle={{ marginRight: "1.5em" }} />
+              <ReadMoreButton
+                customStyle={{ marginRight: "1.5em" }}
+                handleClick={(e) => {
+                  e.preventDefault();
+                  this.props.goToDetail(this.props.postInfo);
+                }}
+              />
               <strong style={{ whiteSpace: "nowrap" }}>No Comment</strong>
             </div>
             <div className="mx-auto"></div>

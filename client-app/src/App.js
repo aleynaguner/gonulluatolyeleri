@@ -12,7 +12,7 @@ import { Home } from "./home/Home";
 import { AboutUs } from "./aboutus/AboutUs";
 import { OurWorkShops } from "./ourworkshops/OurWorkShops";
 import { Projects } from "./projects/Projects";
-import { Blog } from "./blog/Blog";
+import Blog from "./blog/Blog";
 import { ContactUs } from "./contactus/ContactUs";
 import { AppConfig, GetAppConfigurationAsAwaitable } from "./utility/AppConfig";
 import AdminDashboard from "./admindashboard/AdminDashboard";
@@ -20,6 +20,7 @@ import Loading from "./components/Loading";
 import config from "./config.json";
 import { hasDefaultValue } from "./utility/Utils";
 import WorkShopDetail from "./ourworkshops/components/WorkShopDetail";
+import BlogPostDetail from "./blog/components/BlogPostDetail";
 //#endregion
 
 export default class App extends React.Component {
@@ -84,6 +85,12 @@ export default class App extends React.Component {
               path="/ourworkshops/:id"
               render={(routeProps) => (
                 <WorkShopDetail id={routeProps.match.params?.id} />
+              )}
+            />
+            <Route
+              path="/blog/:id"
+              render={(routeProps) => (
+                <BlogPostDetail id={routeProps.match.params?.id} />
               )}
             />
             <Redirect to="/home" />
