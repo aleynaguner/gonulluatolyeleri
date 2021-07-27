@@ -78,7 +78,7 @@ export default class App extends React.Component {
             <Route exact path="/ourworkshops" component={OurWorkShops} />
             <Route path="/projects" component={Projects} />
             <Route path="/aboutus" component={AboutUs} />
-            <Route path="/blog" component={Blog} />
+            <Route exact path="/blog" component={Blog} />
             <Route path="/contactus" component={ContactUs} />
             <Route path="/admindashboard" component={AdminDashboard} />
             <Route

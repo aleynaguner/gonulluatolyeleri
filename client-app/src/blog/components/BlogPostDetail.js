@@ -4,17 +4,16 @@ import { withRouter } from "react-router-dom";
 class BlogPostDetailContent extends Component {
   constructor(props) {
     super(props);
-    console.log("hi from BlogPostDetailContent", this.props)
     this.detailInfo = this.props.location.state;
   }
 
   render() {
-    return <div>ji</div>;
+    return <h1>{this.detailInfo._id}</h1>;
   }
 }
 
 const BlogPostDetail = withRouter((props) => (
-    <BlogPostDetailContent {...props} />
-  ));
-  
-  export default BlogPostDetail;
+  <BlogPostDetailContent {...props} />
+));
+
+export default BlogPostDetail;

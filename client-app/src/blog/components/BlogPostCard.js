@@ -2,6 +2,7 @@ import React from "react";
 import BaseComponent from "../../utility/BaseComponent";
 import ReadMoreButton from "./ReadMoreButton";
 import "../style/blogpostcard.css";
+import { withRouter } from "react-router-dom";
 
 const prepareContent = (content) => {
   if (content.length >= 300) {
@@ -12,7 +13,15 @@ const prepareContent = (content) => {
   }
 };
 
-export default class BlogPostCard extends BaseComponent {
+class BlogPostCardContent extends BaseComponent {
+  goToDetail = () => {
+    console.log("BlogPostCardContent")
+    this.props.history.push({
+      pathname: `/blog/${this.props.postInfo._id}`,
+      state: this.props.postInfo,
+    });
+  };
+
   render() {
     return (
       <div className="col-6 mt-3">
@@ -40,10 +49,7 @@ export default class BlogPostCard extends BaseComponent {
             >
               <ReadMoreButton
                 customStyle={{ marginRight: "1.5em" }}
-                handleClick={(e) => {
-                  e.preventDefault();
-                  this.props.goToDetail(this.props.postInfo);
-                }}
+                handleClick={this.goToDetail}
               />
               <strong style={{ whiteSpace: "nowrap" }}>No Comment</strong>
             </div>
@@ -64,3 +70,7 @@ export default class BlogPostCard extends BaseComponent {
     );
   }
 }
+
+const Blog = withRouter((props) => <BlogPostCardContent {...props} />);
+
+export default Blog;
